@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORQUESTRA | Linha do Tempo</title>
+</head>
+<body class="page page-call-detail page-call-timeline">
+  <header class="app-header">
+    <a href="../index.html">Voltar para Chamados</a>
+    <a href="../index.html">ORQUESTRA</a>
+    <a href="../alerts/alertas.html">Alertas</a>
+  </header>
+
+  <main id="conteudo" data-view="call-timeline">
+    <nav class="breadcrumb" aria-label="Caminho">
+      <a href="../index.html">Chamados</a> / <span>Linha do Tempo</span>
+    </nav>
+
+    <section class="call-heading" aria-labelledby="call-id">
+      <p class="criticality-label" data-field="criticality">[Criticidade]</p>
+      <p data-field="sla-label">[Informação de SLA ou tempo decorrido]</p>
+      <h1 id="call-id" data-field="id">[ID do chamado]</h1>
+    </section>
+
+    <nav class="call-tabs" aria-label="Detalhes do chamado">
+      <a href="chamado-resumo.html">Resumo</a>
+      <a href="chamado-linha-do-tempo.html" aria-current="page">Linha do Tempo</a>
+      <a href="chamado-historico.html">Histórico</a>
+    </nav>
+
+    <section class="timeline-card" aria-labelledby="timeline-title">
+      <h2 id="timeline-title">Linha do Tempo do chamado</h2>
+      <ol data-field="timeline-events">
+        <li><time data-field="opened-at">[Horário]</time><p>Chamado aberto pelo cliente</p></li>
+        <li><time data-field="triaged-at">[Horário]</time><p>Triagem concluída</p></li>
+        <li><time data-field="arrival-at">[Horário]</time><p>Chegada prevista no local</p></li>
+        <li><time data-field="resolution-at">[Horário]</time><p>Solução prevista, se informada</p></li>
+      </ol>
+    </section>
+
+    <section class="contact-actions" aria-label="Contato com o técnico">
+      <a href="tel:" data-action="call-technician">Ligar para o técnico</a>
+      <a href="https://wa.me/" data-action="whatsapp">WhatsApp</a>
+    </section>
+  </main>
+
+  <nav class="bottom-navigation" aria-label="Navegação principal">
+    <a href="../index.html">Chamados</a>
+    <a href="../alerts/alertas.html">Alertas</a>
+    <a href="../more/mais.html">Mais</a>
+  </nav>
+</body>
+</html>

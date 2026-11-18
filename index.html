@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORQUESTRA | Chamadas abertas</title>
+</head>
+<body class="page page-home">
+  <header class="app-header">
+    <button type="button" aria-label="Abrir menu">Menu</button>
+    <a href="index.html" aria-label="ORQUESTRA, início">ORQUESTRA</a>
+    <a href="alerts/alertas.html" aria-label="Abrir alertas">Notificações</a>
+  </header>
+
+  <main id="conteudo">
+    <section class="page-heading" aria-labelledby="titulo-pagina">
+      <h1 id="titulo-pagina">Chamados</h1>
+      <p>7 eventos ativos agora</p>
+    </section>
+
+    <section class="sort-controls" aria-label="Ordenar chamados">
+      <label for="ordenacao">Ordenar por</label>
+      <select id="ordenacao" name="ordenacao">
+        <option value="sla">Tempo para estourar SLA</option>
+        <option value="criticidade">Criticidade</option>
+      </select>
+    </section>
+
+ 
+
+    <section class="call-list" aria-labelledby="titulo-lista">
+      <h2 id="titulo-lista">Chamados abertos</h2>
+      <ol>
+        <li class="call-item criticality-red" data-call-id="CH-0008137">
+          <a href="detalhes/chamado-resumo.html?chamado=CH-0008137">
+            <span class="criticality-label">Crítica</span>
+            <strong>#CH-0008137</strong>
+            <span>Terminal Rodoviário Tietê · Elevador Social — E03</span>
+            <span>Cabine parada entre pavimentos</span>
+            <span class="elapsed-time">Tempo decorrido: 00h30</span>
+          </a>
+        </li>
+        <li class="call-item criticality-red" data-call-id="CH-0008136">
+          <a href="detalhes/chamado-resumo.html?chamado=CH-0008136">
+            <span class="criticality-label">Crítica</span>
+            <strong>#CH-0008136</strong>
+            <span>Shopping Center Norte · Elevador Panorâmico — E01</span>
+            <span>Usuário preso no elevador</span>
+            <span class="elapsed-time">Tempo decorrido: 00h40</span>
+          </a>
+        </li>
+        <li class="call-item criticality-orange" data-call-id="CH-0008126">
+          <a href="detalhes/chamado-resumo.html?chamado=CH-0008126">
+            <span class="criticality-label">Alta</span>
+            <strong>#CH-0008126</strong>
+            <span>Aeroporto de Congonhas · Elevador Social</span>
+            <span>Falha no sensor de porta</span>
+            <span class="sla-time">Faltam 20 min para SLA · 00h20</span>
+          </a>
+        </li>
+        <li class="call-item criticality-orange" data-call-id="CH-0008128">
+          <a href="detalhes/chamado-resumo.html?chamado=CH-0008128">
+            <span class="criticality-label">Alta</span>
+            <strong>#CH-0008128</strong>
+            <span>Aeroporto de Guarulhos · Elevador de Serviço</span>
+            <span>Botão emperrado</span>
+            <span class="sla-time">Faltam 30 min para SLA · 00h30</span>
+          </a>
+        </li>
+        <li class="call-item criticality-yellow" data-call-id="CH-0008134">
+          <a href="detalhes/chamado-resumo.html?chamado=CH-0008134">
+            <span class="criticality-label">Média</span>
+            <strong>#CH-0008134</strong>
+            <span>Edifício Aurora Plaza · Elevador Social — E02</span>
+            <span>Display de pavimento apagado</span>
+            <span class="sla-time">Faltam 3h10 para SLA · 03h10</span>
+          </a>
+        </li>
+        <li class="call-item criticality-yellow" data-call-id="CH-0008129">
+          <a href="detalhes/chamado-resumo.html?chamado=CH-0008129">
+            <span class="criticality-label">Média</span>
+            <strong>#CH-0008129</strong>
+            <span>Mercado Central de Tatuapé · Elevador de Serviço</span>
+            <span>Batidas fortes ao fechar</span>
+            <span class="sla-time">Faltam 3h40 para SLA · 03h40</span>
+          </a>
+        </li>
+        <li class="call-item criticality-green" data-call-id="CH-0008135">
+          <a href="detalhes/chamado-resumo.html?chamado=CH-0008135">
+            <span class="criticality-label">Normal</span>
+            <strong>#CH-0008135</strong>
+            <span>Clínica Bem Viver · Elevador Social — E01</span>
+            <span>Ruído leve na cabine ao subir</span>
+            <span class="sla-time">Faltam 7h30 para SLA · 07h30</span>
+          </a>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <nav class="bottom-navigation" aria-label="Navegação principal">
+    <a href="index.html" aria-current="page">Chamados</a>
+    <a href="alerts/alertas.html">Alertas</a>
+    <a href="more/mais.html">Mais</a>
+  </nav>
+</body>
+</html>

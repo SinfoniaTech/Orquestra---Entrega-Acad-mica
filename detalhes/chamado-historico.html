@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORQUESTRA | Histórico do chamado</title>
+</head>
+<body class="page page-call-detail page-call-history">
+  <header class="app-header">
+    <a href="../index.html">Voltar para Chamados</a>
+    <a href="../index.html">ORQUESTRA</a>
+    <a href="../alerts/alertas.html">Alertas</a>
+  </header>
+
+  <main id="conteudo" data-view="call-history">
+    <nav class="breadcrumb" aria-label="Caminho">
+      <a href="../index.html">Chamados</a> / <span>Histórico</span>
+    </nav>
+
+    <section class="call-heading" aria-labelledby="call-id">
+      <p class="criticality-label" data-field="criticality">[Criticidade]</p>
+      <p data-field="sla-label">[Informação de SLA ou tempo decorrido]</p>
+      <h1 id="call-id" data-field="id">[ID do chamado]</h1>
+    </section>
+
+    <nav class="call-tabs" aria-label="Detalhes do chamado">
+      <a href="chamado-resumo.html">Resumo</a>
+      <a href="chamado-linha-do-tempo.html">Linha do Tempo</a>
+      <a href="chamado-historico.html" aria-current="page">Histórico</a>
+    </nav>
+
+    <section class="history-card" aria-labelledby="history-title">
+      <h2 id="history-title">Recorrência</h2>
+      <p data-field="recurrence-summary">[Resumo de recorrência, se informado]</p>
+      <ol data-field="history-events">
+        <li>
+          <time data-field="history-date">[Data]</time>
+          <p data-field="history-description">[Descrição do atendimento anterior]</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="contact-actions" aria-label="Contato com o técnico">
+      <a href="tel:" data-action="call-technician">Ligar para o técnico</a>
+      <a href="https://wa.me/" data-action="whatsapp">WhatsApp</a>
+    </section>
+  </main>
+
+  <nav class="bottom-navigation" aria-label="Navegação principal">
+    <a href="../index.html">Chamados</a>
+    <a href="../alerts/alertas.html">Alertas</a>
+    <a href="../more/mais.html">Mais</a>
+  </nav>
+</body>
+</html>
