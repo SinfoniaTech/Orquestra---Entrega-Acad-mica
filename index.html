@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ORQUESTRA | Chamadas abertas</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="page page-home">
   <header class="app-header">
     <button type="button" aria-label="Abrir menu">Menu</button>
     <a href="index.html" aria-label="ORQUESTRA, início">ORQUESTRA</a>
-    <a href="alerts/alertas.html" aria-label="Abrir alertas">Notificações</a>
+    <button type="button" class="notification-button" aria-label="Notificações"></button>
   </header>
 
   <main id="conteudo">
@@ -32,7 +33,7 @@
       <h2 id="titulo-lista">Chamados abertos</h2>
       <ol>
         <li class="call-item criticality-red" data-call-id="CH-0008137">
-          <a href="detalhes/chamado-resumo.html?chamado=CH-0008137">
+          <a href="detalhes/chamado-resumo.html#CH-0008137">
             <span class="criticality-label">Crítica</span>
             <strong>#CH-0008137</strong>
             <span>Terminal Rodoviário Tietê · Elevador Social — E03</span>
@@ -41,7 +42,7 @@
           </a>
         </li>
         <li class="call-item criticality-red" data-call-id="CH-0008136">
-          <a href="detalhes/chamado-resumo.html?chamado=CH-0008136">
+          <a href="detalhes/chamado-resumo.html#CH-0008136">
             <span class="criticality-label">Crítica</span>
             <strong>#CH-0008136</strong>
             <span>Shopping Center Norte · Elevador Panorâmico — E01</span>
@@ -50,7 +51,7 @@
           </a>
         </li>
         <li class="call-item criticality-orange" data-call-id="CH-0008126">
-          <a href="detalhes/chamado-resumo.html?chamado=CH-0008126">
+          <a href="detalhes/chamado-resumo.html#CH-0008126">
             <span class="criticality-label">Alta</span>
             <strong>#CH-0008126</strong>
             <span>Aeroporto de Congonhas · Elevador Social</span>
@@ -59,7 +60,7 @@
           </a>
         </li>
         <li class="call-item criticality-orange" data-call-id="CH-0008128">
-          <a href="detalhes/chamado-resumo.html?chamado=CH-0008128">
+          <a href="detalhes/chamado-resumo.html#CH-0008128">
             <span class="criticality-label">Alta</span>
             <strong>#CH-0008128</strong>
             <span>Aeroporto de Guarulhos · Elevador de Serviço</span>
@@ -68,7 +69,7 @@
           </a>
         </li>
         <li class="call-item criticality-yellow" data-call-id="CH-0008134">
-          <a href="detalhes/chamado-resumo.html?chamado=CH-0008134">
+          <a href="detalhes/chamado-resumo.html#CH-0008134">
             <span class="criticality-label">Média</span>
             <strong>#CH-0008134</strong>
             <span>Edifício Aurora Plaza · Elevador Social — E02</span>
@@ -77,7 +78,7 @@
           </a>
         </li>
         <li class="call-item criticality-yellow" data-call-id="CH-0008129">
-          <a href="detalhes/chamado-resumo.html?chamado=CH-0008129">
+          <a href="detalhes/chamado-resumo.html#CH-0008129">
             <span class="criticality-label">Média</span>
             <strong>#CH-0008129</strong>
             <span>Mercado Central de Tatuapé · Elevador de Serviço</span>
@@ -86,7 +87,7 @@
           </a>
         </li>
         <li class="call-item criticality-green" data-call-id="CH-0008135">
-          <a href="detalhes/chamado-resumo.html?chamado=CH-0008135">
+          <a href="detalhes/chamado-resumo.html#CH-0008135">
             <span class="criticality-label">Normal</span>
             <strong>#CH-0008135</strong>
             <span>Clínica Bem Viver · Elevador Social — E01</span>
@@ -105,3 +106,6 @@
   </nav>
 </body>
 </html>
+
+
+

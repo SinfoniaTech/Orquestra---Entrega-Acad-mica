@@ -4,62 +4,166 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ORQUESTRA | Resumo do chamado</title>
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="page page-call-detail page-call-summary">
   <header class="app-header">
-    <a href="../index.html">Voltar para Chamados</a>
+    <span class="scenario-clock" aria-label="Horário de referência do cenário: 08:40">08:40</span>
     <a href="../index.html">ORQUESTRA</a>
-    <a href="../alerts/alertas.html">Alertas</a>
+    <button type="button" class="notification-button" aria-label="Notificações"></button>
   </header>
-
-  <main id="conteudo" data-view="call-summary">
-    <nav class="breadcrumb" aria-label="Caminho">
-      <a href="../index.html">Chamados</a> / <span>Resumo</span>
-    </nav>
-
-    <section class="call-heading" aria-labelledby="call-id">
-      <p class="criticality-label" data-field="criticality">[Criticidade]</p>
-      <p data-field="sla-label">[Informação de SLA ou tempo decorrido]</p>
-      <h1 id="call-id" data-field="id">[ID do chamado]</h1>
-    </section>
-
+  <main id="conteudo">
+    <nav class="breadcrumb" aria-label="Caminho"><a href="../index.html">Chamados</a> / <span>Resumo do chamado</span></nav>
+    <article class="detail-screen criticality-red" id="CH-0008137" aria-labelledby="ch-8137-title">
+    <header class="detail-heading">
+      <a class="detail-back" href="../index.html">← Chamadas</a>
+      <div class="detail-statusline"><span class="criticality-label criticality-red">Crítica · Vermelho</span><p>Tempo decorrido: 00h30 · faltam 20 min para SLA</p></div>
+      <h1 id="ch-8137-title">#CH-0008137</h1>
     <nav class="call-tabs" aria-label="Detalhes do chamado">
-      <a href="chamado-resumo.html" aria-current="page">Resumo</a>
-      <a href="chamado-linha-do-tempo.html">Linha do Tempo</a>
-      <a href="chamado-historico.html">Histórico</a>
-    </nav>
-
-    <section class="event-card" aria-labelledby="event-title">
-      <h2 id="event-title">Evento</h2>
-      <p data-field="problem">[Problema registrado]</p>
-      <p data-field="client">[Cliente]</p>
-      <p data-field="equipment">[Equipamento]</p>
-      <address data-field="address">[Endereço, se informado]</address>
-      <p data-field="passenger-status">[Informação de passageiro, se aplicável]</p>
-    </section>
-
-    <section class="impact-card" aria-labelledby="impact-title">
-      <h2 id="impact-title">Impacto Temporal</h2>
-      <dl>
-        <div><dt>Solução prevista (SLA)</dt><dd data-field="sla-deadline">[Não informado]</dd></div>
-        <div><dt>Tempo decorrido (TA)</dt><dd data-field="elapsed-time">[Não informado]</dd></div>
-        <div><dt>Tempo restante (TB)</dt><dd data-field="remaining-time">[Não informado]</dd></div>
-      </dl>
-    </section>
-
-    <section class="suggestions-card" aria-labelledby="suggestions-title">
-      <h2 id="suggestions-title">Ações sugeridas pelo ORQUESTRA</h2>
-      <p data-field="suggestions">[Ações vinculadas a este chamado, se disponíveis]</p>
-    </section>
-
-    <section class="contact-actions" aria-label="Contato com o técnico">
-      <a href="tel:" data-action="call-technician">Ligar para o técnico</a>
-      <a href="https://wa.me/" data-action="whatsapp">WhatsApp</a>
-    </section>
+      <a href="chamado-resumo.html#CH-0008137" class="tab-summary">Resumo</a>
+      <a href="chamado-linha-do-tempo.html#CH-0008137" class="tab-timeline">Linha do Tempo</a>
+      <a href="chamado-historico.html#CH-0008137" class="tab-history">Histórico</a>
+    </nav>    </header>      <section class="event-card"><h2>Evento</h2><p class="event-problem">Cabine parada entre pavimentos</p><p>Terminal Rodoviário Tietê</p><p>Elevador Social · E03</p><address>Av. Cruzeiro do Sul, 1800 · Santana, São Paulo</address></section>
+      <section class="impact-card"><h2>Impacto Temporal</h2><dl>
+        <div><dt>Solução prevista (SLA)</dt><dd>09:00</dd></div>
+        <div><dt>Tempo decorrido (TA)</dt><dd>00h30</dd></div>
+        <div><dt>Tempo restante (TB)</dt><dd class="detail-emphasis">00h20</dd></div>
+      </dl></section>
+      <section class="suggestions-card"><h2>Ações sugeridas pelo ORQUESTRA</h2>
+        <div class="detail-recommendations"><article><h3>Status do técnico</h3><p>Ana Prado · a caminho</p><p>2,8 km · ETA 10 min</p><p>Chegada prevista em 10 min</p></article><article><h3>Peça mais rápida</h3><p>Kit de liberação e contato de porta</p><p>CD Norte · unidade Tietê</p><p>ETA 12 min · previsão 08:52</p></article></div>
+<ul class="detail-bullets"><li>Manter contato com o passageiro e confirmar condição da cabine.</li><li>Isolar o equipamento e acionar o procedimento de resgate.</li><li>Após a liberação, inspecionar nivelamento, freio e sensor de porta.</li><li>Testar o elevador sem passageiros antes de liberar a operação.</li></ul>
+      </section>
+      <section class="contact-actions" aria-label="Contato com o técnico"><button type="button" disabled>Ligar técnico</button><button type="button" disabled>WhatsApp</button></section>
+    </article>
+    <article class="detail-screen criticality-red" id="CH-0008136" aria-labelledby="ch-8136-title">
+    <header class="detail-heading">
+      <a class="detail-back" href="../index.html">← Chamadas</a>
+      <div class="detail-statusline"><span class="criticality-label criticality-red">Crítica · Vermelho</span><p>Tempo decorrido: 00h40 · faltam 20 min para SLA</p></div>
+      <h1 id="ch-8136-title">#CH-0008136</h1>
+    <nav class="call-tabs" aria-label="Detalhes do chamado">
+      <a href="chamado-resumo.html#CH-0008136" class="tab-summary">Resumo</a>
+      <a href="chamado-linha-do-tempo.html#CH-0008136" class="tab-timeline">Linha do Tempo</a>
+      <a href="chamado-historico.html#CH-0008136" class="tab-history">Histórico</a>
+    </nav>    </header>      <section class="event-card"><h2>Evento</h2><p class="event-problem">Usuário preso no elevador</p><p>Shopping Center Norte</p><p>Elevador Panorâmico · E01</p><address>Av. Otto Baumgart, 245 · Vila Guilherme, São Paulo</address></section>
+      <section class="impact-card"><h2>Impacto Temporal</h2><dl>
+        <div><dt>Solução prevista (SLA)</dt><dd>09:00</dd></div>
+        <div><dt>Tempo decorrido (TA)</dt><dd>00h40</dd></div>
+        <div><dt>Tempo restante (TB)</dt><dd class="detail-emphasis">00h20</dd></div>
+      </dl></section>
+      <section class="suggestions-card"><h2>Ações sugeridas pelo ORQUESTRA</h2>
+        <div class="detail-recommendations"><article><h3>Status do técnico</h3><p>Bruno Alves · a caminho</p><p>2,1 km · ETA 8 min</p><p>Chegada prevista em 8 min</p></article><article><h3>Peça mais rápida</h3><p>Kit de resgate e comunicação</p><p>Viatura do técnico · apoio de campo</p><p>Disponível com o técnico</p></article></div>
+<ul class="detail-bullets"><li>Manter comunicação com o passageiro até a chegada da equipe.</li><li>Acionar o protocolo de resgate e sinalizar o elevador.</li><li>Verificar nivelamento, freio e sistema de comunicação da cabine.</li><li>Liberar o equipamento somente após inspeção e teste.</li></ul>
+      </section>
+      <section class="contact-actions" aria-label="Contato com o técnico"><button type="button" disabled>Ligar técnico</button><button type="button" disabled>WhatsApp</button></section>
+    </article>
+    <article class="detail-screen criticality-orange" id="CH-0008126" aria-labelledby="ch-8126-title">
+    <header class="detail-heading">
+      <a class="detail-back" href="../index.html">← Chamadas</a>
+      <div class="detail-statusline"><span class="criticality-label criticality-orange">Alta · Laranja</span><p>Faltam 20 min para SLA</p></div>
+      <h1 id="ch-8126-title">#CH-0008126</h1>
+    <nav class="call-tabs" aria-label="Detalhes do chamado">
+      <a href="chamado-resumo.html#CH-0008126" class="tab-summary">Resumo</a>
+      <a href="chamado-linha-do-tempo.html#CH-0008126" class="tab-timeline">Linha do Tempo</a>
+      <a href="chamado-historico.html#CH-0008126" class="tab-history">Histórico</a>
+    </nav>    </header>      <section class="event-card"><h2>Evento</h2><p class="event-problem">Falha no sensor de porta</p><p>Aeroporto de Congonhas</p><p>Elevador Social</p><address>Av. Washington Luís, s/n · Vila Congonhas, São Paulo</address></section>
+      <section class="impact-card"><h2>Impacto Temporal</h2><dl>
+        <div><dt>Solução prevista (SLA)</dt><dd>09:00</dd></div>
+        <div><dt>Tempo decorrido (TA)</dt><dd>00h45</dd></div>
+        <div><dt>Tempo restante (TB)</dt><dd class="detail-emphasis">00h20</dd></div>
+      </dl></section>
+      <section class="suggestions-card"><h2>Ações sugeridas pelo ORQUESTRA</h2>
+        <div class="detail-recommendations"><article><h3>Status do técnico</h3><p>Roberto Silva · a caminho</p><p>3,5 km · ETA 12 min</p><p>Chegada prevista em 12 min</p></article><article><h3>Peça mais rápida</h3><p>Sensor de porta</p><p>CD São Paulo · Interlagos · Av. Interlagos, 2000</p><p>ETA 10 min · previsão 08:50</p></article></div>
+<ul class="detail-bullets"><li>Requisitar inspeção do sensor e do operador de portas.</li><li>Sinalizar o patamar com cones e avisos de interdição.</li><li>Verificar alinhamento, limpeza e fiação da barreira infravermelha.</li><li>Ajustar a calibração do sensor e testar a reversão de segurança.</li></ul>
+      </section>
+      <section class="contact-actions" aria-label="Contato com o técnico"><button type="button" disabled>Ligar técnico</button><button type="button" disabled>WhatsApp</button></section>
+    </article>
+    <article class="detail-screen criticality-orange" id="CH-0008128" aria-labelledby="ch-8128-title">
+    <header class="detail-heading">
+      <a class="detail-back" href="../index.html">← Chamadas</a>
+      <div class="detail-statusline"><span class="criticality-label criticality-orange">Alta · Laranja</span><p>Faltam 30 min para SLA</p></div>
+      <h1 id="ch-8128-title">#CH-0008128</h1>
+    <nav class="call-tabs" aria-label="Detalhes do chamado">
+      <a href="chamado-resumo.html#CH-0008128" class="tab-summary">Resumo</a>
+      <a href="chamado-linha-do-tempo.html#CH-0008128" class="tab-timeline">Linha do Tempo</a>
+      <a href="chamado-historico.html#CH-0008128" class="tab-history">Histórico</a>
+    </nav>    </header>      <section class="event-card"><h2>Evento</h2><p class="event-problem">Botão emperrado</p><p>Aeroporto de Guarulhos</p><p>Elevador de Serviço</p><address>Rodovia Hélio Smidt, s/n · Cumbica, Guarulhos</address></section>
+      <section class="impact-card"><h2>Impacto Temporal</h2><dl>
+        <div><dt>Solução prevista (SLA)</dt><dd>09:10</dd></div>
+        <div><dt>Tempo decorrido (TA)</dt><dd>00h30</dd></div>
+        <div><dt>Tempo restante (TB)</dt><dd class="detail-emphasis">00h30</dd></div>
+      </dl></section>
+      <section class="suggestions-card"><h2>Ações sugeridas pelo ORQUESTRA</h2>
+        <div class="detail-recommendations"><article><h3>Status do técnico</h3><p>Carlos Mendes · a caminho</p><p>4,2 km · ETA 15 min</p><p>Chegada prevista em 15 min</p></article><article><h3>Peça mais rápida</h3><p>Conjunto de botoeira e contato</p><p>CD Guarulhos · Cumbica · Av. Riacho Ipiranga, 4000</p><p>ETA 18 min · previsão 08:58</p></article></div>
+<ul class="detail-bullets"><li>Solicitar avaliação técnica do painel de comandos.</li><li>Sinalizar temporariamente o elevador para manutenção.</li><li>Verificar danos no mecanismo de acionamento do botão.</li><li>Priorizar o reparo e testar a botoeira antes de liberar a operação.</li></ul>
+      </section>
+      <section class="contact-actions" aria-label="Contato com o técnico"><button type="button" disabled>Ligar técnico</button><button type="button" disabled>WhatsApp</button></section>
+    </article>
+    <article class="detail-screen criticality-yellow" id="CH-0008134" aria-labelledby="ch-8134-title">
+    <header class="detail-heading">
+      <a class="detail-back" href="../index.html">← Chamadas</a>
+      <div class="detail-statusline"><span class="criticality-label criticality-yellow">Média · Amarelo</span><p>Faltam 3h10 para SLA</p></div>
+      <h1 id="ch-8134-title">#CH-0008134</h1>
+    <nav class="call-tabs" aria-label="Detalhes do chamado">
+      <a href="chamado-resumo.html#CH-0008134" class="tab-summary">Resumo</a>
+      <a href="chamado-linha-do-tempo.html#CH-0008134" class="tab-timeline">Linha do Tempo</a>
+      <a href="chamado-historico.html#CH-0008134" class="tab-history">Histórico</a>
+    </nav>    </header>      <section class="event-card"><h2>Evento</h2><p class="event-problem">Display de pavimento apagado</p><p>Edifício Aurora Plaza</p><p>Elevador Social · E02</p><address>Av. Paulista, 1000 · Bela Vista, São Paulo</address></section>
+      <section class="impact-card"><h2>Impacto Temporal</h2><dl>
+        <div><dt>Solução prevista (SLA)</dt><dd>11:50</dd></div>
+        <div><dt>Tempo decorrido (TA)</dt><dd>00h45</dd></div>
+        <div><dt>Tempo restante (TB)</dt><dd class="detail-emphasis">03h10</dd></div>
+      </dl></section>
+      <section class="suggestions-card"><h2>Ações sugeridas pelo ORQUESTRA</h2>
+        <div class="detail-recommendations"><article><h3>Status do técnico</h3><p>Fernanda Costa · a caminho</p><p>6 km · ETA 20 min</p><p>Chegada prevista em 20 min</p></article><article><h3>Peça mais rápida</h3><p>Módulo display de pavimento</p><p>Almoxarifado Centro · São Paulo</p><p>ETA 25 min · previsão 09:05</p></article></div>
+<ul class="detail-bullets"><li>Inspecionar alimentação elétrica e conexão do display.</li><li>Verificar o sinal entre o controlador e o indicador de pavimento.</li><li>Substituir o módulo se o teste confirmar falha do componente.</li><li>Validar a indicação em todos os pavimentos atendidos.</li></ul>
+      </section>
+      <section class="contact-actions" aria-label="Contato com o técnico"><button type="button" disabled>Ligar técnico</button><button type="button" disabled>WhatsApp</button></section>
+    </article>
+    <article class="detail-screen criticality-yellow" id="CH-0008129" aria-labelledby="ch-8129-title">
+    <header class="detail-heading">
+      <a class="detail-back" href="../index.html">← Chamadas</a>
+      <div class="detail-statusline"><span class="criticality-label criticality-yellow">Média · Amarelo</span><p>Faltam 3h40 para SLA</p></div>
+      <h1 id="ch-8129-title">#CH-0008129</h1>
+    <nav class="call-tabs" aria-label="Detalhes do chamado">
+      <a href="chamado-resumo.html#CH-0008129" class="tab-summary">Resumo</a>
+      <a href="chamado-linha-do-tempo.html#CH-0008129" class="tab-timeline">Linha do Tempo</a>
+      <a href="chamado-historico.html#CH-0008129" class="tab-history">Histórico</a>
+    </nav>    </header>      <section class="event-card"><h2>Evento</h2><p class="event-problem">Batidas fortes ao fechar</p><p>Mercado Central de Tatuapé</p><p>Elevador de Serviço</p><address>Rua Itapura, 800 · Tatuapé, São Paulo</address></section>
+      <section class="impact-card"><h2>Impacto Temporal</h2><dl>
+        <div><dt>Solução prevista (SLA)</dt><dd>12:20</dd></div>
+        <div><dt>Tempo decorrido (TA)</dt><dd>00h45</dd></div>
+        <div><dt>Tempo restante (TB)</dt><dd class="detail-emphasis">03h40</dd></div>
+      </dl></section>
+      <section class="suggestions-card"><h2>Ações sugeridas pelo ORQUESTRA</h2>
+        <div class="detail-recommendations"><article><h3>Status do técnico</h3><p>Jorge Paulo · a caminho</p><p>3,5 km · ETA 12 min</p><p>Chegada prevista em 12 min</p></article><article><h3>Peça mais rápida</h3><p>Batentes de borracha e amortecedores</p><p>CD São Paulo · Interlagos · Av. Interlagos, 2000</p><p>ETA 20 min · previsão 09:00</p></article></div>
+<ul class="detail-bullets"><li>Inspecionar batentes, amortecedores e réguas de fim de curso.</li><li>Verificar alinhamento e folgas nas corrediças e patins de guiamento.</li><li>Ajustar a curva de desaceleração e a rampa de fechamento.</li><li>Testar a barreira infravermelha e o tempo de reversão de segurança.</li></ul>
+      </section>
+      <section class="contact-actions" aria-label="Contato com o técnico"><button type="button" disabled>Ligar técnico</button><button type="button" disabled>WhatsApp</button></section>
+    </article>
+    <article class="detail-screen criticality-green" id="CH-0008135" aria-labelledby="ch-8135-title">
+    <header class="detail-heading">
+      <a class="detail-back" href="../index.html">← Chamadas</a>
+      <div class="detail-statusline"><span class="criticality-label criticality-green">Normal · Verde</span><p>Faltam 7h30 para SLA</p></div>
+      <h1 id="ch-8135-title">#CH-0008135</h1>
+    <nav class="call-tabs" aria-label="Detalhes do chamado">
+      <a href="chamado-resumo.html#CH-0008135" class="tab-summary">Resumo</a>
+      <a href="chamado-linha-do-tempo.html#CH-0008135" class="tab-timeline">Linha do Tempo</a>
+      <a href="chamado-historico.html#CH-0008135" class="tab-history">Histórico</a>
+    </nav>    </header>      <section class="event-card"><h2>Evento</h2><p class="event-problem">Ruído leve na cabine ao subir</p><p>Clínica Bem Viver</p><p>Elevador Social · E01</p><address>Rua Veridiana, 350 · Higienópolis, São Paulo</address></section>
+      <section class="impact-card"><h2>Impacto Temporal</h2><dl>
+        <div><dt>Solução prevista (SLA)</dt><dd>16:10</dd></div>
+        <div><dt>Tempo decorrido (TA)</dt><dd>00h45</dd></div>
+        <div><dt>Tempo restante (TB)</dt><dd class="detail-emphasis">07h30</dd></div>
+      </dl></section>
+      <section class="suggestions-card"><h2>Ações sugeridas pelo ORQUESTRA</h2>
+        <div class="detail-recommendations"><article><h3>Status do técnico</h3><p>Diego Mendes · a caminho</p><p>9 km · ETA 35 min</p><p>Chegada prevista em 35 min</p></article><article><h3>Peça mais rápida</h3><p>Inspeção inicial sem troca de peça prevista</p><p>Kit de lubrificação disponível na viatura</p><p>Disponível no atendimento</p></article></div>
+<ul class="detail-bullets"><li>Reproduzir o ruído com o elevador vazio e com carga controlada.</li><li>Inspecionar guias, roletes e fixações da cabine.</li><li>Aplicar lubrificação conforme especificação do fabricante, se necessário.</li><li>Registrar a origem do ruído e validar a operação após o ajuste.</li></ul>
+      </section>
+      <section class="contact-actions" aria-label="Contato com o técnico"><button type="button" disabled>Ligar técnico</button><button type="button" disabled>WhatsApp</button></section>
+    </article>  </main>
   </main>
-
   <nav class="bottom-navigation" aria-label="Navegação principal">
-    <a href="../index.html">Chamados</a>
+    <a href="../index.html" aria-current="page">Chamados</a>
     <a href="../alerts/alertas.html">Alertas</a>
     <a href="../more/mais.html">Mais</a>
   </nav>
