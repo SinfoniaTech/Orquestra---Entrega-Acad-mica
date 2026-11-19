@@ -1,4 +1,4 @@
-/* ORQUESTRA — estilos compartilhados do protótipo mobile */
+
 :root {
   color-scheme: light;
   --purple: #1f0a3c;
@@ -434,7 +434,6 @@ main#conteudo { padding: 18px 16px 22px; }
 }
 
 
-/* Detalhe estático por chamado: o link da lista ancora no cartão correspondente. */
 .call-detail-card {
   scroll-margin-top: 76px;
   margin: 0 0 14px;
@@ -484,7 +483,6 @@ main#conteudo { padding: 18px 16px 22px; }
 .history-empty p { margin:0; font-size:11px; }
 
 
-/* Cabeçalho de detalhes: sino clicável, sem navegação provisória. */
 .app-header .notification-button {
   justify-self: end;
   display: grid;
@@ -501,7 +499,6 @@ main#conteudo { padding: 18px 16px 22px; }
 .app-header .notification-button::before { content: "\1F514"; font-size: 18px; }
 .app-header .notification-button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
-/* O hash identifica o chamado selecionado; todos os outros detalhes ficam ocultos. */
 #conteudo > .detail-screen { display: none; }
 #conteudo > .detail-screen:first-of-type { display: block; }
 #conteudo:has(> .detail-screen:target) > .detail-screen:not(:target) { display: none; }
@@ -520,7 +517,6 @@ main#conteudo { padding: 18px 16px 22px; }
 .detail-screen .impact-card dd { overflow-wrap: anywhere; }
 
 
-/* Campos de detalhe preenchidos e texto responsivo */
 .detail-screen address{margin-top:8px;color:var(--muted);font-size:10px;font-style:normal;overflow-wrap:anywhere}
 .detail-recommendations{display:grid;gap:9px}.detail-recommendations article{display:grid;gap:2px;padding:9px 10px;border-radius:9px;background:#f7f5f9;min-width:0}.detail-recommendations h3{margin:0 0 3px;color:var(--purple);font-size:11px}.detail-recommendations p{margin:0;color:var(--ink);font-size:10px;line-height:1.5;overflow-wrap:anywhere}
 .detail-bullets{margin:9px 0 0;padding-left:17px;color:var(--ink);font-size:10px;line-height:1.55}.detail-bullets li{padding:2px 0;overflow-wrap:anywhere}
@@ -528,7 +524,6 @@ main#conteudo { padding: 18px 16px 22px; }
 .history-events{display:grid;gap:8px;margin:12px 0 0;padding:0;list-style:none}.history-events li{padding:10px;border:1px solid var(--line);border-radius:9px;background:#faf9fb}.history-events time{color:var(--muted);font-size:10px;font-weight:700}.history-events p{margin:3px 0 0;color:var(--ink);font-size:11px;line-height:1.5;overflow-wrap:anywhere}
 @media(max-width:360px){.timeline-list li{grid-template-columns:48px minmax(0,1fr);gap:7px}.detail-heading h1{font-size:23px}}
 
-/* Cartões demo: relógio, operação e texto responsivo */
 .scenario-clock{justify-self:start;color:#fff;font-size:10px;font-variant-numeric:tabular-nums;letter-spacing:.05em}
 .page-call-detail .app-header{grid-template-columns:48px 1fr 48px}
 .page-call-detail .app-header>a:first-of-type{grid-column:2;justify-self:center}
