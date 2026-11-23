@@ -19,7 +19,7 @@
       </ul>
       <p class="sidebar-group">BACKOFFICE</p>
       <ul>
-        <li><a href="#"><i class="fa-solid fa-phone"></i>Chamados</a></li>
+        <li><a href="chamados.html"><i class="fa-solid fa-phone"></i>Chamados</a></li>
         <li><a href="#"><i class="fa-regular fa-file-lines"></i>Contratos</a></li>
         <li><a href="#"><i class="fa-solid fa-building"></i>Equipamentos</a></li>
         <li><a href="#"><i class="fa-regular fa-user"></i>Clientes</a></li>
@@ -53,7 +53,6 @@
     </header>
 
     <main>
-      <!-- 1.1 Início -->
       <section class="kpis" aria-label="Indicadores">
         <article class="kpi"><div class="kpi-label">Total de Chamadas</div><div class="kpi-value is-green">1.248</div><div class="kpi-note is-green">+6% vs. mês anterior</div></article>
         <article class="kpi"><div class="kpi-label">Abertas</div><div class="kpi-value is-orange">58</div><div class="kpi-note is-orange">12 acima do previsto</div></article>
@@ -89,19 +88,18 @@
         </div>
       </section>
 
-      <!-- 1.2 Gráficos -->
       <section class="charts" aria-label="Gráficos">
         <article class="card chart-card">
           <h2>Chamadas por Período</h2>
           <p class="card-sub">Volume total e reincidências</p>
-          <ul class="legend"><li>Chamadas</li><li style="--c:var(--blue)">Reincidências</li></ul>
-          <div class="bars" role="img" aria-label="Chamadas e reincidências de abril a setembro">
-            <div class="bar-group"><span class="bar" style="--v:36%"></span><span class="bar is-alt" style="--v:5%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:40%"></span><span class="bar is-alt" style="--v:6%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:39%"></span><span class="bar is-alt" style="--v:5.5%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:42%"></span><span class="bar is-alt" style="--v:6.5%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:40%"></span><span class="bar is-alt" style="--v:6%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:45%"></span><span class="bar is-alt" style="--v:7%"></span></div>
+          <ul class="legend"><li>Chamadas</li><li class="legend-alt">Reincidências</li></ul>
+          <div class="bars bars-period" role="img" aria-label="Chamadas e reincidências de abril a setembro">
+            <div class="bar-group"><span class="bar"></span><span class="bar is-alt"></span></div>
+            <div class="bar-group"><span class="bar"></span><span class="bar is-alt"></span></div>
+            <div class="bar-group"><span class="bar"></span><span class="bar is-alt"></span></div>
+            <div class="bar-group"><span class="bar"></span><span class="bar is-alt"></span></div>
+            <div class="bar-group"><span class="bar"></span><span class="bar is-alt"></span></div>
+            <div class="bar-group"><span class="bar"></span><span class="bar is-alt"></span></div>
           </div>
           <ul class="xlabels"><li>Abr</li><li>Mai</li><li>Jun</li><li>Jul</li><li>Ago</li><li>Set</li></ul>
         </article>
@@ -109,12 +107,12 @@
         <article class="card chart-card">
           <h2>Chamadas por Prioridade</h2>
           <p class="card-sub">Distribuição da criticidade</p>
-          <ul class="legend" style="visibility:hidden"><li>.</li></ul>
+          <ul class="legend is-hidden" aria-hidden="true"><li>.</li></ul>
           <div class="bars single" role="img" aria-label="Chamadas por prioridade: crítica, alta, média e baixa">
-            <div class="bar-group"><span class="bar p-critica" style="--v:4%"></span></div>
-            <div class="bar-group"><span class="bar p-alta" style="--v:20%"></span></div>
-            <div class="bar-group"><span class="bar p-media" style="--v:58%"></span></div>
-            <div class="bar-group"><span class="bar p-baixa" style="--v:39%"></span></div>
+            <div class="bar-group"><span class="bar p-critica"></span></div>
+            <div class="bar-group"><span class="bar p-alta"></span></div>
+            <div class="bar-group"><span class="bar p-media"></span></div>
+            <div class="bar-group"><span class="bar p-baixa"></span></div>
           </div>
           <ul class="xlabels"><li>Crítica</li><li>Alta</li><li>Média</li><li>Baixa</li></ul>
         </article>
@@ -123,19 +121,18 @@
           <h2>Chamadas por Tipo de Ocorrência</h2>
           <p class="card-sub">Concentração de falhas</p>
           <ul class="legend"><li>Chamadas</li></ul>
-          <div class="bars single" role="img" aria-label="Chamadas por tipo de ocorrência">
-            <div class="bar-group"><span class="bar" style="--v:84%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:70%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:58%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:48%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:36%"></span></div>
-            <div class="bar-group"><span class="bar" style="--v:40%"></span></div>
+          <div class="bars single bars-type" role="img" aria-label="Chamadas por tipo de ocorrência">
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
           </div>
           <ul class="xlabels"><li>Nivelamento</li><li>Porta</li><li>Painel/comando</li><li>Segurança</li><li>Comunicação</li><li>Outros</li></ul>
         </article>
       </section>
 
-      <!-- 1.3 Tabela -->
       <section class="card" aria-labelledby="t-padroes">
         <h2 id="t-padroes">Padrões e Recorrências Identificadas</h2>
         <p class="card-sub">Correlação entre equipamento, ocorrência e histórico técnico</p>
@@ -154,70 +151,68 @@
         </div>
       </section>
 
-      <!-- 1.3 Performance por área (cards clicáveis) + 1.4 Cobertura de Skills dividida entre eles -->
       <section class="card" aria-labelledby="t-areas">
         <h2 id="t-areas">Performance por Área</h2>
         <p class="card-sub">TA, TB, SLA e reincidência por região</p>
         <div class="areas">
-          <a class="area" href="#sp-capital">
+          <article class="area area-sp-capital">
             <div class="area-head"><span class="area-name">SP Capital</span><span class="sla">SLA 96%</span></div>
             <dl class="metrics">
               <div><dt>TA</dt><dd>24 min</dd></div><div><dt>TB</dt><dd>118 min</dd></div>
               <div><dt>Técnicos</dt><dd>42</dd></div><div><dt>Reincid.</dt><dd>8%</dd></div>
             </dl>
-            <div class="skill">
+            <div class="skill skill-media">
               <div class="skill-top"><span class="skill-name">Escadas rolantes — corrente</span><span class="level media">Média</span></div>
               <p class="skill-meta">SP Capital · 81%</p>
-              <div class="meter"><span style="--p:81%; --c:var(--navy-2)"></span></div>
+              <div class="meter"><span></span></div>
             </div>
-          </a>
-          <a class="area" href="#sp-interior">
+          </article>
+          <article class="area area-sp-interior">
             <div class="area-head"><span class="area-name">SP Interior</span><span class="sla">SLA 89%</span></div>
             <dl class="metrics">
               <div><dt>TA</dt><dd>38 min</dd></div><div><dt>TB</dt><dd>156 min</dd></div>
               <div><dt>Técnicos</dt><dd>26</dd></div><div><dt>Reincid.</dt><dd>14%</dd></div>
             </dl>
-            <div class="skill">
+            <div class="skill skill-alta">
               <div class="skill-top"><span class="skill-name">Nivelamento e sensores de zona</span><span class="level alta">Alta</span></div>
               <p class="skill-meta">SP Interior · 62%</p>
-              <div class="meter"><span style="--p:62%; --c:var(--orange)"></span></div>
+              <div class="meter"><span></span></div>
             </div>
-          </a>
-          <a class="area" href="#rio-de-janeiro">
+          </article>
+          <article class="area area-rio">
             <div class="area-head"><span class="area-name">Rio de Janeiro</span><span class="sla">SLA 92%</span></div>
             <dl class="metrics">
               <div><dt>TA</dt><dd>31 min</dd></div><div><dt>TB</dt><dd>142 min</dd></div>
               <div><dt>Técnicos</dt><dd>24</dd></div><div><dt>Reincid.</dt><dd>11%</dd></div>
             </dl>
-            <div class="skill">
+            <div class="skill skill-alta">
               <div class="skill-top"><span class="skill-name">Operador de porta eletrônico</span><span class="level alta">Alta</span></div>
               <p class="skill-meta">RJ · 74%</p>
-              <div class="meter"><span style="--p:74%; --c:var(--orange)"></span></div>
+              <div class="meter"><span></span></div>
             </div>
-          </a>
-          <a class="area" href="#minas-gerais">
+          </article>
+          <article class="area area-minas">
             <div class="area-head"><span class="area-name">Minas Gerais</span><span class="sla">SLA 90%</span></div>
             <dl class="metrics">
               <div><dt>TA</dt><dd>35 min</dd></div><div><dt>TB</dt><dd>149 min</dd></div>
               <div><dt>Técnicos</dt><dd>18</dd></div><div><dt>Reincid.</dt><dd>12%</dd></div>
             </dl>
-            <div class="skill">
+            <div class="skill skill-critica">
               <div class="skill-top"><span class="skill-name">Painel de comando série X</span><span class="level critica">Crítica</span></div>
               <p class="skill-meta">MG · 48%</p>
-              <div class="meter"><span style="--p:48%; --c:var(--red)"></span></div>
+              <div class="meter"><span></span></div>
             </div>
-          </a>
-          <a class="area" href="#sul">
+          </article>
+          <article class="area area-sul">
             <div class="area-head"><span class="area-name">Sul</span><span class="sla">SLA 94%</span></div>
             <dl class="metrics">
               <div><dt>TA</dt><dd>29 min</dd></div><div><dt>TB</dt><dd>131 min</dd></div>
               <div><dt>Técnicos</dt><dd>21</dd></div><div><dt>Reincid.</dt><dd>9%</dd></div>
             </dl>
-          </a>
+          </article>
         </div>
       </section>
 
-      <!-- 1.4 Recomendações em linha -->
       <section class="card" aria-labelledby="t-reco">
         <h2 id="t-reco">Recomendações da Inteligência ORQUESTRA</h2>
         <p class="card-sub">Sugestões geradas a partir dos padrões — execução permanece nos sistemas responsáveis</p>
@@ -253,18 +248,21 @@
 </div>
 
 <script>
-  // Mostra/oculta os filtros do "Histórico de Chamadas" pelo ícone de funil
   const btn = document.getElementById('btn-filter');
   const box = document.getElementById('filters');
+
   btn.addEventListener('click', () => {
     const open = box.hidden;
     box.hidden = !open;
     btn.setAttribute('aria-expanded', String(open));
     btn.setAttribute('aria-label', open ? 'Ocultar filtros' : 'Mostrar filtros');
   });
-  // Liga/desliga cada filtro
-  box.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () =>
-    c.setAttribute('aria-pressed', String(c.getAttribute('aria-pressed') !== 'true'))));
+
+  box.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true'));
+    });
+  });
 </script>
 </body>
 </html>

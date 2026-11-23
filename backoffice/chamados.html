@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orquestra | Chamados</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+  <link rel="stylesheet" href="./chamados.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <p class="brand">Orquestra</p>
+    <nav aria-label="Navegação principal">
+      <ul>
+        <li><a href="painel-operacional.html"><i class="fa-solid fa-table-cells-large"></i>Painel Operacional</a></li>
+        <li><a href="#"><i class="fa-solid fa-chart-line"></i>Painel Executivo</a></li>
+      </ul>
+      <p class="sidebar-group">BACKOFFICE</p>
+      <ul>
+        <li><a href="chamados.html" aria-current="page"><i class="fa-solid fa-phone"></i>Chamados</a></li>
+        <li><a href="#"><i class="fa-regular fa-file-lines"></i>Contratos</a></li>
+        <li><a href="#"><i class="fa-solid fa-building"></i>Equipamentos</a></li>
+        <li><a href="#"><i class="fa-regular fa-user"></i>Clientes</a></li>
+        <li><a href="#"><i class="fa-solid fa-cube"></i>Peças</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-gear"></i>Técnicos</a></li>
+        <li><a href="#"><i class="fa-solid fa-graduation-cap"></i>Treinamentos</a></li>
+        <li><a href="#"><i class="fa-solid fa-chart-column"></i>Relatórios</a></li>
+      </ul>
+      <p class="sidebar-group">SISTEMA</p>
+      <ul>
+        <li><a href="#"><i class="fa-solid fa-gear"></i>Configurações</a></li>
+        <li><a href="#"><i class="fa-solid fa-plug"></i>Integrações</a></li>
+        <li><a href="#"><i class="fa-solid fa-database"></i>Logs de Carga</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="content">
+    <header class="topbar">
+      <div>
+        <h1>Chamados</h1>
+        <p>Acompanhamento de chamados de manutenção em tempo real</p>
+      </div>
+      <div class="topbar-tools">
+        <label class="search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" placeholder="Buscar contrato, cliente, equipamento" aria-label="Buscar contrato, cliente, equipamento">
+        </label>
+        <button type="button" class="btn-period">Tempo real <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="kpis" aria-label="Indicadores">
+        <article class="kpi"><div class="kpi-label">Total de Chamadas</div><div class="kpi-value is-green">1.247</div><div class="kpi-note is-green">+6% vs. mês anterior</div></article>
+        <article class="kpi"><div class="kpi-label">Abertas</div><div class="kpi-value is-orange">58</div><div class="kpi-note is-orange">12 acima do previsto</div></article>
+        <article class="kpi"><div class="kpi-label">Em Atendimento</div><div class="kpi-value is-red">21</div><div class="kpi-note is-orange">8 críticas</div></article>
+        <article class="kpi"><div class="kpi-label">SLA em risco</div><div class="kpi-value">4</div><div class="kpi-note is-muted">acima de 70% do prazo</div></article>
+        <article class="kpi"><div class="kpi-label">Concluídas</div><div class="kpi-value">1.168</div><div class="kpi-note is-muted">93,7% do total</div></article>
+        <article class="kpi"><div class="kpi-label">TA Médio</div><div class="kpi-value is-green">27 min</div><div class="kpi-note is-green">meta 30 min</div></article>
+      </section>
+
+      <section class="card" aria-labelledby="t-fluxo">
+        <h2 id="t-fluxo">Fluxo de chamados</h2>
+        <p class="card-sub">Ciclo do chamado no backoffice — execução consolidada dos sistemas OTIS</p>
+        <div class="flow">
+          <div class="flow-step"><span class="flow-label">Aguardando priorização</span><strong class="flow-value">4</strong></div>
+          <i class="fa-solid fa-chevron-right flow-arrow" aria-hidden="true"></i>
+          <div class="flow-step"><span class="flow-label">Encaminhados ao supervisor</span><strong class="flow-value">54</strong></div>
+          <i class="fa-solid fa-chevron-right flow-arrow" aria-hidden="true"></i>
+          <div class="flow-step"><span class="flow-label">Em atendimento</span><strong class="flow-value">21</strong></div>
+          <i class="fa-solid fa-chevron-right flow-arrow" aria-hidden="true"></i>
+          <div class="flow-step"><span class="flow-label">Concluídos</span><strong class="flow-value">1.168</strong></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="t-fila">
+        <div class="card-head">
+          <div>
+            <h2 id="t-fila">Fila de chamados</h2>
+            <p class="card-sub">Ordenada por chegada (mais recente no topo) — clique em uma linha para ver os detalhes</p>
+          </div>
+          <button type="button" class="btn-filter" id="btn-filter" aria-expanded="false" aria-controls="filters" aria-label="Mostrar filtros">
+            <i class="fa-solid fa-filter" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="filters" id="filters" hidden>
+          <div class="filter-group">
+            <span class="filters-label">Status:</span>
+            <button type="button" class="chip" data-group="status" data-value="todos" aria-pressed="true">Todos</button>
+            <button type="button" class="chip" data-group="status" data-value="aberto" aria-pressed="false">Aberto</button>
+            <button type="button" class="chip" data-group="status" data-value="supervisor" aria-pressed="false">Encaminhado ao supervisor</button>
+            <button type="button" class="chip" data-group="status" data-value="atendimento" aria-pressed="false">Em atendimento</button>
+          </div>
+          <div class="filter-group">
+            <span class="filters-label">Prioridade:</span>
+            <button type="button" class="chip" data-group="prioridade" data-value="todas" aria-pressed="true">Todas</button>
+            <button type="button" class="chip" data-group="prioridade" data-value="critica" aria-pressed="false">Crítica</button>
+            <button type="button" class="chip" data-group="prioridade" data-value="alta" aria-pressed="false">Alta</button>
+            <button type="button" class="chip" data-group="prioridade" data-value="media" aria-pressed="false">Média</button>
+            <button type="button" class="chip" data-group="prioridade" data-value="normal" aria-pressed="false">Normal</button>
+          </div>
+          <div class="filter-group">
+            <span class="filters-label">Região:</span>
+            <button type="button" class="chip" data-group="regiao" data-value="todas" aria-pressed="true">Todas</button>
+            <button type="button" class="chip" data-group="regiao" data-value="centro" aria-pressed="false">Centro</button>
+            <button type="button" class="chip" data-group="regiao" data-value="sul" aria-pressed="false">Zona Sul</button>
+            <button type="button" class="chip" data-group="regiao" data-value="norte" aria-pressed="false">Zona Norte</button>
+            <button type="button" class="chip" data-group="regiao" data-value="leste" aria-pressed="false">Zona Leste</button>
+            <button type="button" class="chip" data-group="regiao" data-value="oeste" aria-pressed="false">Zona Oeste</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Local · Equipamento</th>
+                <th>Ocorrência</th>
+                <th>Prioridade</th>
+                <th>Região</th>
+                <th>Status</th>
+                <th>SLA restante</th>
+                <th>Responsável</th>
+                <th><span class="visually-hidden">Detalhes</span></th>
+              </tr>
+            </thead>
+            <tbody id="queue-body">
+              <tr data-status="atendimento" data-prioridade="critica" data-regiao="centro">
+                <td>#CH-0008182</td>
+                <td>Hospital Central Paulista · Elevador de Leitos - E02</td>
+                <td>Usuário preso no elevador</td>
+                <td><span class="prio prio-critica"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>CRÍTICA</span></td>
+                <td>Centro</td>
+                <td><span class="status status-atendimento">Em atendimento</span></td>
+                <td class="col-sla"><div class="meter meter-over meter-100"><span></span></div><p class="sla-text">100% · estourado</p></td>
+                <td>Téc. João da Silva</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008182"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="atendimento" data-prioridade="alta" data-regiao="sul">
+                <td>#CH-0008181</td>
+                <td>Academia Smart Fit Vila Olímpia · Elevador Social - E03</td>
+                <td>Botão de emergência com desgaste</td>
+                <td><span class="prio prio-alta"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>ALTA</span></td>
+                <td>Zona Sul</td>
+                <td><span class="status status-atendimento">Em atendimento</span></td>
+                <td class="col-sla"><div class="meter meter-warn meter-88"><span></span></div><p class="sla-text">88% · 50 min</p></td>
+                <td>Téc. Paulo Menezes</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008181"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="supervisor" data-prioridade="normal" data-regiao="sul">
+                <td>#CH-0008170</td>
+                <td>Residencial Jardim das Acácias · Elevador Social - E01</td>
+                <td>Display do indicador de piso apagado</td>
+                <td><span class="prio prio-normal"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>NORMAL</span></td>
+                <td>Zona Sul</td>
+                <td><span class="status status-supervisor">Encaminhado ao supervisor</span></td>
+                <td class="col-sla"><div class="meter meter-ok meter-10"><span></span></div><p class="sla-text">10% · 6h 20min</p></td>
+                <td>Superv. Renata Alves</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008170"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="aberto" data-prioridade="media" data-regiao="centro">
+                <td>#CH-0008160</td>
+                <td>Galeria Paulista Offices · Elevador Social - E04</td>
+                <td>Freio com ruído ao parar</td>
+                <td><span class="prio prio-media"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>MÉDIA</span></td>
+                <td>Centro</td>
+                <td><span class="status status-aberto">Aberto</span></td>
+                <td class="col-sla"><div class="meter meter-ok meter-35"><span></span></div><p class="sla-text">35% · 2h 10min</p></td>
+                <td class="unassigned">Não atribuído</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008160"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="atendimento" data-prioridade="critica" data-regiao="sul">
+                <td>#CH-0008154</td>
+                <td>Hospital Life · Elevador Maca - E05</td>
+                <td>Cabine parada entre pavimentos</td>
+                <td><span class="prio prio-critica"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>CRÍTICA</span></td>
+                <td>Zona Sul</td>
+                <td><span class="status status-atendimento">Em atendimento</span></td>
+                <td class="col-sla"><div class="meter meter-over meter-100"><span></span></div><p class="sla-text">102% · estourado</p></td>
+                <td>Téc. Carlos Souza</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008154"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="supervisor" data-prioridade="media" data-regiao="sul" hidden>
+                <td>#CH-0008153</td>
+                <td>Shopping Ibirapuera · Elevador Panorâmico - E01</td>
+                <td>Cabine com ruído excessivo</td>
+                <td><span class="prio prio-media"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>MÉDIA</span></td>
+                <td>Zona Sul</td>
+                <td><span class="status status-supervisor">Encaminhado ao supervisor</span></td>
+                <td class="col-sla"><div class="meter meter-warn meter-73"><span></span></div><p class="sla-text">73% · 32 min</p></td>
+                <td>Superv. Renata Alves</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008153"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="atendimento" data-prioridade="alta" data-regiao="norte" hidden>
+                <td>#CH-0008152</td>
+                <td>Metrô Santana · Escada Rolante - M03</td>
+                <td>Sensor de porta com falha</td>
+                <td><span class="prio prio-alta"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>ALTA</span></td>
+                <td>Zona Norte</td>
+                <td><span class="status status-atendimento">Em atendimento</span></td>
+                <td class="col-sla"><div class="meter meter-warn meter-71"><span></span></div><p class="sla-text">71% · 17 min</p></td>
+                <td>Téc. Bruno Alves</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008152"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="supervisor" data-prioridade="normal" data-regiao="leste" hidden>
+                <td>#CH-0008151</td>
+                <td>Residencial Aurora · Elevador Social - E02</td>
+                <td>Botão de chamada intermitente</td>
+                <td><span class="prio prio-normal"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>NORMAL</span></td>
+                <td>Zona Leste</td>
+                <td><span class="status status-supervisor">Encaminhado ao supervisor</span></td>
+                <td class="col-sla"><div class="meter meter-ok meter-24"><span></span></div><p class="sla-text">24% · 3h</p></td>
+                <td>Superv. Douglas Lima</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008151"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="aberto" data-prioridade="alta" data-regiao="sul" hidden>
+                <td>#CH-0008149</td>
+                <td>Edifício Faria Lima Corporate · Elevador Social - E06</td>
+                <td>Nivelamento irregular na parada</td>
+                <td><span class="prio prio-alta"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>ALTA</span></td>
+                <td>Zona Sul</td>
+                <td><span class="status status-aberto">Aberto</span></td>
+                <td class="col-sla"><div class="meter meter-ok meter-45"><span></span></div><p class="sla-text">45% · 1h 40min</p></td>
+                <td class="unassigned">Não atribuído</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008149"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+              <tr data-status="aberto" data-prioridade="normal" data-regiao="oeste" hidden>
+                <td>#CH-0008148</td>
+                <td>Escola Estadual Vila Madalena · Elevador de Acessibilidade - E01</td>
+                <td>Ruído leve ao subir</td>
+                <td><span class="prio prio-normal"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>NORMAL</span></td>
+                <td>Zona Oeste</td>
+                <td><span class="status status-aberto">Aberto</span></td>
+                <td class="col-sla"><div class="meter meter-ok meter-8"><span></span></div><p class="sla-text">8% · 7h</p></td>
+                <td class="unassigned">Não atribuído</td>
+                <td class="col-go"><a class="row-link" href="#" aria-label="Ver detalhes do chamado #CH-0008148"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="empty" id="empty" hidden>Nenhum chamado encontrado com esses filtros.</p>
+
+        <div class="queue-foot" id="queue-foot">
+          <button type="button" class="btn-more" id="btn-more" aria-expanded="false">Ver mais</button>
+          <p class="queue-count">Mostrando <span id="visible-count">5</span> de 80</p>
+        </div>
+      </section>
+
+      <section class="insights" aria-label="Eventos e distribuição">
+        <article class="card">
+          <h2>Eventos da integração</h2>
+          <p class="card-sub">Últimos eventos recebidos — mais recente no topo</p>
+          <ul class="events">
+            <li><time>13:58</time><div><p>Chamado #CH-0008182 recebido do Sistema OTIS</p><span class="event-source">Sistema OTIS</span></div></li>
+            <li><time>13:56</time><div><p>Chamado #CH-0008181 recebido do Sistema OTIS</p><span class="event-source">Sistema OTIS</span></div></li>
+            <li><time>13:54</time><div><p>Chamado #CH-0008170 recebido do Sistema OTIS</p><span class="event-source">Sistema OTIS</span></div></li>
+            <li><time>13:47</time><div><p>Chamado #CH-0008154 priorizado como Crítica (Zona Sul)</p><span class="event-source">Orquestra</span></div></li>
+            <li><time>13:41</time><div><p>Chamado #CH-0008153 encaminhado ao supervisor</p><span class="event-source">Orquestra</span></div></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Chamados por região</h2>
+          <p class="card-sub">Distribuição da fila ativa</p>
+          <ul class="legend"><li>Chamados ativos</li></ul>
+          <div class="bars bars-region" role="img" aria-label="Chamados ativos por região: Centro 2, Zona Sul 5, Zona Norte 1, Zona Leste 1, Zona Oeste 1">
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
+            <div class="bar-group"><span class="bar"></span></div>
+          </div>
+          <ul class="xlabels"><li>Centro</li><li>Zona Sul</li><li>Zona Norte</li><li>Zona Leste</li><li>Zona Oeste</li></ul>
+        </article>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+  const PAGE_SIZE = 5;
+
+  const filterBtn = document.getElementById('btn-filter');
+  const filterBox = document.getElementById('filters');
+  const rows = Array.from(document.querySelectorAll('#queue-body tr'));
+  const moreBtn = document.getElementById('btn-more');
+  const countEl = document.getElementById('visible-count');
+  const emptyMsg = document.getElementById('empty');
+  const foot = document.getElementById('queue-foot');
+
+  const selected = { status: 'todos', prioridade: 'todas', regiao: 'todas' };
+  let expanded = false;
+
+  function render() {
+    const matches = rows.filter(row =>
+      Object.entries(selected).every(([group, value]) =>
+        value === 'todos' || value === 'todas' || row.dataset[group] === value
+      )
+    );
+    const visible = expanded ? matches : matches.slice(0, PAGE_SIZE);
+
+    rows.forEach(row => { row.hidden = !visible.includes(row); });
+
+    countEl.textContent = visible.length;
+    emptyMsg.hidden = matches.length > 0;
+    foot.hidden = matches.length === 0;
+    moreBtn.hidden = matches.length <= PAGE_SIZE;
+    moreBtn.textContent = expanded ? 'Ver menos' : 'Ver mais';
+    moreBtn.setAttribute('aria-expanded', String(expanded));
+  }
+
+  filterBtn.addEventListener('click', () => {
+    const open = filterBox.hidden;
+    filterBox.hidden = !open;
+    filterBtn.setAttribute('aria-expanded', String(open));
+    filterBtn.setAttribute('aria-label', open ? 'Ocultar filtros' : 'Mostrar filtros');
+  });
+
+  filterBox.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const group = chip.dataset.group;
+      selected[group] = chip.dataset.value;
+      filterBox.querySelectorAll(`.chip[data-group="${group}"]`).forEach(other => {
+        other.setAttribute('aria-pressed', String(other === chip));
+      });
+      expanded = false;
+      render();
+    });
+  });
+
+  moreBtn.addEventListener('click', () => {
+    expanded = !expanded;
+    render();
+  });
+
+  rows.forEach(row => {
+    row.addEventListener('click', event => {
+      if (!event.target.closest('a')) row.querySelector('.row-link').click();
+    });
+  });
+
+  render();
+</script>
+</body>
+</html>

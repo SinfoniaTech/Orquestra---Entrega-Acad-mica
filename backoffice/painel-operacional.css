@@ -1,6 +1,4 @@
-
 :root {
-  /* Cores base */
   --navy: #1f0a3c;
   --navy-2: #1a1a66;
   --blue: #3b6fd8;
@@ -11,7 +9,6 @@
   --card: #fff;
   --line: #e5e7eb;
 
-  /* Criticidade / status */
   --red: #e11d2e;
   --red-soft: #fdecee;
   --orange: #ea8a1a;
@@ -21,7 +18,6 @@
   --green: #1a9d52;
   --green-soft: #e6f6ed;
 
-  /* Medidas */
   --radius: 10px;
   --radius-sm: 8px;
   --gap: 10px;
@@ -30,8 +26,6 @@
   color: var(--ink);
 }
 
-
-/* ---------- 2. Base ---------- */
 * {
   box-sizing: border-box;
 }
@@ -58,15 +52,22 @@ button {
   outline-offset: 2px;
 }
 
-
-/* ---------- 3. Layout ---------- */
 .layout {
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
   min-height: 100vh;
 }
 
-/* Sidebar */
+.content {
+  min-width: 0;
+}
+
+main {
+  display: grid;
+  gap: var(--gap);
+  padding: 12px 20px 24px;
+}
+
 .sidebar {
   position: sticky;
   top: 0;
@@ -120,11 +121,6 @@ button {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .08em;
-}
-
-/* Conteúdo e barra superior */
-.content {
-  min-width: 0;
 }
 
 .topbar {
@@ -193,16 +189,6 @@ button {
   font-weight: 600;
 }
 
-main {
-  display: grid;
-  gap: var(--gap);
-  padding: 12px 20px 24px;
-}
-
-
-/* ---------- 4. Componentes compartilhados ---------- */
-
-/* Card (padding reduzido) */
 .card {
   padding: 10px 12px;
   border: 1px solid var(--line);
@@ -222,13 +208,11 @@ main {
   font-size: 12px;
 }
 
-/* Cores de texto */
 .is-green  { color: var(--green); }
 .is-orange { color: var(--orange); }
 .is-red    { color: var(--red); }
 .is-muted  { color: var(--muted); }
 
-/* Badges */
 .badge {
   display: inline-block;
   padding: 2px 8px;
@@ -241,7 +225,6 @@ main {
 .badge-red    { color: var(--red); background: var(--red-soft); }
 .badge-yellow { color: #8a6a00; background: var(--yellow-soft); }
 
-/* Nível de skill */
 .level {
   padding: 1px 7px;
   border-radius: 999px;
@@ -253,8 +236,6 @@ main {
 .level.critica { color: var(--red); background: var(--red-soft); }
 .level.media   { color: #555; background: #eceef3; }
 
-
-/* ---------- 5. KPIs ---------- */
 .kpis {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -284,8 +265,6 @@ main {
   font-size: 11px;
 }
 
-
-/* ---------- 6. Histórico e filtros ---------- */
 .history-head {
   display: flex;
   justify-content: space-between;
@@ -343,8 +322,6 @@ main {
   border-color: var(--navy-2);
 }
 
-
-/* ---------- 7. Gráficos ---------- */
 .charts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -365,6 +342,10 @@ main {
   font-size: 11px;
 }
 
+.legend.is-hidden {
+  visibility: hidden;
+}
+
 .legend li::before {
   content: "";
   display: inline-block;
@@ -373,6 +354,10 @@ main {
   margin-right: 5px;
   border-radius: 2px;
   background: var(--c, var(--navy-2));
+}
+
+.legend .legend-alt {
+  --c: var(--blue);
 }
 
 .bars {
@@ -414,17 +399,35 @@ main {
   background: var(--blue);
 }
 
-/* Barra única por grupo (prioridade e ocorrência) */
 .bars.single .bar {
   width: 100%;
   max-width: 30px;
 }
 
-/* Cores do gráfico de prioridade (mesma lógica de criticidade do app mobile) */
-.bar.p-critica { background: var(--red); }
-.bar.p-alta    { background: var(--orange); }
-.bar.p-media   { background: var(--yellow); }
-.bar.p-baixa   { background: var(--green); }
+.bar.p-critica { --v: 4%;  background: var(--red); }
+.bar.p-alta    { --v: 20%; background: var(--orange); }
+.bar.p-media   { --v: 58%; background: var(--yellow); }
+.bar.p-baixa   { --v: 39%; background: var(--green); }
+
+.bars-period .bar-group:nth-child(1) .bar        { --v: 36%; }
+.bars-period .bar-group:nth-child(1) .bar.is-alt { --v: 5%; }
+.bars-period .bar-group:nth-child(2) .bar        { --v: 40%; }
+.bars-period .bar-group:nth-child(2) .bar.is-alt { --v: 6%; }
+.bars-period .bar-group:nth-child(3) .bar        { --v: 39%; }
+.bars-period .bar-group:nth-child(3) .bar.is-alt { --v: 5.5%; }
+.bars-period .bar-group:nth-child(4) .bar        { --v: 42%; }
+.bars-period .bar-group:nth-child(4) .bar.is-alt { --v: 6.5%; }
+.bars-period .bar-group:nth-child(5) .bar        { --v: 40%; }
+.bars-period .bar-group:nth-child(5) .bar.is-alt { --v: 6%; }
+.bars-period .bar-group:nth-child(6) .bar        { --v: 45%; }
+.bars-period .bar-group:nth-child(6) .bar.is-alt { --v: 7%; }
+
+.bars-type .bar-group:nth-child(1) .bar { --v: 84%; }
+.bars-type .bar-group:nth-child(2) .bar { --v: 70%; }
+.bars-type .bar-group:nth-child(3) .bar { --v: 58%; }
+.bars-type .bar-group:nth-child(4) .bar { --v: 48%; }
+.bars-type .bar-group:nth-child(5) .bar { --v: 36%; }
+.bars-type .bar-group:nth-child(6) .bar { --v: 40%; }
 
 .xlabels {
   display: flex;
@@ -442,8 +445,6 @@ main {
   text-align: center;
 }
 
-
-/* ---------- 8. Tabela de padrões ---------- */
 .table-wrap {
   overflow-x: auto;
 }
@@ -474,8 +475,6 @@ td:first-child {
   font-weight: 700;
 }
 
-
-/* ---------- 9. Performance por área + skills ---------- */
 .areas {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -484,13 +483,12 @@ td:first-child {
 
 .area {
   display: grid;
+  align-content: start;
   gap: 6px;
   padding: 8px 10px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  color: inherit;
   background: #fff;
-  
 }
 
 .area-head {
@@ -533,7 +531,6 @@ td:first-child {
   margin: 0;
 }
 
-/* Cobertura de skills (dentro do card da área) */
 .skill {
   padding-top: 6px;
   border-top: 1px dashed var(--line);
@@ -572,8 +569,15 @@ td:first-child {
   background: var(--c);
 }
 
+.skill-media   .meter span { --c: var(--navy-2); }
+.skill-alta    .meter span { --c: var(--orange); }
+.skill-critica .meter span { --c: var(--red); }
 
-/* ---------- 10. Recomendações (card em linha) ---------- */
+.area-sp-capital  .meter span { --p: 81%; }
+.area-sp-interior .meter span { --p: 62%; }
+.area-rio         .meter span { --p: 74%; }
+.area-minas       .meter span { --p: 48%; }
+
 .reco-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -602,6 +606,7 @@ td:first-child {
 
 .reco-title {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 6px;
   font-size: 13px;
@@ -629,16 +634,10 @@ td:first-child {
   font-weight: 600;
 }
 
-
-/* ---------- 11. Responsivo ---------- */
 @media (max-width: 1200px) {
   .kpis,
   .areas {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .reco-row {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -661,7 +660,8 @@ td:first-child {
     width: auto;
   }
 
-  .charts {
+  .charts,
+  .reco-row {
     grid-template-columns: 1fr;
   }
 
