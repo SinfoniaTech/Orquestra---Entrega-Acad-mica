@@ -973,3 +973,15 @@ main#conteudo { padding: 18px 16px 22px; }
     transition: none !important;
   }
 }
+/* O conteúdo rola acima da navegação; nenhum card fica atrás do rodapé. */
+body.page { display:flex; flex-direction:column; height:100dvh; min-height:0; padding:0; overflow:hidden; }
+.app-header { flex:0 0 auto; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); }
+.app-header a.header-brand { grid-column:2; grid-row:1; justify-self:center; min-width:max-content; text-align:center; white-space:nowrap; font-size:13px; font-weight:750; letter-spacing:.22em; }
+.app-header .header-start, .app-header .scenario-clock { grid-column:1; grid-row:1; justify-self:start; }
+.app-header .notification-button, .app-header .bell-link { grid-column:3; grid-row:1; justify-self:end; }
+main#conteudo { flex:1 1 auto; min-height:0; overflow-x:hidden; overflow-y:auto; overscroll-behavior-y:contain; padding:18px 16px 22px; scrollbar-gutter:stable; }
+.bottom-navigation { position:relative; inset:auto; z-index:2; flex:0 0 auto; width:100%; margin:auto 0 0; border-radius:0; background:#fff; box-shadow:0 -3px 12px rgba(31,10,60,.08); }
+.detail-screen .contact-actions button:last-child { background:#078b46; box-shadow:0 4px 12px rgba(7,139,70,.24); }
+.detail-screen .contact-actions button:disabled { opacity:1; cursor:not-allowed; }
+@media(min-width:600px){ body.page{height:calc(100dvh - 52px);min-height:480px;margin:26px auto;padding:0;overflow:hidden} .bottom-navigation{bottom:auto;border-radius:0 0 21px 21px} }
+@media(max-width:360px){ main#conteudo{padding-right:12px;padding-left:12px} }
