@@ -11,6 +11,9 @@ import QueueFilters from '../components/backoffice/QueueFilters.jsx'
 // montarGruposFiltro e compartilhada com o Painel Operacional (cada tela passa a sua base).
 const GRUPOS_FILTRO = montarGruposFiltro(chamados)
 
+// Quantidade de chamados exibidos antes de clicar em "Ver mais"
+const LIMITE_INICIAL = 5
+
 function BackofficeChamados() {
   const dados = insights.chamados
 
@@ -19,13 +22,19 @@ function BackofficeChamados() {
   // Filtros selecionados (null = Todos) e visibilidade do painel de filtros
   const [filtros, setFiltros] = useState(FILTROS_VAZIOS)
   const [filtrosAbertos, setFiltrosAbertos] = useState(false)
+  // false = mostra apenas os primeiros chamados; true = mostra a fila inteira
+  const [verTodos, setVerTodos] = useState(false)
 
-  // Busca e filtros sao aplicados em sequencia sobre os 12 registros (logica E);
+  // Busca e filtros sao aplicados em sequencia sobre os registros (logica E);
   // a lista original nao e alterada
   const resultado = filtrarFila(buscar(chamados, busca), filtros)
   const temBusca = busca.trim() !== ''
   const filtrosAtivos = contarFiltrosAtivos(filtros)
   const temCriterio = temBusca || filtrosAtivos > 0
+
+  // Recorte exibido na tabela: 5 primeiros ou todos, conforme o botao
+  const temMais = resultado.length > LIMITE_INICIAL
+  const exibidos = verTodos ? resultado : resultado.slice(0, LIMITE_INICIAL)
 
   // Seleciona uma opcao em um grupo; os demais grupos sao mantidos (combinacao).
   // A forma setFiltros(anterior => ...) parte sempre do valor mais recente do estado,
@@ -84,11 +93,6 @@ function BackofficeChamados() {
             <div>
               <h2 id="t-fila">Fila de chamados</h2>
               <p className="card-sub">Ordenada por chegada (mais recente no topo)</p>
-              <p className="scope-note">
-                <i className="fa-solid fa-circle-info" aria-hidden="true"></i>{' '}
-                Recorte operacional com {chamados.length} chamados ativos. Os indicadores do topo representam
-                o universo total da operação e não são calculados a partir desta fila.
-              </p>
             </div>
             {/* Abre e fecha o painel de filtros; o numero indica quantos grupos estao filtrando */}
             <button
@@ -152,7 +156,7 @@ function BackofficeChamados() {
                   </tr>
                 </thead>
                 <tbody>
-                  {resultado.map((chamado) => (
+                  {exibidos.map((chamado) => (
                     <tr key={chamado.id}>
                       <td>#{chamado.id}</td>
                       <td>{chamado.local} · {chamado.equipamento}</td>
@@ -177,37 +181,49 @@ function BackofficeChamados() {
             </div>
           )}
           <div className="queue-foot">
+            {/* O botao so aparece quando ha mais chamados do que o limite inicial */}
+            {temMais && (
+              <button
+                type="button"
+                className="btn-clear"
+                aria-expanded={verTodos}
+                onClick={() => setVerTodos(!verTodos)}
+              >
+                {verTodos ? 'Ver menos' : 'Ver mais (' + (resultado.length - LIMITE_INICIAL) + ')'}
+              </button>
+            )}
             <p className="queue-count" aria-live="polite">
               {temCriterio
-                ? 'Mostrando ' + resultado.length + ' de ' + chamados.length + ' chamados da fila'
-                : 'Mostrando ' + chamados.length + ' chamados'}
+                ? 'Mostrando ' + exibidos.length + ' de ' + resultado.length + ' resultados · fila com ' + chamados.length + ' chamados'
+                : 'Mostrando ' + exibidos.length + ' de ' + chamados.length + ' chamados'}
             </p>
           </div>
         </section>
 
         <section className="insights" aria-label="Eventos e distribuição">
-          <article className="card">
-            <h2>Eventos da integração</h2>
-            <p className="card-sub">Últimos eventos recebidos — mais recente no topo</p>
-            <ul className="events">
-              {dados.eventosIntegracao.map((evento) => (
-                <li key={evento.hora + evento.descricao}>
-                  <time>{evento.hora}</time>
-                  <div>
-                    <p>{evento.descricao}</p>
-                    <span className="event-source">{evento.fonte}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+          {/* A altura do card de eventos acompanha o grafico ao lado; se a lista for maior, ela rola */}
+          <article className="card events-card">
+            <div className="events-card__inner">
+              <h2>Eventos da integração</h2>
+              <p className="card-sub">Últimos eventos recebidos — mais recente no topo</p>
+              <ul className="events">
+                {dados.eventosIntegracao.map((evento) => (
+                  <li key={evento.hora + evento.descricao}>
+                    <time>{evento.hora}</time>
+                    <div>
+                      <p>{evento.descricao}</p>
+                      <span className="event-source">{evento.fonte}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </article>
           <article className="card">
             <h2>Chamados por região</h2>
             <p className="card-sub">Distribuição da fila ativa</p>
             <ul className="legend"><li>Chamados ativos</li></ul>
             <BarChart titulo="Chamados ativos por região" grupos={gruposRegiao} simples eixoX="Região" />
-            <p className="chart-total">Total: <strong>{chamados.length}</strong> chamados ativos (recorte da fila)</p>
-            <p className="data-source">Calculado a partir do recorte da fila ({chamados.length} registros), não do universo dos indicadores.</p>
           </article>
         </section>
       </main>

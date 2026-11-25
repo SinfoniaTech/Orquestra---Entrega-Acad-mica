@@ -10,7 +10,6 @@ import {
   SELECAO_VAZIA,
 } from '../utils/filters.js'
 import { calcularIndicadores, formatarDuracao, percentual } from '../utils/stats.js'
-import { ROTULOS_SLA } from '../utils/sla.js'
 import BackofficeTopbar from '../components/backoffice/BackofficeTopbar.jsx'
 import KpiList from '../components/backoffice/KpiList.jsx'
 import BarChart from '../components/backoffice/BarChart.jsx'
@@ -36,6 +35,7 @@ const classePadrao = { 'Recorrência confirmada': 'badge-red', 'Em observação'
 
 // Formatacao (pt-BR): 1247 -> "1.247" | 6.0 -> "6,0%" | null -> "—"
 const formatarNumero = (valor) => valor.toLocaleString('pt-BR')
+
 function formatarPercentual(valor) {
   if (valor === null) return '—'
   return valor.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%'
@@ -66,6 +66,7 @@ function BackofficePainel() {
     const item = ind.porStatus.find((status) => status.valor === valor)
     return item ? item.quantidade : 0
   }
+
   const abertos = quantidadeDoStatus('aberto')
   const aguardandoSupervisor = quantidadeDoStatus('supervisor')
   const variacao = ind.variacaoMensal
@@ -112,14 +113,13 @@ function BackofficePainel() {
       },
     },
   }
-  const legendaKpis =
-    'Calculados sobre ' + formatarNumero(ind.total) + ' de ' + formatarNumero(BASE.length) +
-    ' chamados da base demonstrativa (' + PERIODO.toLowerCase() + ') · respondem aos filtros.'
 
-  // ---------- Seis graficos (mesmos registros filtrados) ----------
-  const totalReincidentes = 'Total: ' + formatarNumero(ind.total) + ' chamados · ' + formatarNumero(ind.reincidencias) +
+  // ---------- Tres graficos (mesmos registros filtrados) ----------
+  const totalReincidentes =
+    'Total: ' + formatarNumero(ind.total) + ' chamados · ' + formatarNumero(ind.reincidencias) +
     ' reincidentes (' + formatarPercentual(percentual(ind.reincidencias, ind.total)) + ', já incluídos no total)'
-  const classesSlaComDados = ['prazo', 'risco', 'estourado'].concat(ind.sla.indeterminado > 0 ? ['indeterminado'] : [])
+
+  const totalChamados = 'Total: ' + formatarNumero(ind.total) + ' chamados'
 
   const graficos = [
     {
@@ -144,7 +144,7 @@ function BackofficePainel() {
       eixoX: 'Status',
       percentual: true,
       grupos: ind.porStatus.map((item) => ({ rotulo: item.rotulo, barras: [{ valor: item.quantidade }] })),
-      rodape: 'Total: ' + formatarNumero(ind.total) + ' chamados',
+      rodape: totalChamados,
     },
     {
       chave: 'prioridade',
@@ -152,42 +152,11 @@ function BackofficePainel() {
       subtitulo: 'Distribuição da criticidade',
       eixoX: 'Prioridade',
       percentual: true,
-      grupos: ind.porPrioridade.map((item) => ({ rotulo: item.rotulo, barras: [{ valor: item.quantidade, classe: 'p-' + item.valor }] })),
-      rodape: 'Total: ' + formatarNumero(ind.total) + ' chamados',
-    },
-    {
-      chave: 'regiao',
-      titulo: 'Chamados por Região',
-      subtitulo: 'Distribuição geográfica',
-      eixoX: 'Região',
-      percentual: true,
-      grupos: ind.porRegiao.map((item) => ({ rotulo: item.rotulo, barras: [{ valor: item.quantidade }] })),
-      rodape: 'Total: ' + formatarNumero(ind.total) + ' chamados',
-    },
-    {
-      chave: 'tipo',
-      titulo: 'Chamados por Tipo de Ocorrência',
-      subtitulo: 'Concentração de falhas e reincidentes',
-      series: true,
-      eixoX: 'Tipo de ocorrência',
-      percentual: true,
-      grupos: ind.porTipo.map((item) => ({
+      grupos: ind.porPrioridade.map((item) => ({
         rotulo: item.rotulo,
-        barras: [
-          { valor: item.quantidade, nome: 'Chamados' },
-          { valor: item.reincidentes, nome: 'Reincidentes', classe: 'is-alt' },
-        ],
+        barras: [{ valor: item.quantidade, classe: 'p-' + item.valor }],
       })),
-      rodape: totalReincidentes,
-    },
-    {
-      chave: 'sla',
-      titulo: 'Situação do SLA',
-      subtitulo: 'No prazo ≤ 70% · Em risco > 70% e < 100% · Estourado ≥ 100% do prazo',
-      eixoX: 'Classificação',
-      percentual: true,
-      grupos: classesSlaComDados.map((classe) => ({ rotulo: ROTULOS_SLA[classe], barras: [{ valor: ind.sla[classe], classe: 'sla-' + classe }] })),
-      rodape: 'Base: ' + formatarNumero(ind.sla.comClassificacao) + ' chamados com SLA calculável de ' + formatarNumero(ind.total),
+      rodape: totalChamados,
     },
   ]
 
@@ -200,16 +169,13 @@ function BackofficePainel() {
         buscaDesabilitada
       />
       <main className="app-content">
-        <KpiList indicadores={kpis} chaves={['total', 'abertas', 'atendimento', 'concluidas', 'ta', 'tb']} legenda={legendaKpis} />
+        <KpiList indicadores={kpis} chaves={['total', 'abertas', 'atendimento', 'concluidas', 'ta', 'tb']} legenda="" />
 
         {/* Filtros: alteram TODOS os elementos analiticos abaixo e os KPIs acima */}
         <section className="card" aria-labelledby="t-filtros-indicadores">
           <div className="card-head">
             <div>
-              <div className="chart-head">
-                <h2 id="t-filtros-indicadores">Filtros dos indicadores</h2>
-                <span className="tag-demo" title={DOC.aviso}>Base demonstrativa</span>
-              </div>
+              <h2 id="t-filtros-indicadores">Filtros dos indicadores</h2>
               <p className="card-sub">
                 Marque uma ou mais opções em cada grupo (qualquer uma dentro do grupo; todas entre os grupos).
                 Os indicadores, gráficos e a Performance por Região desta tela são recalculados.
@@ -227,6 +193,7 @@ function BackofficePainel() {
               {opcoesMarcadas > 0 && <span className="filter-count" aria-hidden="true">{opcoesMarcadas}</span>}
             </button>
           </div>
+
           {filtrosAbertos && (
             <QueueFilters
               id="filtros-painel"
@@ -238,6 +205,7 @@ function BackofficePainel() {
               multipla
             />
           )}
+
           {ind.total === 0 ? (
             <div className="empty-search" role="status">
               <p>Nenhum chamado da base demonstrativa corresponde aos filtros selecionados.</p>
@@ -258,11 +226,13 @@ function BackofficePainel() {
             <article key={grafico.chave} className="card chart-card">
               <div className="chart-head">
                 <h2>{grafico.titulo}</h2>
-                <span className="tag-demo" title={DOC.aviso}>Demonstrativo</span>
               </div>
               <p className="card-sub">{grafico.subtitulo} · {PERIODO}</p>
               {grafico.series ? (
-                <ul className="legend"><li>Chamados (total)</li><li className="legend-alt">Reincidentes (incluídos no total)</li></ul>
+                <ul className="legend">
+                  <li>Chamados (total)</li>
+                  <li className="legend-alt">Reincidentes (incluídos no total)</li>
+                </ul>
               ) : (
                 <ul className="legend is-hidden" aria-hidden="true"><li>.</li></ul>
               )}
@@ -280,10 +250,7 @@ function BackofficePainel() {
 
         {/* Performance por Regiao: mesmos registros filtrados, com os denominadores de cada calculo */}
         <section className="card" aria-labelledby="t-regioes">
-          <div className="chart-head">
-            <h2 id="t-regioes">Performance por Região</h2>
-            <span className="tag-demo" title={DOC.aviso}>Demonstrativo</span>
-          </div>
+          <h2 id="t-regioes">Performance por Região</h2>
           <p className="card-sub">
             TA, TB, SLA no prazo, reincidência e responsáveis por região · n = quantidade de registros usada em cada cálculo
           </p>
@@ -311,12 +278,7 @@ function BackofficePainel() {
         </section>
 
         {/* Referencias do prototipo (insights.json): NAO usam a base demonstrativa e NAO respondem aos filtros */}
-        <section className="ref-demo" aria-labelledby="t-referencias">
-          <div className="ref-demo-head">
-            <h2 id="t-referencias">Referências demonstrativas — não respondem aos filtros</h2>
-            <p>Conteúdo fixo do protótipo original (insights.json). Não é calculado a partir da base demonstrativa nem da seleção atual.</p>
-          </div>
-
+        <section className="ref-demo">
           <section className="card" aria-labelledby="t-padroes">
             <h2 id="t-padroes">Padrões e Recorrências Identificadas</h2>
             <p className="card-sub">Correlação entre equipamento, ocorrência e histórico técnico</p>
@@ -324,8 +286,13 @@ function BackofficePainel() {
               <table className="table-padroes">
                 <thead>
                   <tr>
-                    <th>Equipamento</th><th>Local</th><th>Ocorrência</th><th>Eventos</th>
-                    <th>Janela</th><th>Padrão</th><th>Ação recomendada</th>
+                    <th>Equipamento</th>
+                    <th>Local</th>
+                    <th>Ocorrência</th>
+                    <th>Eventos</th>
+                    <th>Janela</th>
+                    <th>Padrão</th>
+                    <th>Ação recomendada</th>
                   </tr>
                 </thead>
                 <tbody>
