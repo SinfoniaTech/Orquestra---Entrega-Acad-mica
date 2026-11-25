@@ -1,15 +1,36 @@
 # ORQUESTRA — Gestão e acompanhamento de chamados operacionais
 
-Projeto acadêmico (PBL) migrado de HTML/CSS/JS para **React + JSX**, com Vite, React Router, Bootstrap 5 e CSS próprio.
+Projeto acadêmico (PBL) migrado de HTML/CSS/JS para **React + JSX**. A aplicação atual é inteiramente React; o protótipo HTML original foi removido do projeto (ver "Registro de limpeza").
 Sem TypeScript, Redux, Context API, custom hooks ou bibliotecas de gráficos.
+
+## Tecnologias
+
+| Tecnologia | Uso |
+|---|---|
+| React 19 + JSX | Componentes e telas (`useState` e props para o estado) |
+| React Router 7 | Rotas com `createBrowserRouter` (`src/router.jsx`) |
+| Vite 8 (`@vitejs/plugin-react`) | Servidor de desenvolvimento e build |
+| Bootstrap 5.3 + CSS próprio | Estilos (`src/styles/`) |
+| Font Awesome 7 (CDN, no `index.html`) | Ícones |
+| oxlint | Verificação do código (`npm run lint`) |
+| Node.js | Execução do Vite e do script que gera a base demonstrativa |
+
+Os gráficos são feitos em HTML/CSS, sem biblioteca de gráficos.
 
 ## Como executar
 
 ```bash
-npm install
+npm install      # instala as dependências
 npm run dev      # servidor de desenvolvimento
 npm run build    # build de produção (pasta dist/)
+npm run preview  # serve o build de produção localmente
 npm run lint     # verificação com oxlint
+```
+
+Para regenerar a base demonstrativa do Painel Operacional (o resultado é sempre o mesmo arquivo):
+
+```bash
+node scripts/gerar-painel-demonstrativo.mjs
 ```
 
 ## Estrutura
@@ -24,9 +45,12 @@ src/
   data/                    arquivos JSON (fonte dos dados exibidos)
   utils/                   funções puras e tabelas de apresentação
   styles/                  global, overrides do Bootstrap, mobile e backoffice
-docs/                      material acadêmico de referência
-*.html, styles.css, alerts/, critical/, high/, medio/, detalhes/, more/, backoffice/
-                           protótipo HTML original, mantido como referência
+public/                    arquivos públicos (favicon.svg)
+scripts/                   gerar-painel-demonstrativo.mjs (ferramenta de desenvolvimento; não é importada pela aplicação)
+index.html                 entrada do Vite (carrega src/main.jsx)
+vite.config.js             configuração do Vite (plugin React e separação das bibliotecas no build)
+package.json               dependências e scripts npm
+.oxlintrc.json             regras do lint
 ```
 
 ## Rotas
@@ -61,7 +85,7 @@ A escolha fica registrada na própria rota e se mantém enquanto o usuário nave
 | E3 | Paginação (5 por página) e tratamento do campo `hidden` | Pendente |
 | E4 | Sinalização de risco de SLA | Pendente |
 | E5 | Indicadores calculados do recorte | Pendente |
-| EP1 + EP-R | Painel Operacional gerencial (base demonstrativa, filtros múltiplos, KPIs, gráficos e Performance por Região calculados) | Concluída — aguardando avaliação |
+| EP1 + EP-R | Painel Operacional gerencial (base demonstrativa, filtros múltiplos, KPIs, gráficos e Performance por Região calculados) | Concluída |
 
 ### Busca (E1)
 
@@ -136,6 +160,10 @@ Todos os elementos analíticos do Painel usam a **mesma base** e os **mesmos reg
 
 Os gráficos são HTML/CSS (`components/backoffice/BarChart.jsx`). A altura de cada barra é calculada a partir do valor recebido (`valor / maior valor × 100%`). Nenhum valor de negócio fica fixado no CSS.
 
+**A base de 1.247 registros do Painel Operacional é demonstrativa:** os chamados são fictícios. Os prazos de SLA e as metas de TA/TB também são regras assumidas apenas para a demonstração, e nada disso representa a operação real.
+
+Alguns campos dos JSONs originais (por exemplo, `slaPorOrigem` em `chamados-mobile.json`) citam caminhos de páginas do protótipo HTML, como `detalhes/chamado-resumo.html`. São referências históricas de onde cada valor foi obtido. A aplicação não abre esses arquivos, e eles podem ser consultados no histórico do Git (tag `pos-ep-r`), por exemplo com `git show pos-ep-r:detalhes/chamado-resumo.html`.
+
 ## Registro de limpeza (2026-11-24)
 
 Antes de excluir cada arquivo, foi verificado que nenhum outro arquivo do projeto o referenciava.
@@ -150,4 +178,19 @@ Antes de excluir cada arquivo, foi verificado que nenhum outro arquivo do projet
 | `src/pages/Criticality.jsx`, `src/components/CriticalityNav.jsx` | Substituídos pelo filtro na Home (`CriticalityFilter.jsx`) e por `RedirecionaCriticidade.jsx` |
 | Dependências `@types/react`, `@types/react-dom` | Tipos para TypeScript; o projeto não usa TS (não há tsconfig/jsconfig) |
 
-Mantidos de propósito: o protótipo HTML/CSS original, os JSONs, `docs/`, `public/favicon.svg` (referenciado no `index.html`) e `src/utils/stats.js` (reservado para o cálculo de indicadores).
+Mantidos naquela limpeza: o protótipo HTML/CSS original (removido depois, na limpeza de 2026-11-25), os JSONs, `public/favicon.svg` (referenciado no `index.html`) e `src/utils/stats.js` (hoje usado pelo Painel Operacional).
+
+## Registro de limpeza (2026-11-25) — protótipo anterior ao React
+
+Antes da remoção, foi criado o ponto de restauração `pos-ep-r` (commit `f8d4a6e`), que contém a EP-R e todos os arquivos abaixo. Nenhum deles era importado ou carregado pela aplicação React. As únicas referências eram textos históricos nos JSONs, comentários no CSS e a documentação.
+
+| Removido | Motivo |
+|---|---|
+| `alerts/alertas.html`, `critical/critico-vermelho.html`, `high/alto-laranja.html`, `medio/medio-amarelo.html`, `medio/padrao-verde.html`, `more/mais.html` | Páginas do protótipo HTML, substituídas pelas telas React |
+| `detalhes/chamado-resumo.html`, `detalhes/chamado-linha-do-tempo.html`, `detalhes/chamado-historico.html` | Páginas do protótipo, substituídas por `pages/Detail/*` |
+| `backoffice/chamados.html`, `backoffice/painel-operacional.html`, `backoffice/chamados.css`, `backoffice/painel-operacional.css` | Páginas e estilos do protótipo do Backoffice, substituídos por `BackofficeChamados.jsx`, `BackofficePainel.jsx` e `styles/backoffice.css`. Também causavam um defeito no `npm run dev`: o acesso direto a `/backoffice/chamados` carregava o HTML antigo em vez da aplicação React |
+| `styles.css` (raiz) | Estilo do protótipo, migrado para `src/styles/` |
+| Pastas `alerts/`, `critical/`, `high/`, `medio/`, `more/`, `detalhes/`, `backoffice/` | Ficaram vazias |
+| Pastas vazias `src/components/common/`, `detail/` e `layout/` | Sem conteúdo |
+| `CLAUDE.md` | Arquivo de instruções do assistente, que deixou de ser necessário. As regras relevantes estão neste README |
+| `docs/` (material acadêmico em PDF) | Removido do projeto por decisão do autor |
