@@ -1,0 +1,84 @@
+{
+  "indicadores": {
+    "tipo": "demonstrativo",
+    "universo": "Operação consolidada (todos os contratos e regiões)",
+    "documentacao": {
+      "descricao": "Fonte única dos indicadores agregados do Backoffice. As telas Chamados e Painel Operacional leem os mesmos itens por chave (listas 'kpis' de cada tela).",
+      "harmonizacao": "No protótipo HTML, painel-operacional.html (commit ddaab9f, 21/11) trazia Total 1.248 / Em Atendimento 22 / Concluídas 93,6%, e chamados.html (commit 586ef7a, 23/11) trazia 1.247 / 21 / 93,7%. Mesma métrica, mesmo universo e mesmas notas, com diferença de 1 chamado em atendimento. Adotada a base 1.247 / 21: é a versão mais recente e a única confirmada pelo fluxo de chamados (4 + 54 = 58 abertas; 21 em atendimento; 1.168 concluídos).",
+      "relacaoComFila": "Os indicadores representam o universo total da operação. A fila de chamados-backoffice.json (12 registros) é um recorte operacional e não serve de base para estes números.",
+      "periodo": "Não definido no protótipo original. As telas exibem apenas seletores visuais ('Tempo real' em Chamados e 'Últimos 6 meses' no Painel)."
+    },
+    "itens": {
+      "total": { "label": "Total de Chamadas", "value": "1.247", "note": "+6% vs. mês anterior", "tone": "green" },
+      "abertas": { "label": "Abertas", "value": "58", "note": "12 acima do previsto", "tone": "orange" },
+      "emAtendimento": { "label": "Em Atendimento", "value": "21", "note": "8 críticas", "tone": "red" },
+      "slaEmRisco": { "label": "SLA em risco", "value": "4", "note": "acima de 70% do prazo", "tone": "muted" },
+      "concluidas": { "label": "Concluídas", "value": "1.168", "note": "93,7% do total", "tone": "muted" },
+      "taMedio": { "label": "TA Médio", "value": "27 min", "note": "meta 30 min", "tone": "green" },
+      "tbMedio": { "label": "TB Médio", "value": "2h 15min", "note": "meta 2h", "tone": "orange" }
+    }
+  },
+  "chamados": {
+    "kpis": ["total", "abertas", "emAtendimento", "slaEmRisco", "concluidas", "taMedio"],
+    "fluxo": [
+      { "label": "Aguardando priorização", "value": 4 },
+      { "label": "Encaminhados ao supervisor", "value": 54 },
+      { "label": "Em atendimento", "indicador": "emAtendimento" },
+      { "label": "Concluídos", "indicador": "concluidas" }
+    ],
+    "eventosIntegracao": [
+      { "hora": "13:58", "descricao": "Chamado #CH-0008182 recebido do Sistema OTIS", "fonte": "Sistema OTIS" },
+      { "hora": "13:56", "descricao": "Chamado #CH-0008181 recebido do Sistema OTIS", "fonte": "Sistema OTIS" },
+      { "hora": "13:54", "descricao": "Chamado #CH-0008170 recebido do Sistema OTIS", "fonte": "Sistema OTIS" },
+      { "hora": "13:47", "descricao": "Chamado #CH-0008154 priorizado como Crítica (Zona Sul)", "fonte": "Orquestra" },
+      { "hora": "13:41", "descricao": "Chamado #CH-0008153 encaminhado ao supervisor", "fonte": "Orquestra" }
+    ],
+    "regioes": [
+      { "regiao": "Centro", "quantidade": 3 },
+      { "regiao": "Zona Sul", "quantidade": 6 },
+      { "regiao": "Zona Norte", "quantidade": 1 },
+      { "regiao": "Zona Leste", "quantidade": 1 },
+      { "regiao": "Zona Oeste", "quantidade": 1 }
+    ],
+    "chamadosPorRegiaoAriaLabelOriginal": "Chamados ativos por região: Centro 2, Zona Sul 5, Zona Norte 1, Zona Leste 1, Zona Oeste 1",
+    "chamadosPorRegiaoAriaLabelCorrigido": "Chamados ativos por região: Centro 3, Zona Sul 6, Zona Norte 1, Zona Leste 1, Zona Oeste 1"
+  },
+  "painelOperacional": {
+    "kpis": ["total", "abertas", "emAtendimento", "concluidas", "taMedio", "tbMedio"],
+    "filtrosHistorico": ["Item/Equipamento","Tipo de Chamada","Período","Ocorrência","Código de Fechamento","Tempo de Chegada","Tempo de Solução","Feedback do Técnico","Tipo de Peça","Treinamento","Prioridade"],
+    "graficos": {
+      "chamadasPorPeriodo": { "meses": ["Abr","Mai","Jun","Jul","Ago","Set"], "valoresChamadas": null, "valoresReincidencias": null, "observacao": "Alturas das barras definidas em CSS; valores numéricos não presentes no HTML original." },
+      "chamadasPorPrioridade": { "categorias": ["Crítica","Alta","Média","Baixa"], "valores": null, "observacao": "Alturas das barras definidas em CSS." },
+      "chamadasPorTipoOcorrencia": { "categorias": ["Nivelamento","Porta","Painel/comando","Segurança","Comunicação","Outros"], "valores": null, "observacao": "Alturas das barras definidas em CSS." }
+    },
+    "padroes": [
+      { "equipamento": "ELV-4471", "local": "Hospital São Paulo — SP", "ocorrencia": "Falha de nivelamento", "eventos": 7, "janela": "60 dias", "padrao": "Recorrência confirmada", "acaoRecomendada": "Revisar sensor de zona + treinamento nivelamento" },
+      { "equipamento": "ELV-2210", "local": "Shopping Center Norte — SP", "ocorrencia": "Porta não fecha", "eventos": 5, "janela": "45 dias", "padrao": "Recorrência confirmada", "acaoRecomendada": "Substituir operador de porta (peça pré-posicionada)" },
+      { "equipamento": "ESC-0912", "local": "Hospital Life — RJ", "ocorrencia": "Parada por segurança", "eventos": 3, "janela": "30 dias", "padrao": "Em observação", "acaoRecomendada": "Monitorar telemetria IoT por 15 dias" },
+      { "equipamento": "ELV-7788", "local": "Edifício Corporate — BH", "ocorrencia": "Painel / comando", "eventos": 4, "janela": "50 dias", "padrao": "Recorrência confirmada", "acaoRecomendada": "Norma técnica de inspeção trimestral" }
+    ],
+    "areas": [
+      { "nome": "SP Capital", "sla": "96%", "ta": "24 min", "tb": "118 min", "tecnicos": 42, "reincidencia": "8%", "skill": { "nome": "Escadas rolantes — corrente", "nivel": "Média", "percentual": "81%" } },
+      { "nome": "SP Interior", "sla": "89%", "ta": "38 min", "tb": "156 min", "tecnicos": 26, "reincidencia": "14%", "skill": { "nome": "Nivelamento e sensores de zona", "nivel": "Alta", "percentual": "62%" } },
+      { "nome": "Rio de Janeiro", "sla": "92%", "ta": "31 min", "tb": "142 min", "tecnicos": 24, "reincidencia": "11%", "skill": { "nome": "Operador de porta eletrônico", "nivel": "Alta", "percentual": "74%" } },
+      { "nome": "Minas Gerais", "sla": "90%", "ta": "35 min", "tb": "149 min", "tecnicos": 18, "reincidencia": "12%", "skill": { "nome": "Painel de comando série X", "nivel": "Crítica", "percentual": "48%" } },
+      { "nome": "Sul", "sla": "94%", "ta": "29 min", "tb": "131 min", "tecnicos": 21, "reincidencia": "9%", "skill": null }
+    ],
+    "recomendacoes": [
+      { "titulo": "Treinamento de nivelamento — SP Interior", "tag": "Treinamento", "descricao": "12 recorrências em 60 dias, TA 38 min acima da meta", "ganho": "Redução estimada de 18% em reincidência", "icone": "fa-graduation-cap" },
+      { "titulo": "Pré-posicionar operadores de porta em MG", "tag": "Peças", "descricao": "4 equipamentos com padrão confirmado de falha de porta", "ganho": "TB estimado -22 min por atendimento", "icone": "fa-cube" },
+      { "titulo": "Norma de inspeção trimestral — painel série X", "tag": "Norma", "descricao": "Correlação entre alertas IoT e paradas não programadas", "ganho": "Prevenção de ~30 chamadas/trimestre", "icone": "fa-clipboard" }
+    ],
+    "contrato": "CT-2025-00124",
+    "cliente": "Hospital São Paulo"
+  },
+  "more": {
+    "opcoes": [
+      { "label": "Meu perfil", "href": "#perfil", "tipo": "placeholder" },
+      { "label": "Equipe", "href": "#equipe", "tipo": "placeholder" },
+      { "label": "Configurações", "href": "#configuracoes", "tipo": "placeholder" },
+      { "label": "Ajuda", "href": "#ajuda", "tipo": "placeholder" },
+      { "label": "Backoffice", "href": "/backoffice/painel", "tipo": "rota" }
+    ]
+  }
+}
