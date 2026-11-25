@@ -1,257 +1,1282 @@
-.app-root--backoffice{--navy:#1f0a3c;--navy-2:#1a1a66;--blue:#3b6fd8;--blue-soft:#e9efff;--ink:#1b1f2e;--muted:#6b7280;--page:#f6f7fb;--card:#fff;--line:#e5e7eb;--radius:10px;--radius-sm:8px;--gap:10px;--red:#e11d2e;--red-soft:#fdecee;--orange:#ea8a1a;--orange-soft:#fff3e2;--yellow:#f2c200;--yellow-soft:#fff9dc;--green:#1a9d52;--green-soft:#e6f6ed;font-family:Inter,Segoe UI,Arial,sans-serif;font-size:14px;line-height:1.4;color:var(--ink);background:var(--page);}
+.app-root--backoffice {
+  --navy: #1f0a3c;
+  --navy-2: #1a1a66;
+  --blue: #3b6fd8;
+  --blue-soft: #e9efff;
+  --ink: #1b1f2e;
+  --muted: #6b7280;
+  --page: #f6f7fb;
+  --card: #fff;
+  --line: #e5e7eb;
+  --radius: 10px;
+  --radius-sm: 8px;
+  --gap: 10px;
+  --red: #e11d2e;
+  --red-soft: #fdecee;
+  --orange: #ea8a1a;
+  --orange-soft: #fff3e2;
+  --yellow: #f2c200;
+  --yellow-soft: #fff9dc;
+  --green: #1a9d52;
+  --green-soft: #e6f6ed;
 
-.app-root--backoffice{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100svh;width:100%;}
-.app-root--backoffice :is(a,button):focus-visible{outline:3px solid #9bb4f2;outline-offset:2px;}
-.app-root--backoffice button{cursor:pointer;}
-
-.app-root--backoffice .sidebar{position:sticky;top:0;height:100svh;padding:18px 12px;overflow-y:auto;color:#fff;background:var(--navy);}
-.app-root--backoffice .sidebar ul{margin:0;padding:0;list-style:none;}
-.app-root--backoffice .sidebar a,.app-root--backoffice .sidebar-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--radius-sm);color:#e6e7f6;font-size:14px;}
-.app-root--backoffice .sidebar a:hover{background:rgba(255,255,255,.07);}
-.app-root--backoffice .sidebar a.active,.app-root--backoffice .sidebar a[aria-current=page]{color:#fff;background:var(--blue);}
-.app-root--backoffice .sidebar-item.is-placeholder{cursor:default;opacity:.75;}
-.app-root--backoffice .sidebar i{width:18px;text-align:center;}
-.app-root--backoffice .brand{margin:0 8px 18px;font-size:26px;font-weight:700;letter-spacing:-.02em;color:#fff;}
-.app-root--backoffice .sidebar-group{margin:18px 8px 6px;color:#8d90bd;font-size:11px;font-weight:600;letter-spacing:.08em;}
-
-.app-root--backoffice .content{min-width:0;display:flex;flex-direction:column;min-height:100svh;}
-.app-root--backoffice .app-content{flex:1;display:grid;align-content:start;gap:var(--gap);padding:12px 20px 24px;}
-
-.app-root--backoffice .topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;background:#fff;border-bottom:1px solid var(--line);}
-.app-root--backoffice .topbar h1{margin:0;font-size:20px;letter-spacing:-.02em;}
-.app-root--backoffice .topbar p{margin:2px 0 0;color:var(--muted);font-size:13px;}
-.app-root--backoffice .topbar-tools{display:flex;align-items:center;gap:var(--gap);}
-.app-root--backoffice .search{display:flex;align-items:center;gap:8px;width:300px;margin:0;padding:8px 12px;border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--muted);background:var(--page);}
-.app-root--backoffice .search input{flex:1;min-width:0;border:0;outline:0;color:var(--ink);background:transparent;font:inherit;}
-.app-root--backoffice .search:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);}
-.app-root--backoffice .search.is-disabled{cursor:not-allowed;opacity:.75;}
-.app-root--backoffice .search.is-disabled input{cursor:not-allowed;}
-
-.app-root--backoffice .empty-search{margin:8px 0 4px;padding:22px 16px;border:1px solid var(--line);border-radius:var(--radius);text-align:center;background:var(--page);}
-.app-root--backoffice .empty-search p{margin:0;color:var(--ink);font-size:13px;overflow-wrap:anywhere;}
-.app-root--backoffice .empty-search .empty-search__hint{margin-top:4px;color:var(--muted);font-size:12px;}
-.app-root--backoffice .empty-search__actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px;}
-.app-root--backoffice .empty-search__actions .btn-clear{margin-top:0;}
-.app-root--backoffice .btn-clear{margin-top:12px;padding:6px 14px;border:1px solid var(--navy-2);border-radius:var(--radius-sm);color:var(--navy-2);background:#fff;font-size:12px;font-weight:600;}
-.app-root--backoffice .btn-clear:hover{color:#fff;background:var(--navy-2);}
-.app-root--backoffice .btn-clear:disabled{opacity:.45;cursor:not-allowed;}
-.app-root--backoffice .btn-clear:disabled:hover{color:var(--navy-2);background:#fff;}
-.app-root--backoffice .btn-period{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:0;border-radius:var(--radius-sm);color:#fff;background:var(--navy-2);font-size:13px;font-weight:600;white-space:nowrap;}
-
-.app-root--backoffice .card{display:block;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);color:var(--ink);}
-.app-root--backoffice .card h2{margin:0;font-size:15px;letter-spacing:-.01em;}
-.app-root--backoffice .card-sub{margin:2px 0 8px;color:var(--muted);font-size:12px;}
-.app-root--backoffice .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
-
-.app-root--backoffice .is-green{color:var(--green);}
-.app-root--backoffice .is-orange{color:var(--orange);}
-.app-root--backoffice .is-red{color:var(--red);}
-.app-root--backoffice .is-muted{color:var(--muted);}
-
-.app-root--backoffice .kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gap);}
-.app-root--backoffice .kpi{padding:8px 12px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);}
-.app-root--backoffice .kpi-label{color:var(--muted);font-size:12px;}
-.app-root--backoffice .kpi-value{margin:2px 0;font-size:24px;font-weight:700;letter-spacing:-.02em;}
-.app-root--backoffice .kpi-note{font-size:11px;}
-
-.app-root--backoffice .flow{display:flex;align-items:center;gap:8px;}
-.app-root--backoffice .flow-item{display:flex;flex:1;align-items:center;gap:8px;min-width:0;}
-.app-root--backoffice .flow-step{display:grid;flex:1;gap:2px;min-width:0;padding:6px 12px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--page);}
-.app-root--backoffice .flow-label{color:var(--muted);font-size:12px;}
-.app-root--backoffice .flow-value{font-size:20px;font-weight:700;letter-spacing:-.02em;}
-.app-root--backoffice .flow-arrow{color:var(--muted);font-size:12px;}
-
-.app-root--backoffice .btn-filter{position:relative;display:inline-flex;flex:none;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--navy-2);background:#fff;}
-.app-root--backoffice .btn-filter[aria-expanded="true"]{color:#fff;background:var(--navy-2);border-color:var(--navy-2);}
-.app-root--backoffice .filter-count{position:absolute;top:-6px;right:-6px;display:grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border:2px solid #fff;border-radius:999px;color:#fff;background:var(--blue);font-size:10px;font-weight:700;line-height:1;}
-
-.app-root--backoffice .filters{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:6px 0 10px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--page);}
-.app-root--backoffice .filter-group{display:flex;flex-wrap:wrap;align-items:center;gap:6px;}
-.app-root--backoffice .filters-label{margin-right:4px;color:var(--muted);font-size:12px;}
-.app-root--backoffice .filters-actions{margin-left:auto;}
-.app-root--backoffice .filters-actions .btn-clear{margin-top:0;}
-.app-root--backoffice .filters-resumo{margin:2px 0 0;color:var(--muted);font-size:12px;}
-.app-root--backoffice .filters-resumo strong{color:var(--ink);}
-.app-root--backoffice .filters--demo{flex-direction:column;align-items:flex-start;gap:8px;}
-.app-root--backoffice .filters-demo-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
-.app-root--backoffice .filters--demo .chip:disabled{color:var(--muted);background:#fafbfd;cursor:not-allowed;}
-
-.app-root--backoffice .chip{padding:5px 10px;border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--ink);background:#fff;font-size:12px;}
-.app-root--backoffice .chip:hover:not(:disabled){border-color:var(--navy-2);}
-.app-root--backoffice .chip[aria-pressed="true"]{color:#fff;background:var(--navy-2);border-color:var(--navy-2);}
-
-.app-root--backoffice .table-wrap{overflow-x:auto;}
-.app-root--backoffice table{width:100%;min-width:900px;border-collapse:collapse;font-size:13px;}
-.app-root--backoffice table.table-padroes{min-width:760px;}
-.app-root--backoffice table.table-amostra{min-width:680px;}
-.app-root--backoffice table.table-amostra th{position:sticky;top:0;z-index:1;background:var(--card);box-shadow:inset 0 -1px 0 var(--line);}
-.app-root--backoffice table.table-amostra tbody tr:first-child td{border-top:0;}
-.app-root--backoffice .amostra-wrap{max-height:320px;overflow:auto;border:1px solid var(--line);border-radius:var(--radius-sm);}
-.app-root--backoffice th{padding:6px 10px;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.05em;text-align:left;text-transform:uppercase;white-space:nowrap;}
-.app-root--backoffice td{padding:5px 10px;border-top:1px solid var(--line);vertical-align:middle;}
-.app-root--backoffice td:first-child{font-weight:700;white-space:nowrap;}
-.app-root--backoffice tbody tr:hover{background:var(--page);}
-.app-root--backoffice .col-sla{min-width:130px;}
-
-.app-root--backoffice .prio{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;color:#fff;font-size:11px;font-weight:700;white-space:nowrap;}
-.app-root--backoffice .prio-critica{background:var(--red);}
-.app-root--backoffice .prio-alta{background:var(--orange);}
-.app-root--backoffice .prio-media{color:#4a3b00;background:var(--yellow);}
-.app-root--backoffice .prio-normal{background:var(--green);}
-
-.app-root--backoffice .status{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;white-space:nowrap;}
-.app-root--backoffice .status-aberto{color:#8a6a00;background:var(--yellow-soft);}
-.app-root--backoffice .status-supervisor{color:var(--navy-2);background:var(--blue-soft);}
-.app-root--backoffice .status-atendimento{color:#8a5300;background:var(--orange-soft);}
-
-.app-root--backoffice .sla-text{margin:2px 0 0;color:var(--muted);font-size:11px;}
-.app-root--backoffice .meter{height:5px;border-radius:99px;background:#eceef3;overflow:hidden;}
-.app-root--backoffice .meter span{display:block;height:100%;border-radius:99px;background:var(--c,var(--navy-2));}
-
-.app-root--backoffice .queue-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:8px;}
-.app-root--backoffice .queue-count{margin:0 0 0 auto;color:var(--muted);font-size:12px;}
-.app-root--backoffice .queue-foot .btn-clear{margin-top:0;}
-
-.app-root--backoffice .insights{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--gap);}
-.app-root--backoffice .events-card{position:relative;min-height:200px;}
-.app-root--backoffice .insights .card{padding:8px 12px;}
-.app-root--backoffice .insights .card-sub{margin-bottom:10px;}
-.app-root--backoffice .insights .legend{margin-bottom:10px;}
-.app-root--backoffice .insights .charts-axis,.app-root--backoffice .insights .chart-axis--y{margin-bottom:6px;}
-.app-root--backoffice .insights .bars{--h:170px;gap:16px;padding:20px 8px 0;}
-.app-root--backoffice .insights .bars.single .bar{max-width:44px;border-radius:5px 5px 0 0;}
-.app-root--backoffice .insights .bar-value{font-size:12px;margin-bottom:4px;}
-.app-root--backoffice .insights .xlabels{margin-top:6px;font-size:11px;}
-.app-root--backoffice .insights .chart-axis--x{margin-top:8px;font-size:11px;}
-.app-root--backoffice .events-card__inner{position:absolute;inset:8px 12px;display:flex;flex-direction:column;min-height:0;}
-.app-root--backoffice .events{display:flex;flex-direction:column;flex:1;min-height:0;margin:0;padding:0;overflow-y:auto;list-style:none;}
-.app-root--backoffice .events li{display:grid;flex:1 0 auto;grid-template-columns:48px minmax(0,1fr);align-items:center;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:13px;}
-.app-root--backoffice .events li:first-child{border-top:0;}
-.app-root--backoffice .events time{color:var(--muted);}
-.app-root--backoffice .events p{margin:0;}
-.app-root--backoffice .event-source{display:block;margin-top:3px;color:var(--blue);font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
-
-.app-root--backoffice .charts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);}
-.app-root--backoffice .chart-card{padding:8px 10px;}
-.app-root--backoffice .chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
-.app-root--backoffice .legend{display:flex;gap:12px;margin:0 0 4px;padding:0;list-style:none;color:var(--muted);font-size:11px;}
-.app-root--backoffice .legend.is-hidden{visibility:hidden;}
-.app-root--backoffice .legend li::before{content:"";display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:2px;background:var(--c,var(--navy-2));}
-.app-root--backoffice .legend .legend-alt{--c:var(--blue);}
-
-.app-root--backoffice .chart{margin:0;}
-.app-root--backoffice .bars{--h:136px;display:flex;align-items:flex-end;justify-content:space-around;gap:8px;height:var(--h);padding:16px 4px 0;border-bottom:1px solid var(--line);background:repeating-linear-gradient(to top,transparent 0,transparent calc(25% - 1px),#eef0f4 calc(25% - 1px),#eef0f4 25%);background-clip:content-box;}
-.app-root--backoffice .charts .bars{--h:150px;}
-.app-root--backoffice .bars.single .bar{width:100%;max-width:30px;}
-.app-root--backoffice .bar-group{display:flex;align-items:flex-end;justify-content:center;gap:2px;flex:1;min-width:0;height:100%;}
-.app-root--backoffice .bar{position:relative;width:14px;max-width:40%;min-height:2px;border-radius:3px 3px 0 0;background:var(--navy-2);}
-.app-root--backoffice .bar.is-alt{background:var(--blue);}
-.app-root--backoffice .bar-value{position:absolute;bottom:100%;left:50%;margin-bottom:2px;transform:translateX(-50%);color:var(--ink);font-size:10px;font-weight:700;line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums;}
-.app-root--backoffice .bar.is-alt .bar-value{color:var(--blue);}
-
-.app-root--backoffice .bar.p-critica{background:var(--red);}
-.app-root--backoffice .bar.p-alta{background:var(--orange);}
-.app-root--backoffice .bar.p-media{background:var(--yellow);}
-.app-root--backoffice .bar.p-baixa{background:var(--green);}
-.app-root--backoffice .bar.p-normal{background:var(--green);}
-.app-root--backoffice .bar.sla-prazo{background:var(--green);}
-.app-root--backoffice .bar.sla-risco{background:var(--orange);}
-.app-root--backoffice .bar.sla-estourado{background:var(--red);}
-.app-root--backoffice .bar.sla-indeterminado{background:#9ca3af;}
-
-.app-root--backoffice .chart-axis{margin:0;color:var(--muted);font-size:10px;letter-spacing:.02em;}
-.app-root--backoffice .chart-axis--y{margin-bottom:2px;}
-.app-root--backoffice .chart-axis--x{margin-top:3px;text-align:center;}
-.app-root--backoffice .chart-total{margin:6px 0 0;color:var(--muted);font-size:11px;}
-.app-root--backoffice .chart-total strong{color:var(--ink);}
-.app-root--backoffice .chart-empty{display:grid;place-items:center;min-height:150px;margin-top:4px;padding:12px;border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--muted);background:var(--page);font-size:12px;text-align:center;}
-.app-root--backoffice .xlabel-pct{display:block;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
-.app-root--backoffice .xlabels{display:flex;justify-content:space-around;gap:8px;margin:3px 0 0;padding:0 4px;list-style:none;color:var(--muted);font-size:10px;}
-.app-root--backoffice .xlabels li{flex:1;text-align:center;}
-
-.app-root--backoffice .data-source{margin:6px 0 0;color:var(--muted);font-size:11px;font-style:italic;}
-.app-root--backoffice .kpis-block .data-source{display:none;}
-.app-root--backoffice .charts-source{margin-top:-4px;}
-.app-root--backoffice .scope-note{display:inline-block;margin:0 0 8px;padding:5px 10px;border-radius:var(--radius-sm);color:#3d4256;background:var(--blue-soft);font-size:11px;line-height:1.45;}
-.app-root--backoffice .scope-note i{color:var(--blue);}
-
-.app-root--backoffice .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;line-height:1.4;white-space:nowrap;}
-.app-root--backoffice .badge-red{color:var(--red);background:var(--red-soft);}
-.app-root--backoffice .badge-yellow{color:#8a6a00;background:var(--yellow-soft);}
-
-.app-root--backoffice .areas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;}
-.app-root--backoffice .area{display:grid;align-content:start;gap:6px;padding:8px 10px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;}
-.app-root--backoffice .area.is-vazia{background:var(--page);}
-.app-root--backoffice .area-head{display:flex;justify-content:space-between;align-items:center;gap:6px;}
-.app-root--backoffice .area-name{font-size:14px;font-weight:700;}
-.app-root--backoffice .area-vazia{margin:0;color:var(--muted);font-size:12px;}
-.app-root--backoffice .sla{padding:1px 7px;border-radius:999px;color:var(--green);background:var(--green-soft);font-size:11px;white-space:nowrap;}
-.app-root--backoffice .metrics{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;margin:0;font-size:12px;}
-.app-root--backoffice .metrics div{display:flex;gap:4px;}
-.app-root--backoffice .metrics dt{color:var(--muted);font-weight:400;}
-.app-root--backoffice .metrics dt,.app-root--backoffice .metrics dd{margin:0;}
-.app-root--backoffice .metrics--regiao{grid-template-columns:1fr;gap:3px;}
-.app-root--backoffice .metrics--regiao div{justify-content:space-between;align-items:baseline;}
-.app-root--backoffice .metrics--regiao dd{font-weight:600;text-align:right;}
-.app-root--backoffice .metric-n{margin-left:2px;color:var(--muted);font-size:10px;font-weight:400;white-space:nowrap;}
-
-.app-root--backoffice .ref-demo{display:grid;gap:var(--gap);}
-
-.app-root--backoffice .skill{padding-top:6px;border-top:1px solid var(--line);font-size:12px;}
-.app-root--backoffice .skill-top{display:flex;justify-content:space-between;align-items:center;gap:6px;}
-.app-root--backoffice .skill-name{font-weight:600;}
-.app-root--backoffice .skill-meta{margin:1px 0 3px;color:var(--muted);font-size:11px;}
-.app-root--backoffice .skill-media .meter span{--c:var(--navy-2);}
-.app-root--backoffice .skill-alta .meter span{--c:var(--orange);}
-.app-root--backoffice .skill-critica .meter span{--c:var(--red);}
-.app-root--backoffice .level{padding:1px 7px;border-radius:999px;font-size:11px;font-weight:600;}
-.app-root--backoffice .level.alta{color:var(--orange);background:var(--orange-soft);}
-.app-root--backoffice .level.critica{color:var(--red);background:var(--red-soft);}
-.app-root--backoffice .level.media{color:#555;background:#eceef3;}
-
-.app-root--backoffice .reco-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
-.app-root--backoffice .reco{display:grid;grid-template-columns:32px minmax(0,1fr);gap:4px 10px;align-items:start;padding:8px 10px;border:1px solid var(--line);border-radius:var(--radius);}
-.app-root--backoffice .reco-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:var(--radius-sm);color:var(--navy-2);background:var(--blue-soft);}
-.app-root--backoffice .reco-title{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;font-size:13px;font-weight:700;}
-.app-root--backoffice .reco p{margin:2px 0 0;font-size:12px;}
-.app-root--backoffice .reco .gain{color:var(--green);font-weight:600;}
-.app-root--backoffice .tag{flex:none;align-self:flex-start;padding:1px 8px;border-radius:999px;background:#f1f2f6;font-size:11px;font-weight:600;}
-
-.app-root--backoffice .not-found{padding:32px 20px;background:transparent;}
-
-@media (min-width:901px) and (max-width:1250px){
-  .app-root--backoffice .xlabels--alternados{gap:4px;}
-  .app-root--backoffice .xlabels--alternados li{min-width:0;display:flex;flex-direction:column;align-items:center;white-space:nowrap;overflow-wrap:normal;}
-  .app-root--backoffice .xlabels--alternados li:nth-child(even){padding-top:24px;}
+  font-family: Inter, Segoe UI, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink);
+  background: var(--page);
 }
 
-@media (max-width:1200px){
-  .app-root--backoffice .kpis,.app-root--backoffice .areas{grid-template-columns:repeat(3,minmax(0,1fr));}
+.app-root--backoffice :is(a, button):focus-visible {
+  outline: 3px solid #9bb4f2;
+  outline-offset: 2px;
 }
 
-@media (max-width:900px){
-  .app-root--backoffice{grid-template-columns:1fr;}
-  .app-root--backoffice .sidebar{position:static;height:auto;}
-  .app-root--backoffice .content{min-height:0;}
-  .app-root--backoffice .topbar{position:static;flex-direction:column;align-items:stretch;}
-  .app-root--backoffice .search{width:auto;flex:1;}
-  .app-root--backoffice .app-content{padding:12px 16px 24px;}
-  .app-root--backoffice .flow{flex-direction:column;align-items:stretch;}
-  .app-root--backoffice .flow-arrow{display:none;}
-  .app-root--backoffice .insights,.app-root--backoffice .charts,.app-root--backoffice .reco-row{grid-template-columns:1fr;}
-  .app-root--backoffice .areas{grid-template-columns:1fr 1fr;}
-  .app-root--backoffice .events-card{position:static;min-height:0;}
-  .app-root--backoffice .events-card__inner{position:static;}
-  .app-root--backoffice .events{flex:none;max-height:220px;}
+.app-root--backoffice button {
+  cursor: pointer;
 }
 
-@media (max-width:560px){
-  .app-root--backoffice .kpis,.app-root--backoffice .areas{grid-template-columns:1fr;}
-  .app-root--backoffice .topbar-tools{flex-wrap:wrap;}
-  .app-root--backoffice .xlabels{gap:4px;font-size:9px;}
-  .app-root--backoffice .xlabels li{min-width:0;overflow-wrap:break-word;}
-  .app-root--backoffice .bar-value{font-size:9px;}
-  .app-root--backoffice .bars{gap:4px;}
-  .app-root--backoffice .xlabels--alternados li{display:flex;flex-direction:column;align-items:center;white-space:nowrap;overflow-wrap:normal;}
-  .app-root--backoffice .xlabels--alternados li:nth-child(even){padding-top:24px;}
+.app-root--backoffice {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  min-height: 100svh;
+  width: 100%;
+}
+
+.app-root--backoffice .content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.app-root--backoffice .app-content {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: var(--gap);
+  padding: 12px 20px 24px;
+}
+
+.app-root--backoffice .sidebar {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  padding: 18px 12px;
+  overflow-y: auto;
+  color: #fff;
+  background: var(--navy);
+}
+
+.app-root--backoffice .sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-root--backoffice .sidebar a,
+.app-root--backoffice .sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  color: #e6e7f6;
+  font-size: 14px;
+}
+
+.app-root--backoffice .sidebar a:hover {
+  background: rgba(255, 255, 255, .07);
+}
+
+.app-root--backoffice .sidebar a.active,
+.app-root--backoffice .sidebar a[aria-current=page] {
+  color: #fff;
+  background: var(--blue);
+}
+
+.app-root--backoffice .sidebar-item.is-placeholder {
+  cursor: default;
+  opacity: .75;
+}
+
+.app-root--backoffice .sidebar i {
+  width: 18px;
+  text-align: center;
+}
+
+.app-root--backoffice .brand {
+  margin: 0 8px 18px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: #fff;
+}
+
+.app-root--backoffice .sidebar-group {
+  margin: 18px 8px 6px;
+  color: #8d90bd;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+
+.app-root--backoffice .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 20px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.app-root--backoffice .topbar h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -.02em;
+}
+
+.app-root--backoffice .topbar p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.app-root--backoffice .topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+}
+
+.app-root--backoffice .search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 300px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  background: var(--page);
+}
+
+.app-root--backoffice .search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+  font: inherit;
+}
+
+.app-root--backoffice .search:focus-within {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-soft);
+}
+
+.app-root--backoffice .search.is-disabled {
+  cursor: not-allowed;
+  opacity: .75;
+}
+
+.app-root--backoffice .search.is-disabled input {
+  cursor: not-allowed;
+}
+
+.app-root--backoffice .btn-clear {
+  margin-top: 12px;
+  padding: 6px 14px;
+  border: 1px solid var(--navy-2);
+  border-radius: var(--radius-sm);
+  color: var(--navy-2);
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.app-root--backoffice .btn-clear:hover {
+  color: #fff;
+  background: var(--navy-2);
+}
+
+.app-root--backoffice .btn-clear:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.app-root--backoffice .btn-clear:disabled:hover {
+  color: var(--navy-2);
+  background: #fff;
+}
+
+.app-root--backoffice .empty-search__actions .btn-clear,
+.app-root--backoffice .filters-actions .btn-clear,
+.app-root--backoffice .queue-foot .btn-clear {
+  margin-top: 0;
+}
+
+.app-root--backoffice .btn-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  background: var(--navy-2);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.app-root--backoffice .btn-filter {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--navy-2);
+  background: #fff;
+}
+
+.app-root--backoffice .btn-filter[aria-expanded="true"] {
+  color: #fff;
+  background: var(--navy-2);
+  border-color: var(--navy-2);
+}
+
+.app-root--backoffice .filter-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--blue);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.app-root--backoffice .card {
+  display: block;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+}
+
+.app-root--backoffice .card h2 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: -.01em;
+}
+
+.app-root--backoffice .card-sub {
+  margin: 2px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.app-root--backoffice .is-green  { color: var(--green); }
+.app-root--backoffice .is-orange { color: var(--orange); }
+.app-root--backoffice .is-red    { color: var(--red); }
+.app-root--backoffice .is-muted  { color: var(--muted); }
+
+.app-root--backoffice .kpis {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.app-root--backoffice .kpi {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.app-root--backoffice .kpi-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .kpi-value {
+  margin: 2px 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.app-root--backoffice .kpi-note {
+  font-size: 11px;
+}
+
+.app-root--backoffice .flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-root--backoffice .flow-item {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.app-root--backoffice .flow-step {
+  display: grid;
+  flex: 1;
+  gap: 2px;
+  min-width: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--page);
+}
+
+.app-root--backoffice .flow-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .flow-value {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.app-root--backoffice .flow-arrow {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin: 6px 0 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--page);
+}
+
+.app-root--backoffice .filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-root--backoffice .filters-label {
+  margin-right: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .filters-actions {
+  margin-left: auto;
+}
+
+.app-root--backoffice .filters-resumo {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .filters-resumo strong {
+  color: var(--ink);
+}
+
+.app-root--backoffice .filters--demo {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.app-root--backoffice .filters-demo-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-root--backoffice .filters--demo .chip:disabled {
+  color: var(--muted);
+  background: #fafbfd;
+  cursor: not-allowed;
+}
+
+.app-root--backoffice .chip {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  background: #fff;
+  font-size: 12px;
+}
+
+.app-root--backoffice .chip:hover:not(:disabled) {
+  border-color: var(--navy-2);
+}
+
+.app-root--backoffice .chip[aria-pressed="true"] {
+  color: #fff;
+  background: var(--navy-2);
+  border-color: var(--navy-2);
+}
+
+.app-root--backoffice .table-wrap {
+  overflow-x: auto;
+}
+
+.app-root--backoffice table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.app-root--backoffice table.table-padroes {
+  min-width: 760px;
+}
+
+.app-root--backoffice table.table-amostra {
+  min-width: 680px;
+}
+
+.app-root--backoffice table.table-amostra th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--card);
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+
+.app-root--backoffice table.table-amostra tbody tr:first-child td {
+  border-top: 0;
+}
+
+.app-root--backoffice .amostra-wrap {
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.app-root--backoffice th {
+  padding: 6px 10px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.app-root--backoffice td {
+  padding: 5px 10px;
+  border-top: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.app-root--backoffice td:first-child {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.app-root--backoffice tbody tr:hover {
+  background: var(--page);
+}
+
+.app-root--backoffice .col-sla {
+  min-width: 130px;
+}
+
+.app-root--backoffice .prio {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.app-root--backoffice .prio-critica { background: var(--red); }
+.app-root--backoffice .prio-alta    { background: var(--orange); }
+.app-root--backoffice .prio-media   { color: #4a3b00; background: var(--yellow); }
+.app-root--backoffice .prio-normal  { background: var(--green); }
+
+.app-root--backoffice .status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.app-root--backoffice .status-aberto       { color: #8a6a00; background: var(--yellow-soft); }
+.app-root--backoffice .status-supervisor   { color: var(--navy-2); background: var(--blue-soft); }
+.app-root--backoffice .status-atendimento  { color: #8a5300; background: var(--orange-soft); }
+
+.app-root--backoffice .sla-text {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.app-root--backoffice .meter {
+  height: 5px;
+  border-radius: 99px;
+  background: #eceef3;
+  overflow: hidden;
+}
+
+.app-root--backoffice .meter span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--c, var(--navy-2));
+}
+
+.app-root--backoffice .queue-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.app-root--backoffice .queue-count {
+  margin: 0 0 0 auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .empty-search {
+  margin: 8px 0 4px;
+  padding: 22px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+  background: var(--page);
+}
+
+.app-root--backoffice .empty-search p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.app-root--backoffice .empty-search .empty-search__hint {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .empty-search__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.app-root--backoffice .insights {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--gap);
+}
+
+.app-root--backoffice .insights .card {
+  padding: 8px 12px;
+}
+
+.app-root--backoffice .insights .card-sub {
+  margin-bottom: 10px;
+}
+
+.app-root--backoffice .events-card {
+  position: relative;
+  min-height: 200px;
+}
+
+.app-root--backoffice .events-card__inner {
+  position: absolute;
+  inset: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.app-root--backoffice .events {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.app-root--backoffice .events li {
+  display: grid;
+  flex: 1 0 auto;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.app-root--backoffice .events li:first-child {
+  border-top: 0;
+}
+
+.app-root--backoffice .events time {
+  color: var(--muted);
+}
+
+.app-root--backoffice .events p {
+  margin: 0;
+}
+
+.app-root--backoffice .event-source {
+  display: block;
+  margin-top: 3px;
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.app-root--backoffice .insights .legend {
+  margin-bottom: 10px;
+}
+
+.app-root--backoffice .insights .chart-axis--y {
+  margin-bottom: 6px;
+}
+
+.app-root--backoffice .insights .chart-axis--x {
+  margin-top: 8px;
+  font-size: 11px;
+}
+
+.app-root--backoffice .insights .bars {
+  --h: 170px;
+  gap: 16px;
+  padding: 20px 8px 0;
+}
+
+.app-root--backoffice .insights .bars.single .bar {
+  max-width: 44px;
+  border-radius: 5px 5px 0 0;
+}
+
+.app-root--backoffice .insights .bar-value {
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.app-root--backoffice .insights .xlabels {
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.app-root--backoffice .charts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.app-root--backoffice .chart-card {
+  padding: 8px 10px;
+}
+
+.app-root--backoffice .chart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.app-root--backoffice .legend {
+  display: flex;
+  gap: 12px;
+  margin: 0 0 4px;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.app-root--backoffice .legend.is-hidden {
+  visibility: hidden;
+}
+
+.app-root--backoffice .legend li::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  border-radius: 2px;
+  background: var(--c, var(--navy-2));
+}
+
+.app-root--backoffice .legend .legend-alt {
+  --c: var(--blue);
+}
+
+.app-root--backoffice .chart {
+  margin: 0;
+}
+
+.app-root--backoffice .bars {
+  --h: 136px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 8px;
+  height: var(--h);
+  padding: 16px 4px 0;
+  border-bottom: 1px solid var(--line);
+  background: repeating-linear-gradient(
+    to top,
+    transparent 0,
+    transparent calc(25% - 1px),
+    #eef0f4 calc(25% - 1px),
+    #eef0f4 25%
+  );
+  background-clip: content-box;
+}
+
+.app-root--backoffice .charts .bars {
+  --h: 150px;
+}
+
+.app-root--backoffice .bars.single .bar {
+  width: 100%;
+  max-width: 30px;
+}
+
+.app-root--backoffice .bar-group {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+.app-root--backoffice .bar {
+  position: relative;
+  width: 14px;
+  max-width: 40%;
+  min-height: 2px;
+  border-radius: 3px 3px 0 0;
+  background: var(--navy-2);
+}
+
+.app-root--backoffice .bar.is-alt {
+  background: var(--blue);
+}
+
+.app-root--backoffice .bar-value {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: 2px;
+  transform: translateX(-50%);
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.app-root--backoffice .bar.is-alt .bar-value {
+  color: var(--blue);
+}
+
+.app-root--backoffice .bar.p-critica { background: var(--red); }
+.app-root--backoffice .bar.p-alta    { background: var(--orange); }
+.app-root--backoffice .bar.p-media   { background: var(--yellow); }
+.app-root--backoffice .bar.p-baixa   { background: var(--green); }
+.app-root--backoffice .bar.p-normal  { background: var(--green); }
+
+.app-root--backoffice .bar.sla-prazo         { background: var(--green); }
+.app-root--backoffice .bar.sla-risco         { background: var(--orange); }
+.app-root--backoffice .bar.sla-estourado     { background: var(--red); }
+.app-root--backoffice .bar.sla-indeterminado { background: #9ca3af; }
+
+.app-root--backoffice .chart-axis {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .02em;
+}
+
+.app-root--backoffice .chart-axis--y {
+  margin-bottom: 2px;
+}
+
+.app-root--backoffice .chart-axis--x {
+  margin-top: 3px;
+  text-align: center;
+}
+
+.app-root--backoffice .xlabels {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  margin: 3px 0 0;
+  padding: 0 4px;
+  list-style: none;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.app-root--backoffice .xlabels li {
+  flex: 1;
+  text-align: center;
+}
+
+.app-root--backoffice .xlabel-pct {
+  display: block;
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.app-root--backoffice .chart-total {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.app-root--backoffice .chart-total strong {
+  color: var(--ink);
+}
+
+.app-root--backoffice .chart-empty {
+  display: grid;
+  place-items: center;
+  min-height: 150px;
+  margin-top: 4px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  background: var(--page);
+  font-size: 12px;
+  text-align: center;
+}
+
+.app-root--backoffice .data-source {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-style: italic;
+}
+
+.app-root--backoffice .kpis-block .data-source {
+  display: none;
+}
+
+.app-root--backoffice .charts-source {
+  margin-top: -4px;
+}
+
+.app-root--backoffice .scope-note {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  color: #3d4256;
+  background: var(--blue-soft);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.app-root--backoffice .scope-note i {
+  color: var(--blue);
+}
+
+.app-root--backoffice .badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.app-root--backoffice .badge-red    { color: var(--red); background: var(--red-soft); }
+.app-root--backoffice .badge-yellow { color: #8a6a00; background: var(--yellow-soft); }
+
+.app-root--backoffice .areas {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.app-root--backoffice .area {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.app-root--backoffice .area.is-vazia {
+  background: var(--page);
+}
+
+.app-root--backoffice .area-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-root--backoffice .area-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.app-root--backoffice .area-vazia {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-root--backoffice .sla {
+  padding: 1px 7px;
+  border-radius: 999px;
+  color: var(--green);
+  background: var(--green-soft);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.app-root--backoffice .metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 8px;
+  margin: 0;
+  font-size: 12px;
+}
+
+.app-root--backoffice .metrics div {
+  display: flex;
+  gap: 4px;
+}
+
+.app-root--backoffice .metrics dt {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.app-root--backoffice .metrics dt,
+.app-root--backoffice .metrics dd {
+  margin: 0;
+}
+
+.app-root--backoffice .metrics--regiao {
+  grid-template-columns: 1fr;
+  gap: 3px;
+}
+
+.app-root--backoffice .metrics--regiao div {
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.app-root--backoffice .metrics--regiao dd {
+  font-weight: 600;
+  text-align: right;
+}
+
+.app-root--backoffice .metric-n {
+  margin-left: 2px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.app-root--backoffice .ref-demo {
+  display: grid;
+  gap: var(--gap);
+}
+
+.app-root--backoffice .skill {
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.app-root--backoffice .skill-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-root--backoffice .skill-name {
+  font-weight: 600;
+}
+
+.app-root--backoffice .skill-meta {
+  margin: 1px 0 3px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.app-root--backoffice .skill-media .meter span   { --c: var(--navy-2); }
+.app-root--backoffice .skill-alta .meter span    { --c: var(--orange); }
+.app-root--backoffice .skill-critica .meter span { --c: var(--red); }
+
+.app-root--backoffice .level {
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.app-root--backoffice .level.alta    { color: var(--orange); background: var(--orange-soft); }
+.app-root--backoffice .level.critica { color: var(--red); background: var(--red-soft); }
+.app-root--backoffice .level.media   { color: #555; background: #eceef3; }
+
+.app-root--backoffice .reco-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.app-root--backoffice .reco {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 4px 10px;
+  align-items: start;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.app-root--backoffice .reco-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  color: var(--navy-2);
+  background: var(--blue-soft);
+}
+
+.app-root--backoffice .reco-title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.app-root--backoffice .reco p {
+  margin: 2px 0 0;
+  font-size: 12px;
+}
+
+.app-root--backoffice .reco .gain {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.app-root--backoffice .tag {
+  flex: none;
+  align-self: flex-start;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #f1f2f6;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.app-root--backoffice .not-found {
+  padding: 32px 20px;
+  background: transparent;
+}
+
+@media (min-width: 901px) and (max-width: 1250px) {
+  .app-root--backoffice .xlabels--alternados {
+    gap: 4px;
+  }
+
+  .app-root--backoffice .xlabels--alternados li {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+
+  .app-root--backoffice .xlabels--alternados li:nth-child(even) {
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .app-root--backoffice .kpis,
+  .app-root--backoffice .areas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .app-root--backoffice {
+    grid-template-columns: 1fr;
+  }
+
+  .app-root--backoffice .sidebar {
+    position: static;
+    height: auto;
+  }
+
+  .app-root--backoffice .content {
+    min-height: 0;
+  }
+
+  .app-root--backoffice .topbar {
+    position: static;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .app-root--backoffice .search {
+    width: auto;
+    flex: 1;
+  }
+
+  .app-root--backoffice .app-content {
+    padding: 12px 16px 24px;
+  }
+
+  .app-root--backoffice .flow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .app-root--backoffice .flow-arrow {
+    display: none;
+  }
+
+  .app-root--backoffice .insights,
+  .app-root--backoffice .charts,
+  .app-root--backoffice .reco-row {
+    grid-template-columns: 1fr;
+  }
+
+  .app-root--backoffice .areas {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .app-root--backoffice .events-card {
+    position: static;
+    min-height: 0;
+  }
+
+  .app-root--backoffice .events-card__inner {
+    position: static;
+  }
+
+  .app-root--backoffice .events {
+    flex: none;
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-root--backoffice .kpis,
+  .app-root--backoffice .areas {
+    grid-template-columns: 1fr;
+  }
+
+  .app-root--backoffice .topbar-tools {
+    flex-wrap: wrap;
+  }
+
+  .app-root--backoffice .xlabels {
+    gap: 4px;
+    font-size: 9px;
+  }
+
+  .app-root--backoffice .xlabels li {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .app-root--backoffice .bar-value {
+    font-size: 9px;
+  }
+
+  .app-root--backoffice .bars {
+    gap: 4px;
+  }
+
+  .app-root--backoffice .xlabels--alternados li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+
+  .app-root--backoffice .xlabels--alternados li:nth-child(even) {
+    padding-top: 24px;
+  }
 }
