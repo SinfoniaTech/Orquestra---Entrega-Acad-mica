@@ -55,11 +55,16 @@ export const FILTROS_VAZIOS = { status: null, prioridade: null, regiao: null }
 //  campoRotulo: campo exibido no botao (ex.: "statusLabel")
 //  ordem: ordem de exibicao preferida; valores que nao existirem nos dados sao descartados
 //         e valores dos dados que nao estiverem na lista entram no final.
-export function opcoesDoCampo(chamados, campoValor, campoRotulo, ordem = []) {
+//  rotulos (opcional): dicionario { valor: rotulo } usado quando a base guarda os rotulos uma
+//         unica vez (ex.: painel-demonstrativo.json). Sem ele, o rotulo vem do campo campoRotulo.
+export function opcoesDoCampo(chamados, campoValor, campoRotulo, ordem = [], rotulos = null) {
   const opcoes = []
   chamados.forEach((chamado) => {
     const jaExiste = opcoes.some((opcao) => opcao.valor === chamado[campoValor])
-    if (!jaExiste) opcoes.push({ valor: chamado[campoValor], rotulo: chamado[campoRotulo] })
+    if (!jaExiste) {
+      const rotulo = rotulos ? rotulos[chamado[campoValor]] : chamado[campoRotulo]
+      opcoes.push({ valor: chamado[campoValor], rotulo })
+    }
   })
 
   const ordenadas = []
@@ -94,12 +99,50 @@ export const ORDEM_FILTROS = {
 
 // Monta os tres grupos de filtro (Status, Prioridade, Regiao) a partir de uma lista de registros.
 // Compartilhado entre telas: cada tela passa a sua propria base e recebe opcoes e rotulos dela.
-export function montarGruposFiltro(registros) {
+//  rotulos (opcional): { status: {...}, prioridade: {...}, regiao: {...} } quando a base guarda
+//  os rotulos em um dicionario. Sem ele (fila de Chamados), o comportamento e o mesmo de antes.
+export function montarGruposFiltro(registros, rotulos = null) {
+  const dicionario = (grupo) => (rotulos ? rotulos[grupo] : null)
   return [
-    { campo: 'status', titulo: 'Status', opcoes: opcoesDoCampo(registros, 'status', 'statusLabel', ORDEM_FILTROS.status) },
-    { campo: 'prioridade', titulo: 'Prioridade', opcoes: opcoesDoCampo(registros, 'prioridade', 'prioridadeLabel', ORDEM_FILTROS.prioridade) },
-    { campo: 'regiao', titulo: 'Região', opcoes: opcoesDoCampo(registros, 'regiao', 'regiaoLabel', ORDEM_FILTROS.regiao) },
+    { campo: 'status', titulo: 'Status', opcoes: opcoesDoCampo(registros, 'status', 'statusLabel', ORDEM_FILTROS.status, dicionario('status')) },
+    { campo: 'prioridade', titulo: 'Prioridade', opcoes: opcoesDoCampo(registros, 'prioridade', 'prioridadeLabel', ORDEM_FILTROS.prioridade, dicionario('prioridade')) },
+    { campo: 'regiao', titulo: 'Região', opcoes: opcoesDoCampo(registros, 'regiao', 'regiaoLabel', ORDEM_FILTROS.regiao, dicionario('regiao')) },
   ]
+}
+
+// ---------- Selecao multipla (somente Painel Operacional, EP-R) ----------
+
+// Cada grupo guarda uma LISTA de valores marcados. Lista vazia = "Todos".
+export const SELECAO_VAZIA = { status: [], prioridade: [], regiao: [] }
+
+// Logica: OU dentro do grupo (valor pertence a lista) e E entre os grupos.
+export function filtrarPorSelecao(registros, selecao) {
+  const atende = (lista, valor) => lista.length === 0 || lista.includes(valor)
+  return registros.filter(
+    (registro) =>
+      atende(selecao.status, registro.status) &&
+      atende(selecao.prioridade, registro.prioridade) &&
+      atende(selecao.regiao, registro.regiao)
+  )
+}
+
+// Quantidade de OPCOES marcadas (ex.: Critica + Alta + Zona Sul = 3)
+export function contarSelecoes(selecao) {
+  return selecao.status.length + selecao.prioridade.length + selecao.regiao.length
+}
+
+// Marca ou desmarca um valor de um grupo; valor null ("Todos") esvazia o grupo.
+// Devolve uma NOVA selecao (nao altera a anterior).
+export function alternarSelecao(selecao, campo, valor) {
+  let lista
+  if (valor === null) {
+    lista = []
+  } else if (selecao[campo].includes(valor)) {
+    lista = selecao[campo].filter((item) => item !== valor)
+  } else {
+    lista = [...selecao[campo], valor]
+  }
+  return { ...selecao, [campo]: lista }
 }
 
 // Quantidade de grupos com filtro ativo (usado no botao de filtros e no botao "Limpar filtros")

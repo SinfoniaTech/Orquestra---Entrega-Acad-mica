@@ -61,6 +61,7 @@ A escolha fica registrada na própria rota e se mantém enquanto o usuário nave
 | E3 | Paginação (5 por página) e tratamento do campo `hidden` | Pendente |
 | E4 | Sinalização de risco de SLA | Pendente |
 | E5 | Indicadores calculados do recorte | Pendente |
+| EP1 + EP-R | Painel Operacional gerencial (base demonstrativa, filtros múltiplos, KPIs, gráficos e Performance por Região calculados) | Concluída — aguardando avaliação |
 
 ### Busca (E1)
 
@@ -86,7 +87,42 @@ A escolha fica registrada na própria rota e se mantém enquanto o usuário nave
 - **Contador:** "Mostrando N de 12 chamados da fila" sempre que houver busca ou filtro ativo.
 - **Sem resultado:** a mensagem indica o termo e/ou os filtros, com botões "Limpar busca" e/ou "Limpar filtros", conforme o que estiver ativo.
 - **Recorte preservado:** KPIs consolidados, aviso de recorte e gráfico por região continuam representando os 12 registros.
-- **Painel Operacional:** o botão de filtro abre os 11 chips do protótipo (`insights.painelOperacional.filtrosHistorico`), **desabilitados** e com a etiqueta "Demonstrativo — sem dados funcionais". Os registros não têm dados de histórico que permitam filtrar.
+- **Painel Operacional:** usa filtros próprios, descritos na seção "Painel Operacional (EP-R)". Os 11 chips antigos do protótipo foram substituídos.
+
+### Painel Operacional (EP-R)
+
+Todos os elementos analíticos do Painel usam a **mesma base** e os **mesmos registros filtrados**:
+`indicadores = calcularIndicadores(filtrarPorSelecao(base, selecao))` (`src/utils/stats.js` e `src/utils/filters.js`).
+
+- **Base:** `src/data/painel-demonstrativo.json`, com 1.247 chamados **fictícios** de jul–set 2025, IDs `PD-000001` a `PD-001247`.
+  - É gerada por `node scripts/gerar-painel-demonstrativo.mjs`, que usa semente fixa (a mesma execução sempre produz o mesmo arquivo) e valida todas as regras antes de gravar.
+  - Os rótulos ficam uma única vez em `documentacao.rotulos`, e campos que não se aplicam são omitidos (nunca viram zero).
+  - Quantidades e regras estão em `documentacao`.
+- **Filtros (seleção múltipla, só no Painel):** Status, Prioridade e Região.
+  - **OU** dentro do grupo, **E** entre os grupos.
+  - Clique marca ou desmarca a opção; "Todos" esvazia o grupo.
+  - O contador mostra o número de **opções marcadas**.
+  - O painel de filtros inicia aberto.
+- **Seis KPIs** (calculados):
+
+  | KPI | Cálculo |
+  |---|---|
+  | Total | quantidade de registros, com a variação do último mês com dados em relação ao anterior |
+  | Abertas | Aberto + Aguardando supervisor |
+  | Em atendimento | quantidade, com a nota "N críticas" = em atendimento **e** prioridade crítica |
+  | Concluídas | quantidade, com o % do total |
+  | TA médio | só registros com TA, mostrando n |
+  | TB médio | só concluídos com TB, mostrando n |
+
+- **Seis gráficos:** por mês e por tipo (cada um com a série "Reincidentes", que é um subconjunto **já incluído** no total), por status, por prioridade, por região e situação do SLA.
+- **SLA** = (tempo utilizado ÷ prazo da prioridade) × 100. O tempo utilizado é o TB nos concluídos e o tempo decorrido nos demais.
+  - Classes: **No prazo ≤ 70%**, **Em risco > 70% e < 100%**, **Estourado ≥ 100%**.
+  - Os prazos (60 / 150 / 240 / 480 min) e as metas (TA 30 min, TB 2h) são **regras assumidas** da base demonstrativa, não parâmetros oficiais. Não se aplicam aos chamados reais da aba Chamados.
+- **Performance por Região:** por região, mostra TA, TB, SLA no prazo (sobre os registros com SLA calculável), reincidência (sobre o total da região) e responsáveis distintos, sempre com o **n** de cada cálculo.
+- **Sem resultado:** contagens mostram 0, médias e percentuais mostram "—", e os gráficos mostram "Sem dados para os filtros selecionados".
+- **Referências demonstrativas:** Padrões e Recomendações vêm de `insights.json`, ficam em uma área separada e **não respondem aos filtros**.
+- **Consequência da distribuição de status** (4 Aberto · 54 Aguardando supervisor · 21 Em atendimento · 1.168 Concluído, como no protótipo): poucas combinações com "Aberto" retornam registros.
+- **Build:** o `vite.config.js` separa as bibliotecas (`manualChunks`) do código da aplicação, para que nenhum pacote ultrapasse o limite de aviso do Vite. Os dois pacotes carregam juntos.
 
 ## Origem dos dados
 
@@ -95,7 +131,8 @@ A escolha fica registrada na própria rota e se mantém enquanto o usuário nave
 | `chamados-mobile.json` | 7 chamados do app Mobile (lista, alertas, detalhe, timeline, histórico, SLA) | Registros do protótipo. `slaCorrecao` documenta uma divergência de SLA, que é exibida sem ser resolvida |
 | `chamados-backoffice.json` | 12 chamados da fila do Backoffice | Registros do protótipo. O gráfico "Chamados por região" é **calculado** a partir deles |
 | `insights.json` | `indicadores` (fonte única dos KPIs do Backoffice), fluxo, eventos de integração, padrões, áreas, recomendações e opções do Menu Mais | **Demonstrativos**. Universo: operação consolidada. A fila de 12 chamados é um recorte e não é base dos KPIs. A harmonização 1.247 × 1.248 está documentada em `indicadores.documentacao` |
-| `graficos-demonstrativos.json` | Valores dos 3 gráficos do Painel Operacional | **Simulados**, criados porque o original não tinha valores. Método e verificações de coerência estão no bloco `documentacao` |
+| `graficos-demonstrativos.json` | Valores dos 3 gráficos antigos do Painel Operacional | **Simulados**. Preservado, mas **não é mais usado** pelo Painel desde a EP-R |
+| `painel-demonstrativo.json` | 1.247 chamados fictícios (jul–set 2025) que alimentam todos os KPIs, gráficos e a Performance por Região do Painel | **Demonstrativos**, gerados por script determinístico. Independentes das outras bases |
 
 Os gráficos são HTML/CSS (`components/backoffice/BarChart.jsx`). A altura de cada barra é calculada a partir do valor recebido (`valor / maior valor × 100%`). Nenhum valor de negócio fica fixado no CSS.
 

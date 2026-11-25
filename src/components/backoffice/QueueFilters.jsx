@@ -5,7 +5,19 @@
 // filtros: { status, prioridade, regiao } (null = Todos)
 // onAlterar(campo, valor): seleciona uma opcao (valor null = Todos)
 // onLimpar(): volta todos os grupos para "Todos" (nao mexe na busca)
-export default function QueueFilters({ id, grupos, filtros, onAlterar, onLimpar, filtrosAtivos }) {
+// multipla (opcional, padrao false): quando true, cada grupo guarda uma LISTA de valores
+//   (filtros: { status: [], ... }) e cada chip marca/desmarca o seu valor. Usado apenas no Painel.
+//   Sem essa propriedade, o comportamento e exatamente o da fila de Chamados.
+export default function QueueFilters({ id, grupos, filtros, onAlterar, onLimpar, filtrosAtivos, multipla = false }) {
+  // "Todos" fica marcado quando o grupo nao tem filtro
+  function todosMarcado(campo) {
+    return multipla ? filtros[campo].length === 0 : filtros[campo] === null
+  }
+  // A opcao fica marcada quando faz parte da selecao do grupo
+  function opcaoMarcada(campo, valor) {
+    return multipla ? filtros[campo].includes(valor) : filtros[campo] === valor
+  }
+
   return (
     <div className="filters" id={id}>
       {grupos.map((grupo) => (
@@ -14,7 +26,7 @@ export default function QueueFilters({ id, grupos, filtros, onAlterar, onLimpar,
           <button
             type="button"
             className="chip"
-            aria-pressed={filtros[grupo.campo] === null}
+            aria-pressed={todosMarcado(grupo.campo)}
             onClick={() => onAlterar(grupo.campo, null)}
           >
             Todos
@@ -24,7 +36,7 @@ export default function QueueFilters({ id, grupos, filtros, onAlterar, onLimpar,
               key={opcao.valor}
               type="button"
               className="chip"
-              aria-pressed={filtros[grupo.campo] === opcao.valor}
+              aria-pressed={opcaoMarcada(grupo.campo, opcao.valor)}
               onClick={() => onAlterar(grupo.campo, opcao.valor)}
             >
               {opcao.rotulo}

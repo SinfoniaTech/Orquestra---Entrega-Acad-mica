@@ -38,6 +38,43 @@ export function contarReincidencias(registros) {
   return registros.filter((registro) => registro.reincidencia === true).length
 }
 
+// Igual a contarPorOpcoes, acrescentando quantos desses registros sao reincidentes.
+// "reincidentes" e um SUBCONJUNTO de "quantidade" (nunca deve ser somado ao total).
+export function contarPorOpcoesComReincidencia(registros, campo, opcoes) {
+  return opcoes.map((opcao) => {
+    const daOpcao = registros.filter((registro) => registro[campo] === opcao.valor)
+    return { valor: opcao.valor, rotulo: opcao.rotulo, quantidade: daOpcao.length, reincidentes: contarReincidencias(daOpcao) }
+  })
+}
+
+// Chamados em atendimento que tambem sao de prioridade critica (nota do KPI "Em atendimento")
+export function contarCriticasEmAtendimento(registros) {
+  return registros.filter((registro) => registro.status === 'atendimento' && registro.prioridade === 'critica').length
+}
+
+// Variacao do ultimo mes COM registros em relacao ao mes anterior: (atual - anterior) / anterior x 100.
+//  porMes: resultado de agruparPorMes. Sem mes anterior ou com anterior = 0, percentual = null.
+export function variacaoUltimoMes(porMes) {
+  let ultimo = -1
+  porMes.forEach((mes, indice) => {
+    if (mes.chamados > 0) ultimo = indice
+  })
+  if (ultimo < 1) return { percentual: null, atual: null, anterior: null }
+  const atual = porMes[ultimo]
+  const anterior = porMes[ultimo - 1]
+  return { percentual: percentual(atual.chamados - anterior.chamados, anterior.chamados), atual: atual.rotulo, anterior: anterior.rotulo }
+}
+
+// Minutos em texto: 27 -> "27 min" | 135 -> "2h 15min" | 120 -> "2h". null -> "—"
+export function formatarDuracao(minutos) {
+  if (!ehNumero(minutos)) return '—'
+  const total = Math.round(minutos)
+  if (total < 60) return total + ' min'
+  const horas = Math.floor(total / 60)
+  const resto = total % 60
+  return resto === 0 ? horas + 'h' : horas + 'h ' + resto + 'min'
+}
+
 // Media de um campo numerico, considerando somente os registros com o valor informado.
 //  devolve: { media, base } (media = null quando nenhum registro tem o valor)
 export function mediaDoCampo(registros, campo) {
@@ -137,18 +174,21 @@ export function performancePorRegiao(registros, regioes, prazosMin) {
 //  opcoes: { status, prioridade, regiao, tipoOcorrencia } -> listas [{ valor, rotulo }]
 //  configuracao: { prazosMin, meses }
 export function calcularIndicadores(registros, opcoes, configuracao) {
+  const porMes = agruparPorMes(registros, configuracao.meses)
   return {
     total: contarRegistros(registros),
     conclusao: contarConclusao(registros),
     porStatus: contarPorOpcoes(registros, 'status', opcoes.status),
     porPrioridade: contarPorOpcoes(registros, 'prioridade', opcoes.prioridade),
     porRegiao: contarPorOpcoes(registros, 'regiao', opcoes.regiao),
-    porTipo: contarPorOpcoes(registros, 'tipoOcorrencia', opcoes.tipoOcorrencia),
+    porTipo: contarPorOpcoesComReincidencia(registros, 'tipoOcorrencia', opcoes.tipoOcorrencia),
     reincidencias: contarReincidencias(registros),
+    criticasEmAtendimento: contarCriticasEmAtendimento(registros),
     taMedio: calcularTaMedio(registros),
     tbMedio: calcularTbMedio(registros),
     sla: resumoSla(registros, configuracao.prazosMin),
-    porMes: agruparPorMes(registros, configuracao.meses),
+    porMes,
+    variacaoMensal: variacaoUltimoMes(porMes),
     porRegiaoPerformance: performancePorRegiao(registros, opcoes.regiao, configuracao.prazosMin),
   }
 }

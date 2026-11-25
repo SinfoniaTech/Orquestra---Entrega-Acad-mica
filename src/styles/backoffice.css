@@ -176,6 +176,17 @@
 .app-root--backoffice .bar.p-alta{background:var(--orange);}
 .app-root--backoffice .bar.p-media{background:var(--yellow);}
 .app-root--backoffice .bar.p-baixa{background:var(--green);}
+.app-root--backoffice .bar.p-normal{background:var(--green);}
+/* Classes de SLA (Painel): no prazo, em risco, estourado, indeterminado */
+.app-root--backoffice .bar.sla-prazo{background:var(--green);}
+.app-root--backoffice .bar.sla-risco{background:var(--orange);}
+.app-root--backoffice .bar.sla-estourado{background:var(--red);}
+.app-root--backoffice .bar.sla-indeterminado{background:#9ca3af;}
+/* Grafico sem dados (filtros sem resultado) */
+.app-root--backoffice .chart-empty{display:grid;place-items:center;min-height:150px;margin-top:4px;padding:12px;border:1px dashed var(--line);border-radius:var(--radius-sm);color:var(--muted);background:var(--page);font-size:12px;text-align:center;}
+/* Quantidade de registros considerados pelos filtros do Painel */
+.app-root--backoffice .filters-resumo{margin:2px 0 0;color:var(--muted);font-size:12px;}
+.app-root--backoffice .filters-resumo strong{color:var(--ink);}
 
 /* Cabecalho dos graficos com identificacao de dados demonstrativos e nota de fonte */
 .app-root--backoffice .chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
@@ -205,6 +216,18 @@
 .app-root--backoffice .metrics div{display:flex;gap:4px;}
 .app-root--backoffice .metrics dt{color:var(--muted);font-weight:400;}
 .app-root--backoffice .metrics dt,.app-root--backoffice .metrics dd{margin:0;}
+/* Performance por Regiao: uma metrica por linha, com o denominador (n) de cada calculo */
+.app-root--backoffice .metrics--regiao{grid-template-columns:1fr;gap:3px;}
+.app-root--backoffice .metrics--regiao div{justify-content:space-between;align-items:baseline;}
+.app-root--backoffice .metrics--regiao dd{font-weight:600;text-align:right;}
+.app-root--backoffice .metric-n{margin-left:2px;color:var(--muted);font-size:10px;font-weight:400;white-space:nowrap;}
+.app-root--backoffice .area.is-vazia{background:var(--page);}
+.app-root--backoffice .area-vazia{margin:0;color:var(--muted);font-size:12px;}
+
+/* Referencias do prototipo que NAO respondem aos filtros: area visualmente separada */
+.app-root--backoffice .ref-demo{display:grid;gap:var(--gap);padding:12px;border:1px dashed #c9cbd6;border-radius:var(--radius);background:#fafbfd;}
+.app-root--backoffice .ref-demo-head h2{margin:0;font-size:14px;color:var(--muted);letter-spacing:.01em;}
+.app-root--backoffice .ref-demo-head p{margin:2px 0 0;color:var(--muted);font-size:12px;}
 .app-root--backoffice .skill{padding-top:6px;border-top:1px dashed var(--line);font-size:12px;}
 .app-root--backoffice .skill-top{display:flex;justify-content:space-between;align-items:center;gap:6px;}
 .app-root--backoffice .skill-name{font-weight:600;}
@@ -230,6 +253,17 @@
 .app-root--backoffice .not-found{padding:32px 20px;background:transparent;}
 
 /* ---------- Responsividade (breakpoints do original) ---------- */
+/* DP8: entre 901px e 1250px os graficos ficam em 3 colunas estreitas; rotulos longos
+   (ex.: "Comunicação") alternam de altura, como nas telas pequenas, para nao sair do cartao. */
+@media (min-width: 901px) and (max-width: 1250px){
+  /* Nessa faixa os 6 graficos ficam em 2 colunas (3 colunas deixariam o grafico de tipo com
+     colunas de ~25px, estreitas demais para os rotulos e valores) */
+  .app-root--backoffice .charts{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .app-root--backoffice .xlabels--alternados{gap:4px;}
+  .app-root--backoffice .xlabels--alternados li{min-width:0;display:flex;flex-direction:column;align-items:center;white-space:nowrap;overflow-wrap:normal;}
+  .app-root--backoffice .xlabels--alternados li:nth-child(even){padding-top:24px;}
+}
+
 @media (max-width: 1200px){
   .app-root--backoffice .kpis,.app-root--backoffice .areas{grid-template-columns:repeat(3,minmax(0,1fr));}
 }

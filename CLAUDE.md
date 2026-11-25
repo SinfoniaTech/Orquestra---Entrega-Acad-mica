@@ -8,7 +8,7 @@ A referência acadêmica é `docs/conteúdo_consolidado.pdf`. Detalhes de rotas,
 - **Usar:** React, JSX, JavaScript, Vite, React Router (`createBrowserRouter`), Bootstrap 5 e CSS próprio.
 - **Não usar:** TypeScript, Redux, Context API, custom hooks, `localStorage`, bibliotecas de estado ou de gráficos, nem novas dependências sem autorização.
 - **Estado:** `useState` mais props. Gráficos são feitos em HTML/CSS (`components/backoffice/BarChart.jsx`).
-- **Recursos fora do material acadêmico já usados:** `useParams`, `NavLink`, `Navigate`, `useLocation`, `onChange` em input controlado, `String.normalize` e a forma funcional do `useState` (`setX(anterior => ...)`). Use a forma funcional sempre que o novo estado depender do anterior. Antes de adicionar qualquer recurso novo fora do material, sinalize e justifique.
+- **Recursos fora do material acadêmico já usados:** `useParams`, `NavLink`, `Navigate`, `useLocation`, `onChange` em input controlado, `String.normalize`, a forma funcional do `useState` (`setX(anterior => ...)`), espalhamento de objetos e listas (`...`), `Array.includes`, `String.slice` e `Number.isNaN`. Também há `manualChunks` no `vite.config.js`, que só separa as bibliotecas em outro pacote, sem carregamento sob demanda. Use a forma funcional sempre que o novo estado depender do anterior. Antes de adicionar qualquer recurso novo fora do material, sinalize e justifique.
 - **Estilo do código:** simples e didático, com comentários em português, sem acentos nos comentários.
 
 ## Arquitetura
@@ -20,7 +20,13 @@ A referência acadêmica é `docs/conteúdo_consolidado.pdf`. Detalhes de rotas,
   - `bootstrap-overrides.css`: ajustes sobre o Bootstrap.
   - `mobile.css`: área Mobile.
   - `backoffice.css`: área Desktop. Todas as regras ficam dentro de `.app-root--backoffice`, para não colidir com `.card` e `.badge` do Bootstrap.
-- **Funções puras** ficam em `src/utils/`: `filters.js` (criticidade, busca), `criticidade.js` (tabela de níveis) e `stats.js` (reservado para a E5).
+- **Funções puras** ficam em `src/utils/`:
+  - `filters.js`: criticidade, busca, filtros de seleção única (Chamados) e de seleção múltipla (Painel);
+  - `criticidade.js`: tabela de níveis;
+  - `sla.js`: consumo e classificação de SLA;
+  - `stats.js`: indicadores do Painel.
+- **Componentes compartilhados** (`QueueFilters`, `BarChart`, `KpiList`): só recebem mudanças por **propriedades opcionais** que preservam o comportamento atual quando não são usadas. Exemplos: `multipla`, `legenda` e o estado vazio do gráfico.
+- **Scripts de desenvolvimento** ficam em `scripts/`, não são importados pela aplicação e rodam com Node.js. O `gerar-painel-demonstrativo.mjs` gera a base do Painel.
 
 ## Dados: preservação obrigatória
 
@@ -29,9 +35,11 @@ A referência acadêmica é `docs/conteúdo_consolidado.pdf`. Detalhes de rotas,
 - **Não misturar universos:**
   - 7 chamados Mobile;
   - 12 chamados da fila do Backoffice, que são um **recorte**;
-  - KPIs de `insights.indicadores`, que são **demonstrativos** da operação consolidada (1.247 chamados);
-  - gráficos do Painel, que são **simulados** (`graficos-demonstrativos.json`).
-  Cálculos sobre os 12 registros nunca substituem os KPIs consolidados.
+  - KPIs de `insights.indicadores`, que são **demonstrativos** da operação consolidada e aparecem **só na tela Chamados**;
+  - **base do Painel** (`painel-demonstrativo.json`, 1.247 chamados **fictícios** `PD-`), que alimenta todos os KPIs, gráficos e a Performance por Região do Painel;
+  - `graficos-demonstrativos.json`: simulados antigos, preservados e sem uso desde a EP-R.
+  Cálculos sobre os 12 registros nunca substituem os KPIs consolidados. Os prazos e metas da base do Painel são regras assumidas e não se aplicam aos chamados reais.
+- **Base do Painel:** para regenerar, use `node scripts/gerar-painel-demonstrativo.mjs`, que é determinístico (MD5 `64129a5d…`). Não edite o JSON à mão.
 - **Divergências documentadas** (por exemplo, `slaCorrecao` e a harmonização 1.247 × 1.248) são exibidas, nunca resolvidas sem autorização.
 - **Campo `hidden`** (Backoffice): é metadado legado da paginação "Ver mais" do protótipo. Preservar no JSON e não usar como regra de visibilidade.
 
@@ -42,7 +50,11 @@ A referência acadêmica é `docs/conteúdo_consolidado.pdf`. Detalhes de rotas,
 - **Status:** rótulo "Supervisor", como no JSON.
 - **SLA no Backoffice** (pelo `slaPercent`): Estourado ≥100%, Em risco >70% e <100%, No prazo ≤70%. Não há classificação de SLA no Mobile.
 - **Resumo do recorte:** calculado sobre o resultado da busca e dos filtros, sempre mostrando o N considerado.
-- **Os 11 chips de filtro do Painel** são apenas visuais e identificados como demonstrativos.
+- **Painel Operacional (EP-R):**
+  - filtros com **seleção múltipla**: OU dentro do grupo, E entre os grupos; o contador mostra opções marcadas;
+  - todos os elementos analíticos usam os mesmos registros filtrados;
+  - Padrões e Recomendações ficam como referências separadas, que não respondem aos filtros;
+  - a aba Chamados continua com seleção única.
 - **Fora do Ciclo 2:** seletor de período e ordenação.
 - **Execução:** as etapas E1 a E5 são executadas uma de cada vez, **só com autorização expressa**. Não avançar para a etapa seguinte automaticamente.
 

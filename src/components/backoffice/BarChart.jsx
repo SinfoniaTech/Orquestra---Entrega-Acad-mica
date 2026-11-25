@@ -46,6 +46,17 @@ export default function BarChart({
   // Muitas categorias com nomes longos: em telas estreitas os rotulos alternam de altura (ver CSS)
   const rotulosLongos = grupos.length > 5 && grupos.some((grupo) => grupo.rotulo.length > 8)
 
+  // Sem nenhum valor (ex.: filtros sem resultado): mostra um estado vazio em vez de barras de 0%.
+  // Graficos com dados continuam exatamente como antes.
+  if (maior === 0) {
+    return (
+      <figure className="chart">
+        <figcaption className="visually-hidden">{titulo + '. Sem dados para os filtros selecionados.'}</figcaption>
+        <div className="chart-empty" role="status">Sem dados para os filtros selecionados</div>
+      </figure>
+    )
+  }
+
   // Descricao acessivel montada a partir dos dados exibidos
   const descricao = grupos
     .map((grupo) => {
