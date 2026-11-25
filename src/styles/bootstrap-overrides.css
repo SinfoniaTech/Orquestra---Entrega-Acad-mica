@@ -1,0 +1,23 @@
+/* src/styles/bootstrap-overrides.css */
+/* Sobrescritas pontuais do Bootstrap 5 para preservar a identidade visual original.
+   Carregado depois de global.css e antes de mobile.css e backoffice.css. */
+
+/* Tokens de corpo do Bootstrap alinhados aos tokens do ORQUESTRA (sem !important). */
+:root{
+  --bs-body-font-family:Inter,"Segoe UI",Arial,sans-serif;
+  --bs-body-font-size:14px;
+  --bs-body-line-height:1.45;
+  --bs-body-color:#1f2430;
+  --bs-body-color-rgb:31,36,48;
+  --bs-body-bg:#f5f5f8;
+  --bs-body-bg-rgb:245,245,248;
+}
+
+/* O reboot do Bootstrap sublinha e colore links; a aplicacao original herda a cor e nao sublinha. */
+a{color:inherit;text-decoration:none;}
+
+/* O reboot usa peso 500 nos titulos; o original usava o negrito padrao do navegador. */
+h1,h2,h3{font-weight:700;}
+
+/* O reboot adiciona margem inferior em address e dl; o original controla essas margens nas classes. */
+address{margin-bottom:0;}

@@ -1,0 +1,40 @@
+{
+  "documentacao": {
+    "tipo": "demonstrativo",
+    "aviso": "Dados SIMULADOS para fins de demonstração do protótipo acadêmico. Não representam registros reais de operação.",
+    "criadoEm": "2026-11-24",
+    "motivo": "Em insights.json (painelOperacional.graficos) os valores dos três gráficos do Painel Operacional são null; no protótipo HTML original as barras tinham apenas alturas fixas em CSS, sem valores numéricos.",
+    "metodo": "Valores proporcionais às alturas das barras do CSS original (backoffice/painel-operacional.css), escalados para somar o indicador demonstrativo 'Total de Chamadas' (insights.json → indicadores.itens.total = 1.247). Ajustado de 1.248 para 1.247 em 2026-11-24, na harmonização dos indicadores.",
+    "coerencia": [
+      "Soma de chamadasPorPeriodo.chamadas = 1247 = indicadores.itens.total (insights.json).",
+      "Setembro (232) vs. agosto (219) = +5,9%, coerente com o KPI '+6% vs. mês anterior'.",
+      "Soma de chamadasPorPrioridade = 1247.",
+      "Soma de chamadasPorTipoOcorrencia = 1247.",
+      "Reincidências = 137 (11,0% do total), coerente com a reincidência de 8% a 14% por área (insights.json)."
+    ],
+    "universo": "Operação consolidada (mesmo universo de insights.json → indicadores); não se refere a um contrato específico",
+    "periodo": "Abril a setembro"
+  },
+  "chamadasPorPeriodo": [
+    { "mes": "Abr", "chamadas": 185, "reincidencias": 20 },
+    { "mes": "Mai", "chamadas": 206, "reincidencias": 23 },
+    { "mes": "Jun", "chamadas": 201, "reincidencias": 22 },
+    { "mes": "Jul", "chamadas": 204, "reincidencias": 22 },
+    { "mes": "Ago", "chamadas": 219, "reincidencias": 24 },
+    { "mes": "Set", "chamadas": 232, "reincidencias": 26 }
+  ],
+  "chamadasPorPrioridade": [
+    { "chave": "critica", "categoria": "Crítica", "valor": 41 },
+    { "chave": "alta", "categoria": "Alta", "valor": 206 },
+    { "chave": "media", "categoria": "Média", "valor": 597 },
+    { "chave": "baixa", "categoria": "Baixa", "valor": 403 }
+  ],
+  "chamadasPorTipoOcorrencia": [
+    { "categoria": "Nivelamento", "valor": 312 },
+    { "categoria": "Porta", "valor": 260 },
+    { "categoria": "Painel/comando", "valor": 215 },
+    { "categoria": "Segurança", "valor": 178 },
+    { "categoria": "Comunicação", "valor": 134 },
+    { "categoria": "Outros", "valor": 148 }
+  ]
+}
