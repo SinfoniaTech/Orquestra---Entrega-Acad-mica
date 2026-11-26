@@ -141,7 +141,7 @@ select:focus-visible {
   right: 0;
   z-index: 100;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   align-items: stretch;
   width: 100%;
   min-height: 62px;
@@ -174,12 +174,6 @@ select:focus-visible {
 .bottom-navigation .nav-link[href="/alertas"]::before {
   content: "\26A0";
   content: "\26A0" / "";
-}
-
-.bottom-navigation .nav-link[href="/mais"]::before {
-  content: "\2022\2022\2022";
-  content: "\2022\2022\2022" / "";
-  letter-spacing: 2px;
 }
 
 .bottom-navigation .nav-link.active,
@@ -245,4 +239,58 @@ select:focus-visible {
 .not-found__link:hover {
   color: #fff;
   background: var(--purple-2);
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(31, 10, 60, .45);
+}
+
+.menu-drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(82%, 320px);
+  padding: 14px;
+  overflow-y: auto;
+  background: var(--page);
+  box-shadow: 8px 0 24px rgba(31, 10, 60, .2);
+  animation: menu-slide-in .2s ease;
+}
+
+.menu-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.menu-drawer__close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--purple);
+  background: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@keyframes menu-slide-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@media (min-width: 600px) {
+  .menu-overlay {
+    left: 50%;
+    right: auto;
+    width: min(100%, 480px);
+    transform: translateX(-50%);
+  }
 }
