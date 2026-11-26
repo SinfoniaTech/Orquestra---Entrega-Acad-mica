@@ -281,6 +281,64 @@ select:focus-visible {
   cursor: pointer;
 }
 
+.in-development {
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px;
+}
+
+.in-development__card {
+  width: 100%;
+  max-width: 460px;
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.in-development__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  color: var(--purple);
+  background: #f1edf5;
+  font-size: 22px;
+}
+
+.in-development__card h1 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 22px;
+  letter-spacing: -.02em;
+}
+
+.in-development__card p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.in-development__link {
+  display: inline-flex;
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--purple);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.in-development__link:hover {
+  color: #fff;
+  background: var(--purple-2);
+}
+
 @keyframes menu-slide-in {
   from { transform: translateX(-100%); }
   to { transform: translateX(0); }

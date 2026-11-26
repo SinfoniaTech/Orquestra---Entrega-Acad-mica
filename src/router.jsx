@@ -8,9 +8,9 @@ import Detail from './pages/Detail.jsx'
 import Resumo from './pages/Detail/Resumo.jsx'
 import LinhaDoTempo from './pages/Detail/LinhaDoTempo.jsx'
 import Historico from './pages/Detail/Historico.jsx'
-import More from './pages/More.jsx'
 import BackofficeChamados from './pages/BackofficeChamados.jsx'
 import BackofficePainel from './pages/BackofficePainel.jsx'
+import EmDesenvolvimento from './pages/EmDesenvolvimento.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 export const router = createBrowserRouter([
@@ -20,7 +20,6 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'alertas', element: <Alerts /> },
-      // Rotas antigas de criticidade: redirecionam para a Home com o filtro aplicado
       { path: 'criticidade/:nivel', element: <RedirecionaCriticidade /> },
       {
         path: 'chamados/:id',
@@ -32,8 +31,7 @@ export const router = createBrowserRouter([
           { path: 'historico', element: <Historico /> },
         ],
       },
-      { path: 'mais', element: <More /> },
-      // Qualquer endereco nao mapeado exibe a pagina 404
+      { path: 'mais', element: <Navigate to='/' replace /> },
       { path: '*', element: <NotFound /> },
     ],
   },
@@ -44,6 +42,12 @@ export const router = createBrowserRouter([
       { index: true, element: <Navigate to='painel' replace /> },
       { path: 'chamados', element: <BackofficeChamados /> },
       { path: 'painel', element: <BackofficePainel /> },
+      { path: 'contratos', element: <EmDesenvolvimento titulo='Contratos' /> },
+      { path: 'equipamentos', element: <EmDesenvolvimento titulo='Equipamentos' /> },
+      { path: 'tecnicos', element: <EmDesenvolvimento titulo='Técnicos' /> },
+      { path: 'treinamentos', element: <EmDesenvolvimento titulo='Treinamentos' /> },
+      { path: 'relatorios', element: <EmDesenvolvimento titulo='Relatórios' /> },
+      { path: 'configuracoes', element: <EmDesenvolvimento titulo='Configurações' /> },
       {
         path: '*',
         element: <NotFound voltarPara='/backoffice/painel' voltarTexto='Voltar para o Painel Operacional' />,
