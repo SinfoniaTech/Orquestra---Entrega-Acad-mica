@@ -1,7 +1,4 @@
-// Barra superior das telas do Backoffice. Titulo, subtitulo e periodo variam por tela (props).
-// Busca: campo controlado (o texto fica no estado da tela que usa a topbar, via props busca/onBuscar).
-// Na tela sem fila (Painel), a busca e exibida desabilitada (buscaDesabilitada).
-// O seletor de periodo continua apenas visual (fora do Ciclo 2, decisao D13).
+
 export default function BackofficeTopbar({ titulo, subtitulo, periodo, busca = '', onBuscar, buscaDesabilitada = false }) {
   const textoBusca = buscaDesabilitada
     ? 'Busca disponível na fila de Chamados'
@@ -32,7 +29,7 @@ export default function BackofficeTopbar({ titulo, subtitulo, periodo, busca = '
           />
         </label>
         <button type="button" className="btn-period">
-          {periodo} <i className="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          {periodo}
         </button>
       </div>
     </header>
