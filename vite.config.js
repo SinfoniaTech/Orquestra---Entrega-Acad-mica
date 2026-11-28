@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Orquestra---Entrega-Acad-mica',
+  base: '/Orquestra---Entrega-Acad-mica/',
   build: {
     rollupOptions: {
       output: {
