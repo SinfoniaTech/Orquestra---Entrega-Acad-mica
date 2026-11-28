@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://sinfoniatech.github.io/Orquestra---Entrega-Acad-mica",
+  "homepage": "https://sinfoniatech.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
