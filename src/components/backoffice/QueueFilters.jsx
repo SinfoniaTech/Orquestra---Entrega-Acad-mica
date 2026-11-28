@@ -1,19 +1,8 @@
-// Painel de filtros da fila de chamados (marcacao e classes do prototipo original: .filters, .chip).
-// O estado fica na tela (BackofficeChamados); este componente apenas exibe e avisa as escolhas por props.
-//
-// grupos: [{ campo: "status", titulo: "Status", opcoes: [{ valor, rotulo }] }]
-// filtros: { status, prioridade, regiao } (null = Todos)
-// onAlterar(campo, valor): seleciona uma opcao (valor null = Todos)
-// onLimpar(): volta todos os grupos para "Todos" (nao mexe na busca)
-// multipla (opcional, padrao false): quando true, cada grupo guarda uma LISTA de valores
-//   (filtros: { status: [], ... }) e cada chip marca/desmarca o seu valor. Usado apenas no Painel.
-//   Sem essa propriedade, o comportamento e exatamente o da fila de Chamados.
+// Componente: painel de filtros da fila de chamados
 export default function QueueFilters({ id, grupos, filtros, onAlterar, onLimpar, filtrosAtivos, multipla = false }) {
-  // "Todos" fica marcado quando o grupo nao tem filtro
   function todosMarcado(campo) {
     return multipla ? filtros[campo].length === 0 : filtros[campo] === null
   }
-  // A opcao fica marcada quando faz parte da selecao do grupo
   function opcaoMarcada(campo, valor) {
     return multipla ? filtros[campo].includes(valor) : filtros[campo] === valor
   }

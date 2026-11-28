@@ -1,3 +1,5 @@
+// Tela: resumo do chamado com impacto temporal e acoes sugeridas
+
 import { useParams } from 'react-router-dom'
 import chamados from '../../data/chamados-mobile.json'
 
@@ -5,7 +7,6 @@ function Resumo() {
   const { id } = useParams()
   const chamado = chamados.find((item) => item.id === id)
 
-  // Detail.jsx ja exibe a mensagem de chamado inexistente
   if (!chamado) return null
 
   const tecnico = chamado.tecnico
@@ -31,7 +32,6 @@ function Resumo() {
             <dd className="detail-emphasis">{chamado.tempoRestante}</dd>
           </div>
         </dl>
-        {/* Divergencia documentada no JSON: exibida como registro, sem ser resolvida aqui */}
         {chamado.slaCorrecao && (
           <p className="detail-note">
             Valor original no protótipo: {chamado.slaCorrecao.valorOriginal} (divergência de SLA documentada)
@@ -74,7 +74,7 @@ function Resumo() {
         </ul>
       </section>
 
-      {/* No original os botoes de contato sao desabilitados */}
+
       <section className="contact-actions" aria-label="Contato com o técnico">
         <button type="button" disabled>Ligar técnico</button>
         <button type="button" disabled>WhatsApp</button>

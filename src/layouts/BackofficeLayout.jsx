@@ -1,3 +1,5 @@
+// Layout Backoffice: sidebar, conteudo e rota de saida
+
 import { Outlet, NavLink, Link } from 'react-router-dom'
 
 const itensBackoffice = [

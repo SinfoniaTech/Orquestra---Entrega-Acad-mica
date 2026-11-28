@@ -1,3 +1,5 @@
+// App: monta o React com o roteador
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
@@ -10,6 +12,6 @@ import './styles/backoffice.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} basename={import.meta.env.BASE_URL} />
+    <RouterProvider router={router} />
   </StrictMode>
 )

@@ -1,7 +1,7 @@
+// Componente: pagina nao encontrada
+
 import { Link } from 'react-router-dom'
 
-// Pagina amigavel para rotas inexistentes e identificadores invalidos.
-// As props permitem reaproveitar o componente no Mobile e no Backoffice.
 export default function NotFound({
   titulo = 'Página não encontrada',
   mensagem = 'O endereço acessado não existe ou foi alterado.',

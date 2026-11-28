@@ -1,3 +1,5 @@
+// Componente: menu lateral moveis com atalho para o BackOffice
+
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import insights from "../data/insights.json"

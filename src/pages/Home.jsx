@@ -1,3 +1,5 @@
+// Tela inicial: lista de chamados com filtro por criticidade
+
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
 import chamados from "../data/chamados-mobile.json"
@@ -8,14 +10,12 @@ import CriticalityFilter from "../components/CriticalityFilter.jsx"
 import CallList from "../components/calls/CallList.jsx"
 
 export default function Home() {
-  // As rotas antigas /criticidade/:nivel redirecionam para ca enviando o filtro inicial
   const location = useLocation()
   const filtroRecebido = location.state ? location.state.filtro : null
   const filtroInicial = NIVEIS[filtroRecebido] ? filtroRecebido : null
 
   const [filtro, setFiltro] = useState(filtroInicial)
 
-  // Clicar no filtro ja ativo desativa o filtro (volta a mostrar todos)
   function selecionarFiltro(nivel) {
     if (nivel === filtro) {
       setFiltro(null)
@@ -26,6 +26,7 @@ export default function Home() {
 
   const lista = filtrarPorCriticidade(chamados, filtro)
   const titulo = filtro ? "Chamados · " + NIVEIS[filtro].titulo : "Chamados abertos"
+
 
   return (
     <section className="page">

@@ -1,7 +1,4 @@
-/* src/utils/criticidade.js */
-/* Dados fixos de apresentacao de cada nivel de criticidade (classe de cor, nome da cor e titulo).
-   A chave corresponde ao campo "prioridade" dos JSONs e ao parametro :nivel da rota /criticidade/:nivel. */
-
+// Niveis de criticidade: classes de cor e nomes
 export const NIVEIS = {
   critica: { classe: 'criticality-red', cor: 'Vermelho', titulo: 'Críticos', menu: 'Críticos' },
   alta: { classe: 'criticality-orange', cor: 'Laranja', titulo: 'Alta prioridade', menu: 'Alta' },

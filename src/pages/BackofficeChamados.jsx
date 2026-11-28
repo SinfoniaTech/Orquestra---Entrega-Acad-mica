@@ -1,3 +1,5 @@
+// Tela Backoffice: fila de chamados com busca e filtros
+
 import { useState } from 'react'
 import chamados from '../data/chamados-backoffice.json'
 import insights from '../data/insights.json'
@@ -7,49 +9,34 @@ import KpiList from '../components/backoffice/KpiList.jsx'
 import BarChart from '../components/backoffice/BarChart.jsx'
 import QueueFilters from '../components/backoffice/QueueFilters.jsx'
 
-// Grupos de filtro (Status, Prioridade, Regiao) extraidos dos proprios registros da fila.
-// montarGruposFiltro e compartilhada com o Painel Operacional (cada tela passa a sua base).
 const GRUPOS_FILTRO = montarGruposFiltro(chamados)
 
-// Quantidade de chamados exibidos antes de clicar em "Ver mais"
 const LIMITE_INICIAL = 5
 
 function BackofficeChamados() {
   const dados = insights.chamados
 
-  // Texto digitado na busca (o campo fica na topbar e recebe o estado por props)
   const [busca, setBusca] = useState('')
-  // Filtros selecionados (null = Todos) e visibilidade do painel de filtros
   const [filtros, setFiltros] = useState(FILTROS_VAZIOS)
   const [filtrosAbertos, setFiltrosAbertos] = useState(false)
-  // false = mostra apenas os primeiros chamados; true = mostra a fila inteira
   const [verTodos, setVerTodos] = useState(false)
 
-  // Busca e filtros sao aplicados em sequencia sobre os registros (logica E);
-  // a lista original nao e alterada
   const resultado = filtrarFila(buscar(chamados, busca), filtros)
   const temBusca = busca.trim() !== ''
   const filtrosAtivos = contarFiltrosAtivos(filtros)
   const temCriterio = temBusca || filtrosAtivos > 0
 
-  // Recorte exibido na tabela: 5 primeiros ou todos, conforme o botao
   const temMais = resultado.length > LIMITE_INICIAL
   const exibidos = verTodos ? resultado : resultado.slice(0, LIMITE_INICIAL)
 
-  // Seleciona uma opcao em um grupo; os demais grupos sao mantidos (combinacao).
-  // A forma setFiltros(anterior => ...) parte sempre do valor mais recente do estado,
-  // evitando perder uma selecao quando duas alteracoes acontecem em sequencia.
   function alterarFiltro(campo, valor) {
     setFiltros((anterior) => ({ ...anterior, [campo]: valor }))
   }
 
-  // Limpa apenas os filtros; o texto da busca e preservado
   function limparFiltros() {
     setFiltros(FILTROS_VAZIOS)
   }
 
-  // Grafico por regiao calculado a partir dos chamados reais da fila (chamados-backoffice.json).
-  // A ordem das regioes segue insights.json (regioes).
   const gruposRegiao = dados.regioes.map((item) => {
     const quantidade = chamados.filter((chamado) => chamado.regiaoLabel === item.regiao).length
     return { rotulo: item.regiao, barras: [{ valor: quantidade, nome: 'Chamados ativos' }] }
@@ -76,7 +63,6 @@ function BackofficeChamados() {
                 {indice > 0 && <i className="fa-solid fa-chevron-right flow-arrow" aria-hidden="true"></i>}
                 <div className="flow-step">
                   <span className="flow-label">{etapa.label}</span>
-                  {/* Etapas com "indicador" reaproveitam o valor da fonte unica (sem duplicar o numero no JSON) */}
                   <strong className="flow-value">
                     {etapa.indicador
                       ? insights.indicadores.itens[etapa.indicador].value
@@ -94,7 +80,6 @@ function BackofficeChamados() {
               <h2 id="t-fila">Fila de chamados</h2>
               <p className="card-sub">Ordenada por chegada (mais recente no topo)</p>
             </div>
-            {/* Abre e fecha o painel de filtros; o numero indica quantos grupos estao filtrando */}
             <button
               type="button"
               className="btn-filter"
@@ -181,7 +166,6 @@ function BackofficeChamados() {
             </div>
           )}
           <div className="queue-foot">
-            {/* O botao so aparece quando ha mais chamados do que o limite inicial */}
             {temMais && (
               <button
                 type="button"
@@ -201,7 +185,6 @@ function BackofficeChamados() {
         </section>
 
         <section className="insights" aria-label="Eventos e distribuição">
-          {/* A altura do card de eventos acompanha o grafico ao lado; se a lista for maior, ela rola */}
           <article className="card events-card">
             <div className="events-card__inner">
               <h2>Eventos da integração</h2>

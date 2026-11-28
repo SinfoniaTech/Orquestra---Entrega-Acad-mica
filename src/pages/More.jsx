@@ -1,10 +1,11 @@
+// Tela: mais opcoes com atalho para o BackOffice
+
 import { Link } from "react-router-dom"
 import insights from "../data/insights.json"
 import PageHeading from "../components/PageHeading.jsx"
 
 export default function More() {
   const opcoes = insights.more.opcoes;
-  // A opcao do tipo "rota" (Backoffice) ganha destaque; as demais formam a lista comum
   const acessoBackoffice = opcoes.find((opcao) => opcao.tipo === "rota")
   const placeholders = opcoes.filter((opcao) => opcao.tipo !== "rota")
 

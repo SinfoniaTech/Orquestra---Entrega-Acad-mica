@@ -1,4 +1,4 @@
-// Titulo padrao das telas Mobile (classe .page-heading do original)
+// Componente: titulo padrao das telas moveis
 export default function PageHeading({ titulo, subtitulo }) {
   return (
     <section className="page-heading">

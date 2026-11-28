@@ -1,24 +1,10 @@
-/* scripts/gerar-painel-demonstrativo.mjs
- *
- * Gera src/data/painel-demonstrativo.json: base DEMONSTRATIVA (ficticia) do Painel Operacional.
- * Ferramenta de desenvolvimento (Node.js, sem dependencias). A aplicacao NAO importa este arquivo:
- * ela le apenas o JSON gerado. Nada e sorteado no navegador.
- *
- * Uso:  node scripts/gerar-painel-demonstrativo.mjs
- *
- * Determinismo: o "sorteio" usa um gerador pseudoaleatorio com SEMENTE FIXA. A mesma execucao
- * produz sempre o mesmo arquivo. As quantidades de cada dimensao sao COTAS EXATAS (listas com as
- * quantidades planejadas, embaralhadas com a semente). Cada registro e montado individualmente.
- * Antes de gravar, o script valida todas as regras e interrompe com erro se alguma falhar.
- */
+// Gera a base ficticia de 1.247 chamados do painel demonstrativo
 
 import { writeFileSync } from 'node:fs'
 
 const ARQUIVO = new URL('../src/data/painel-demonstrativo.json', import.meta.url)
 const SEMENTE = 20250930
 
-// ---------------------------------------------------------------- gerador com semente fixa
-// "mulberry32": a cada chamada devolve um numero entre 0 e 1, sempre na mesma sequencia.
 function criarSorteador(semente) {
   let estado = semente >>> 0
   return function sortear() {
@@ -33,7 +19,6 @@ const sortear = criarSorteador(SEMENTE)
 
 const inteiroEntre = (min, max) => min + Math.floor(sortear() * (max - min + 1))
 
-// Embaralha uma lista (Fisher-Yates) usando o sorteador com semente
 function embaralhar(lista) {
   const copia = lista.slice()
   for (let i = copia.length - 1; i > 0; i--) {
@@ -45,7 +30,6 @@ function embaralhar(lista) {
   return copia
 }
 
-// { a: 2, b: 1 } -> ["a", "a", "b"]
 function listaDeCotas(cotas) {
   const lista = []
   Object.entries(cotas).forEach(([valor, quantidade]) => {
@@ -54,14 +38,12 @@ function listaDeCotas(cotas) {
   return lista
 }
 
-// Distribuicao normal padrao (Box-Muller), usada no fator de consumo do TB
 function normalPadrao() {
   const u1 = Math.max(sortear(), 1e-12)
   const u2 = sortear()
   return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2)
 }
 
-// ---------------------------------------------------------------- parametros planejados (aprovados)
 const MESES = [
   { chave: '2025-07', rotulo: 'Jul', dias: 31 },
   { chave: '2025-08', rotulo: 'Ago', dias: 31 },
@@ -69,7 +51,6 @@ const MESES = [
 ]
 const INSTANTE_REFERENCIA = '2025-09-30T18:00'
 
-// Status por mes (Jul / Ago / Set): pendencias espalhadas, menos casos nos meses mais antigos
 const STATUS_POR_MES = {
   '2025-07': { aberto: 1, atendimento: 3, supervisor: 10, concluido: 374 },
   '2025-08': { aberto: 1, atendimento: 6, supervisor: 16, concluido: 394 },
@@ -89,18 +70,12 @@ const ROTULOS = {
 const PRAZOS_SLA_MIN = { critica: 60, alta: 150, media: 240, normal: 480 }
 const METAS = { taMin: 30, tbMin: 120 }
 
-// Tempo de chegada (TA): base por prioridade + ajuste por regiao, com variacao de 60% a 140% da base
 const TA_BASE_MIN = { critica: 12, alta: 20, media: 27, normal: 33 }
 const TA_AJUSTE_REGIAO_MIN = { centro: -3, sul: 0, norte: 2, leste: 1, oeste: 5 }
-// Tempo de solucao (TB) = prazo da prioridade x fator de consumo f x ajuste da regiao.
-// f segue UMA distribuicao log-normal fixa (mediana 0,40; sigma 0,55; limitada a 2,0), igual para
-// todas as prioridades. O fator nao e ajustado registro a registro: a classificacao de SLA e consequencia.
 const FATOR_TB = { mediana: 0.4, sigma: 0.55, maximo: 2.0 }
 const TB_AJUSTE_REGIAO = { centro: 0.95, sul: 1.0, norte: 1.03, leste: 1.0, oeste: 1.1 }
-// Pesos da escolha das 137 reincidencias (mais frequentes em Nivelamento e Porta)
 const PESO_REINCIDENCIA = { Nivelamento: 2.0, Porta: 1.6, 'Painel/comando': 1.0, Segurança: 0.6, Comunicação: 0.6, Outros: 0.5 }
 
-// Equipes ficticias por regiao (responsaveis sempre da propria regiao)
 const EQUIPES = {
   centro: {
     tecnicos: ['Ana Ribeiro', 'Bruno Castro', 'Carla Mota', 'Diego Prado', 'Elisa Fontes', 'Fábio Lemos', 'Gisele Moura', 'Hugo Siqueira', 'Íris Tavares', 'João Vidal'],
@@ -124,9 +99,6 @@ const EQUIPES = {
   },
 }
 
-// Os 4 registros "Aberto" sao definidos explicitamente (DR2: so ha 4): prioridades e regioes
-// diferentes entre si, para que Aberto + cada prioridade (ou cada regiao, exceto uma) tenha resultado.
-// Um deles atende ao exemplo do enunciado: Aberto + Critica + Zona Sul.
 const ABERTOS_FIXOS = [
   { mes: '2025-09', dia: 30, hora: '17:35', prioridade: 'critica', regiao: 'sul' },
   { mes: '2025-09', dia: 26, hora: '10:20', prioridade: 'alta', regiao: 'centro' },
@@ -134,7 +106,6 @@ const ABERTOS_FIXOS = [
   { mes: '2025-07', dia: 18, hora: '09:40', prioridade: 'normal', regiao: 'oeste' },
 ]
 
-// ---------------------------------------------------------------- utilitarios de data (texto "AAAA-MM-DDTHH:MM")
 const doisDigitos = (n) => String(n).padStart(2, '0')
 const paraMinutos = (texto) => Date.parse(texto + ':00Z') / 60000
 function deMinutos(minutos) {
@@ -144,14 +115,11 @@ function deMinutos(minutos) {
 }
 const REFERENCIA_MIN = paraMinutos(INSTANTE_REFERENCIA)
 
-// Data/hora aleatoria dentro do mes, entre 07:00 e 19:59
 function dataNoMes(mes) {
   const info = MESES.find((m) => m.chave === mes)
   return mes + '-' + doisDigitos(inteiroEntre(1, info.dias)) + 'T' + doisDigitos(inteiroEntre(7, 19)) + ':' + doisDigitos(inteiroEntre(0, 59))
 }
 
-// ---------------------------------------------------------------- montagem dos registros
-// 1) "Vagas" de mes x status (cotas exatas), com os 4 abertos ja definidos
 const vagas = []
 ABERTOS_FIXOS.forEach((a) => vagas.push({ mes: a.mes, status: 'aberto', fixo: a }))
 MESES.forEach((m) => {
@@ -160,7 +128,6 @@ MESES.forEach((m) => {
   })
 })
 
-// 2) Prioridade, regiao e tipo por cotas exatas (descontando o que os 4 abertos fixos ja usam)
 function cotasSemFixos(campo) {
   const cotas = { ...COTAS[campo] }
   ABERTOS_FIXOS.forEach((a) => { cotas[a[campo]] = cotas[a[campo]] - 1 })
@@ -182,7 +149,6 @@ const registros = vagas.map((vaga, indice) => {
   }
 })
 
-// 3) Tempos, datas e responsaveis por status
 const fatorTb = () => Math.min(FATOR_TB.maximo, FATOR_TB.mediana * Math.exp(FATOR_TB.sigma * normalPadrao()))
 const sortearTa = (r) => Math.max(5, Math.round(TA_BASE_MIN[r.prioridade] * (0.6 + 0.8 * sortear()) + TA_AJUSTE_REGIAO_MIN[r.regiao]))
 const escolher = (lista) => lista[Math.floor(sortear() * lista.length)]
@@ -200,7 +166,6 @@ registros.forEach((r) => {
     r.tempoChegadaMin = sortearTa(r)
     const tb = Math.round(PRAZOS_SLA_MIN[r.prioridade] * fatorTb() * TB_AJUSTE_REGIAO[r.regiao])
     r.tempoSolucaoMin = Math.max(tb, r.tempoChegadaMin + 5)
-    // A solucao precisa terminar antes do instante de referencia: antecipa a abertura se necessario
     while (paraMinutos(r.dataAbertura) + r.tempoSolucaoMin > REFERENCIA_MIN) {
       r.dataAbertura = deMinutos(paraMinutos(r.dataAbertura) - 24 * 60)
     }
@@ -213,9 +178,7 @@ registros.forEach((r) => {
     } else {
       r.responsavel = '—'
     }
-    // Abertura sempre antes do instante de referencia
     if (paraMinutos(r.dataAbertura) >= REFERENCIA_MIN) r.dataAbertura = r.mes + '-30T' + doisDigitos(inteiroEntre(7, 16)) + ':' + doisDigitos(inteiroEntre(0, 59))
-    // Em atendimento: o tempo decorrido precisa ser maior que o tempo de chegada
     if (r.status === 'atendimento' && REFERENCIA_MIN - paraMinutos(r.dataAbertura) <= r.tempoChegadaMin + 10) {
       r.dataAbertura = deMinutos(REFERENCIA_MIN - (r.tempoChegadaMin + 30 + inteiroEntre(0, 90)))
     }
@@ -223,14 +186,12 @@ registros.forEach((r) => {
   }
 })
 
-// 4) Reincidencias: exatamente 137, escolhidas com pesos por tipo (chave = u^(1/peso), maiores chaves)
 registros
   .map((r) => ({ r, chave: Math.pow(sortear(), 1 / PESO_REINCIDENCIA[r.tipoOcorrencia]) }))
   .sort((a, b) => b.chave - a.chave)
   .slice(0, COTAS.reincidencias)
   .forEach((item) => { item.r.reincidencia = true })
 
-// 5) Ordena por abertura e numera os IDs (PD-000001 ...). Campos ausentes sao OMITIDOS (nunca zero).
 registros.sort((a, b) => (a.dataAbertura < b.dataAbertura ? -1 : a.dataAbertura > b.dataAbertura ? 1 : 0))
 const chamados = registros.map((r, i) => {
   const saida = {
@@ -249,7 +210,6 @@ const chamados = registros.map((r, i) => {
   return saida
 })
 
-// ---------------------------------------------------------------- validacao (interrompe se falhar)
 const erros = []
 const exigir = (condicao, mensagem) => { if (!condicao) erros.push(mensagem) }
 const contar = (campo) => { const m = {}; chamados.forEach((c) => { m[c[campo]] = (m[c[campo]] || 0) + 1 }); return m }
@@ -290,7 +250,6 @@ if (erros.length > 0) {
   process.exit(1)
 }
 
-// ---------------------------------------------------------------- documentacao e gravacao
 const documentacao = {
   tipo: 'demonstrativo',
   aviso: 'Registros FICTÍCIOS, gerados para demonstrar o funcionamento dos filtros, indicadores e gráficos do Painel Operacional. Não representam chamados reais nem a operação consolidada.',

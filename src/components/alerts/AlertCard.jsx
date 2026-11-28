@@ -1,3 +1,5 @@
+// Componente: card de alerta critico
+
 import { Link } from "react-router-dom"
 import { NIVEIS } from "../../utils/criticidade.js"
 

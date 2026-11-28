@@ -1,8 +1,9 @@
+// Componente: item de chamado na lista
+
 import { Link } from "react-router-dom"
 
 export default function CallItem({ chamado }) {
   const prioridadeClass = "call-item__prioridade call-item__prioridade--" + chamado.prioridade
-  // slaTextoIndex guarda o texto original do card, ex.: "Faltam 1h30 para SLA · 01h30"
   const partesSla = chamado.slaTextoIndex.split(" · ")
   return (
     <Link to={"/chamados/" + chamado.id} className="call-item">

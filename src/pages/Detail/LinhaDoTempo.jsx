@@ -1,3 +1,5 @@
+// Tela: linha do tempo do chamado
+
 import { useParams } from 'react-router-dom'
 import chamados from '../../data/chamados-mobile.json'
 

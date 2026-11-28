@@ -1,10 +1,10 @@
+// Tela: detalhe do chamado com abas resumo, linha do tempo e historico
+
 import { Outlet, useParams, NavLink, Link } from 'react-router-dom'
 import chamados from '../data/chamados-mobile.json'
 import { NIVEIS } from '../utils/criticidade.js'
 import NotFound from './NotFound.jsx'
 
-// Estrutura comum das 3 abas do chamado: caminho, cabecalho, status e abas.
-// O conteudo de cada aba e exibido no Outlet.
 function Detail() {
   const { id } = useParams()
   const chamado = chamados.find((item) => item.id === id)

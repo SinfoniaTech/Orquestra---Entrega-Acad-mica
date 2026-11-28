@@ -1,3 +1,5 @@
+// Tela Backoffice: painel operacional com KPIs, graficos e desempenho por regiao
+
 import { useState } from 'react'
 import insights from '../data/insights.json'
 import painelDemonstrativo from '../data/painel-demonstrativo.json'
@@ -15,8 +17,6 @@ import KpiList from '../components/backoffice/KpiList.jsx'
 import BarChart from '../components/backoffice/BarChart.jsx'
 import QueueFilters from '../components/backoffice/QueueFilters.jsx'
 
-// ---------- Base demonstrativa (1.247 registros ficticios, jul-set 2025) ----------
-// Fonte UNICA de todos os indicadores, graficos e da Performance por Regiao desta tela.
 const DOC = painelDemonstrativo.documentacao
 const BASE = painelDemonstrativo.chamados
 const GRUPOS_FILTRO = montarGruposFiltro(BASE, DOC.rotulos)
@@ -30,10 +30,8 @@ const CONFIGURACAO = { prazosMin: DOC.prazosSlaMin, meses: DOC.periodo.meses }
 const MESES = DOC.periodo.meses
 const PERIODO = MESES[0].rotulo + '–' + MESES[MESES.length - 1].rotulo + ' ' + DOC.periodo.inicio.slice(0, 4)
 
-// Tabela fixa de apresentacao das referencias (texto do JSON -> classe CSS do original)
 const classePadrao = { 'Recorrência confirmada': 'badge-red', 'Em observação': 'badge-yellow' }
 
-// Formatacao (pt-BR): 1247 -> "1.247" | 6.0 -> "6,0%" | null -> "—"
 const formatarNumero = (valor) => valor.toLocaleString('pt-BR')
 
 function formatarPercentual(valor) {
@@ -42,17 +40,13 @@ function formatarPercentual(valor) {
 }
 
 function BackofficePainel() {
-  // Filtros do Painel (estado proprio, independente da tela Chamados).
-  // Cada grupo guarda uma LISTA: lista vazia = "Todos". O painel de filtros inicia aberto.
   const [selecao, setSelecao] = useState(SELECAO_VAZIA)
   const [filtrosAbertos, setFiltrosAbertos] = useState(true)
 
-  // Um unico calculo alimenta KPIs, graficos e Performance por Regiao (mesmos registros filtrados)
   const selecionados = filtrarPorSelecao(BASE, selecao)
   const ind = calcularIndicadores(selecionados, OPCOES, CONFIGURACAO)
   const opcoesMarcadas = contarSelecoes(selecao)
 
-  // Marca/desmarca uma opcao (valor null = "Todos" do grupo)
   function alterarFiltro(campo, valor) {
     setSelecao((anterior) => alternarSelecao(anterior, campo, valor))
   }
@@ -61,7 +55,6 @@ function BackofficePainel() {
     setSelecao(SELECAO_VAZIA)
   }
 
-  // ---------- Seis KPIs (calculados) ----------
   function quantidadeDoStatus(valor) {
     const item = ind.porStatus.find((status) => status.valor === valor)
     return item ? item.quantidade : 0
@@ -114,7 +107,6 @@ function BackofficePainel() {
     },
   }
 
-  // ---------- Tres graficos (mesmos registros filtrados) ----------
   const totalReincidentes =
     'Total: ' + formatarNumero(ind.total) + ' chamados · ' + formatarNumero(ind.reincidencias) +
     ' reincidentes (' + formatarPercentual(percentual(ind.reincidencias, ind.total)) + ', já incluídos no total)'
@@ -171,7 +163,6 @@ function BackofficePainel() {
       <main className="app-content">
         <KpiList indicadores={kpis} chaves={['total', 'abertas', 'atendimento', 'concluidas', 'ta', 'tb']} legenda="" />
 
-        {/* Filtros: alteram TODOS os elementos analiticos abaixo e os KPIs acima */}
         <section className="card" aria-labelledby="t-filtros-indicadores">
           <div className="card-head">
             <div>
@@ -220,7 +211,6 @@ function BackofficePainel() {
           )}
         </section>
 
-        {/* Graficos em HTML/CSS calculados sobre os registros filtrados */}
         <section className="charts" aria-label="Gráficos">
           {graficos.map((grafico) => (
             <article key={grafico.chave} className="card chart-card">
@@ -248,7 +238,6 @@ function BackofficePainel() {
           ))}
         </section>
 
-        {/* Performance por Regiao: mesmos registros filtrados, com os denominadores de cada calculo */}
         <section className="card" aria-labelledby="t-regioes">
           <h2 id="t-regioes">Performance por Região</h2>
           <p className="card-sub">
@@ -277,7 +266,6 @@ function BackofficePainel() {
           </div>
         </section>
 
-        {/* Referencias do prototipo (insights.json): NAO usam a base demonstrativa e NAO respondem aos filtros */}
         <section className="ref-demo">
           <section className="card" aria-labelledby="t-padroes">
             <h2 id="t-padroes">Padrões e Recorrências Identificadas</h2>

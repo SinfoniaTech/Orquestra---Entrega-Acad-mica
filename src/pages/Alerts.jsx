@@ -1,10 +1,11 @@
+// Tela: alertas de chamados criticos
+
 import chamados from "../data/chamados-mobile.json"
 import { filtrarPorCriticidade } from "../utils/filters.js"
 import PageHeading from "../components/PageHeading.jsx"
 import AlertCard from "../components/alerts/AlertCard.jsx"
 
 function Alerts() {
-  // A tela original de Alertas lista os chamados de criticidade critica (vermelhos)
   const criticos = filtrarPorCriticidade(chamados, "critica")
 
   return (

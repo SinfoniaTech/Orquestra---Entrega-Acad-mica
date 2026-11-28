@@ -1,3 +1,5 @@
+// Componente: aviso de tela em desenvolvimento
+
 import { Link } from 'react-router-dom'
 
 function EmDesenvolvimento({

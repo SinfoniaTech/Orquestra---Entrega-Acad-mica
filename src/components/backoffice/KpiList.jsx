@@ -1,10 +1,4 @@
-// Indicadores do topo das telas do Backoffice.
-// indicadores: { tipo, universo, itens: { chave: { label, value, note, tone } } }
-// chaves: quais itens exibir, na ordem.
-//  - Tela Chamados: itens de insights.json -> "indicadores" (operacao consolidada, valores fixos do arquivo).
-//  - Painel Operacional: itens calculados a partir da base demonstrativa filtrada.
-// legenda (opcional): texto exibido abaixo dos cards. Sem ela, mantem a legenda padrao dos
-// indicadores demonstrativos consolidados.
+// Componente: lista de indicadores KPI
 export default function KpiList({ indicadores, chaves, legenda }) {
   return (
     <section className="kpis-block" aria-label="Indicadores">

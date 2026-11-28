@@ -1,7 +1,7 @@
+// Componente: lista de chamados com estado vazio
+
 import CallItem from "./CallItem.jsx"
 
-// Recebe a lista de chamados por props (a Home envia a lista ja filtrada).
-// mensagemVazia e onLimpar sao opcionais e personalizam o estado vazio.
 export default function CallList({ chamados, mensagemVazia = "Nenhum chamado encontrado.", onLimpar }) {
   if (!chamados || chamados.length === 0) {
     return (

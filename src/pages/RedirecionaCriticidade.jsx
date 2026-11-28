@@ -1,9 +1,9 @@
+// Componente: redireciona rotas antigas de criticidade para a home
+
 import { Navigate, useParams } from "react-router-dom"
 import { NIVEIS } from "../utils/criticidade.js"
 import NotFound from "./NotFound.jsx"
 
-// Compatibilidade com as rotas antigas /criticidade/:nivel.
-// Redireciona para a Home levando o filtro escolhido (a Home o aplica como estado inicial).
 function RedirecionaCriticidade() {
   const { nivel } = useParams()
 

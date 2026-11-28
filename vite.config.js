@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
-// https://vite.dev/config/
+// Configuracao do Vite para o build do projeto
 export default defineConfig({
   plugins: [react()],
   base: '/Orquestra---Entrega-Acad-mica/',

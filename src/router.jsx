@@ -1,4 +1,6 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+// Rotas do app: mobile (/) e backoffice (/backoffice)
+
+import { createHashRouter, Navigate } from 'react-router-dom'
 import AppShellLayout from './layouts/AppShellLayout.jsx'
 import BackofficeLayout from './layouts/BackofficeLayout.jsx'
 import Home from './pages/Home.jsx'
@@ -13,7 +15,7 @@ import BackofficePainel from './pages/BackofficePainel.jsx'
 import EmDesenvolvimento from './pages/EmDesenvolvimento.jsx'
 import NotFound from './pages/NotFound.jsx'
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/',
     element: <AppShellLayout />,
@@ -32,7 +34,7 @@ export const router = createBrowserRouter([
         ],
       },
       { path: 'mais', element: <Navigate to='/' replace /> },
-      { path: '*', element: <NotFound /> },
+      { path: '*', element: <Navigate to='/' replace /> },
     ],
   },
   {
@@ -50,7 +52,7 @@ export const router = createBrowserRouter([
       { path: 'configuracoes', element: <EmDesenvolvimento titulo='Configurações' /> },
       {
         path: '*',
-        element: <NotFound voltarPara='/backoffice/painel' voltarTexto='Voltar para o Painel Operacional' />,
+        element: <Navigate to='/' replace />,
       },
     ],
   },

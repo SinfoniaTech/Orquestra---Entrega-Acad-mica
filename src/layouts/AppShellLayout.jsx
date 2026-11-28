@@ -1,12 +1,9 @@
+// Layout mobile: cabecalho, conteudo e navegacao inferior
+
 import { useState } from 'react'
 import { Outlet, NavLink, Link } from 'react-router-dom'
 import MenuDrawer from '../components/MenuDrawer.jsx'
 
-// Layout principal da area Mobile: cabecalho, conteudo da rota (Outlet) e navegacao inferior.
-// Alternancia Mobile/Desktop: feita por rotas (decisao do Ciclo 2, sem modo automatico).
-//   Mobile  -> rotas de "/" (este layout)
-//   Desktop -> rotas de "/backoffice" (BackofficeLayout)
-//   Entrada no Desktop: botao "Acessar BackOffice" no menu hamburguer; retorno: "Voltar ao app Mobile" na sidebar.
 function AppShellLayout() {
   const [menuAberto, setMenuAberto] = useState(false)
 

@@ -1,3 +1,5 @@
+// Componente: topo do Backoffice com busca e periodo
+
 
 export default function BackofficeTopbar({ titulo, subtitulo, periodo, busca = '', onBuscar, buscaDesabilitada = false }) {
   const textoBusca = buscaDesabilitada

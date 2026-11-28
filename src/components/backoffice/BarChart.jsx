@@ -1,16 +1,10 @@
-// Grafico de barras em HTML/CSS (sem biblioteca).
-// Recebe os grupos por props e calcula a representacao visual a partir dos valores:
-//   altura da barra = valor / maior valor do grafico * 100%
-//   percentual      = valor / soma das barras * 100   (somente quando mostrarPercentual = true)
-//
-// Formato de "grupos": [{ rotulo: "Abr", barras: [{ valor: 185, classe: "", nome: "Chamadas" }] }]
+// Componente: grafico de barras em HTML/CSS
 
-// Formata numeros no padrao brasileiro: 1247 -> "1.247"
+
 function formatarNumero(valor) {
   return valor.toLocaleString('pt-BR')
 }
 
-// Formata percentual com 1 casa decimal: 25.02 -> "25,0%"
 function formatarPercentual(valor) {
   return valor.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%'
 }
@@ -23,7 +17,6 @@ export default function BarChart({
   eixoY = 'Nº de chamados',
   mostrarPercentual = false,
 }) {
-  // Maior valor (referencia de 100% da altura) e soma da primeira serie (base dos percentuais)
   let maior = 0
   let soma = 0
   grupos.forEach((grupo) => {
@@ -43,11 +36,8 @@ export default function BarChart({
     return (valor / soma) * 100
   }
 
-  // Muitas categorias com nomes longos: em telas estreitas os rotulos alternam de altura (ver CSS)
   const rotulosLongos = grupos.length > 5 && grupos.some((grupo) => grupo.rotulo.length > 8)
 
-  // Sem nenhum valor (ex.: filtros sem resultado): mostra um estado vazio em vez de barras de 0%.
-  // Graficos com dados continuam exatamente como antes.
   if (maior === 0) {
     return (
       <figure className="chart">
@@ -57,7 +47,6 @@ export default function BarChart({
     )
   }
 
-  // Descricao acessivel montada a partir dos dados exibidos
   const descricao = grupos
     .map((grupo) => {
       const valores = grupo.barras
@@ -81,7 +70,6 @@ export default function BarChart({
                 className={'bar ' + (barra.classe || '')}
                 style={{ height: calcularAltura(barra.valor) }}
               >
-                {/* Valor sempre visivel acima da barra (nao depende de hover) */}
                 <span className="bar-value">{formatarNumero(barra.valor)}</span>
               </span>
             ))}
