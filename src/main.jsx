@@ -10,6 +10,6 @@ import './styles/backoffice.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} basename={import.meta.env.BASE_URL} />
   </StrictMode>
 )
