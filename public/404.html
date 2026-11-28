@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ORQUESTRA | Chamadas abertas</title>
+  </head>
+  <body>
+    <!-- SPA fallback para GitHub Pages: preserva a rota do React Router -->
+    <script>
+      const base = '/Orquestra---Entrega-Acad-mica/'
+      const path = window.location.pathname.replace(base, '')
+      const hash = window.location.hash
+      window.location.replace(base + 'index.html' + (path ? '?path=' + path : '') + hash)
+    </script>
+  </body>
+</html>
